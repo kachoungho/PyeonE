@@ -24,6 +24,11 @@ public class CusLoginController {
 		return "login/cus_login2";
 	}
 
+	@RequestMapping(value = "cus_join", method = RequestMethod.GET)
+	public String joinGET() {
+		return "login/cus_join";
+	}
+
 	@RequestMapping(value = "cus_join", method = RequestMethod.POST)
 	public ModelAndView JoinPOST(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();

@@ -17,8 +17,7 @@
 		<article class="half">
 			<h1>PMART</h1>
 			<div class="tabs">
-				<span class="tab signin active"><a href="#signin">로그인</a></span> <span
-					class="tab signup"><a href="#signup">회원가입</a></span>
+				<span class="tab signin active"><a href="#signin">로그인</a></span>
 			</div>
 			<div class="content">
 				<div class="signin-cont cont">
@@ -34,38 +33,17 @@
 
 						<div class="submit-wrap">
 							<input type="submit" value="로그인" class="submit">
-							<a href="cus_idPwd" class="more">아이디 / 비밀번호 찾기</a>
+							<a href="${pageContext.request.contextPath}/cus_idPwd" class="more">아이디 / 비밀번호 찾기</a>
+							<a href="${pageContext.request.contextPath}/cus_join" class="more">회원 가입</a>
 						</div>
 					</form>
 				</div>
 
-
-				<div class="signup-cont cont">
-					<form action="cus_join" method="post">
-						<label for="userid">아이디</label> <input type="text" name="userid"
-							id="userid" class="inpt" required="required" placeholder="아이디 입력">
-
-						<label for="password">비밀번호</label> <input type="password"
-							name="userpwd" id="userpwd" class="inpt" required="required"
-							placeholder="비밀번호 입력"> <label for="username">이름</label> <input
-							type="text" name="username" id="username" class="inpt"
-							required="required" placeholder="이름 입력"> <label
-							for="userphone">휴대전화</label> <input type="text" name="userphone"
-							id="userphone" class="inpt" required="required"
-							placeholder="휴대전화 입력"> <label for="useremail">이메일</label>
-						<input type="text" name="useremail" id="useremail" class="inpt"
-							required="required" placeholder="이메일 입력">
-
-						<div class="submit-wrap">
-							<input type="submit" value="회원가입" class="submit">
-						</div>
-					</form>
-				</div>
 			</div>
 		</article>
 	</section>
 
-
+<!-- 
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -91,6 +69,6 @@
 					$(this).css('background-position',
 							amountMovedX + 'px ' + amountMovedY + 'px');
 				});
-	</script>
+	</script> -->
 </body>
 </html>
