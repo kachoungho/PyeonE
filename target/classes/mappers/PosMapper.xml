@@ -534,7 +534,7 @@
 	</update>
 	
 	<!-- 댓글 삭제 -->
-	<delete id="noticeReplDelete" parameterType="Integer">
+	<delete id="noticeReplDelete" parameterType="com.pyeon2.vo.NoticeReplVO">
 		delete from company_notice_repl where rno = #{rno}
 	</delete>
 </mapper>
