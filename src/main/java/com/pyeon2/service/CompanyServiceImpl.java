@@ -188,7 +188,7 @@ public class CompanyServiceImpl implements CompanyService {
         if (uploadfile != null) {
             String fileName = uploadfile.getOriginalFilename();
             try {
-                File file = new File("C:/springProject/workspace/Pyeon22/src/main/webapp/resources/item_image/" + fileName);
+                File file = new File("C:/springProject/workspace/PyeonE/src/main/webapp/resources/item_image/" + fileName);
                int count = 0;
                 while(file.exists()) {              
                       int indexes = fileName.lastIndexOf(".");
@@ -198,7 +198,7 @@ public class CompanyServiceImpl implements CompanyService {
                       String newFileName = fileName.substring(0, indexes) + count + extension;
                       System.out.println("새 파일 이름 = "+newFileName);
                       fileName = newFileName;
-                      file = new File("C:/springProject/workspace/Pyeon22/src/main/webapp/resources/item_image/" + newFileName);
+                      file = new File("C:/springProject/workspace/PyeonE/src/main/webapp/resources/item_image/" + newFileName);
                       
                       count++;
                    }
