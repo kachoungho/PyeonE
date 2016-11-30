@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyeon2.mappers.CusLoginMapper">
+
+	<!-- 회원가입 처리 -->
+	<insert id="memberJoin" parameterType="com.pyeon2.vo.UserMemVO">
+		insert into user_member(mem_num, userid, userpwd, username, useremail, userphone)
+		values(mem_num.nextVal, #{userid}, #{userpwd}, #{username},
+		#{useremail}, #{userphone})
+	</insert>
+	
+	<!-- 신규회원 권한 주입 -->
+	<insert id="memberRole" parameterType="com.pyeon2.vo.UserMemVO">
+		insert into ROLE_USER values(#{userid}, 'ROLE_USER')
+	</insert>
+	
+	<!-- 아이디 찾기 -->
+	<select id="getId" parameterType="com.pyeon2.vo.UserMemVO" resultType="com.pyeon2.vo.UserMemVO">
+		select userid from user_member where username = #{username} and useremail = #{useremail}
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="getPwd" parameterType="com.pyeon2.vo.UserMemVO" resultType="com.pyeon2.vo.UserMemVO">
+		select userpwd from user_member where username = #{username} and useremail = #{useremail}
+	</select>
+	
+</mapper>

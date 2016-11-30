@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyeon2.mappers.customerMapper">
+	
+	<!-- 물품 이름과 지점명으로 검색  -->
+	<select id="searchItem" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.vo.ItemVO">
+		select * from p2_item where item_name like #{item_name} and area = #{area}
+	</select>
+	
+	<!-- 물품 이름으로 검색 -->
+	<select id="searchItem_name" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.vo.ItemVO">
+		select * from p2_item where item_name like #{item_name}
+	</select>
+	
+	<!-- 주소검색 -->
+	<select id="getAddress" resultType="com.pyeon2.vo.GpsVO" parameterType="com.pyeon2.vo.GpsVO">
+		select * from p2_gps where area = #{area}
+	</select>
+	
+	<!-- 아이템 섹터 가져오기(판교) -->
+	<select id="getSector_p"  resultType="com.pyeon2.vo.SectorVO" parameterType="com.pyeon2.vo.SectorVO">
+		select sectors, item_name from p2_sector_p where area = #{area}
+	</select>
+	
+	<!-- 아이템 섹터 가져오기(정자) -->
+	<select id="getSector_j"  resultType="com.pyeon2.vo.SectorVO" parameterType="com.pyeon2.vo.SectorVO">
+		select sectors, item_name from p2_sector_j where area = #{area}
+	</select>
+	
+	<!-- 아이템 섹터 가져오기(야탑) -->
+	<select id="getSector_y"  resultType="com.pyeon2.vo.SectorVO" parameterType="com.pyeon2.vo.SectorVO">
+		select sectors, item_name from p2_sector_y where area = #{area}
+	</select>
+	
+	<!-- 재고 요청 게시판 리스트 불러오기 -->
+	<select id="getReqBoardlist" resultType="com.pyeon2.vo.ReqBoardVO">
+		select * from item_req_board order by req_num desc
+	</select>
+	
+	<!-- 로그인한 유저의 이름 가져오기 -->
+	<select id="getName" resultType="java.lang.String">
+		select username from USER_MEMBER where userid = #{id}
+	</select>
+	
+	<!-- 재고 요청 게시판 글쓰기 -->
+	<insert id="writeReq" parameterType="com.pyeon2.vo.ReqBoardVO">
+		insert into item_req_board values(req_num.nextVal, #{title}, #{name}, #{item_name}, #{position}, #{contant}, sysdate)
+	</insert>
+	
+	<!-- 재고 요청 게시글 자세히 보기 -->
+	<select id="getReqBoardContant" resultType="com.pyeon2.vo.ReqBoardVO" parameterType="com.pyeon2.vo.ReqBoardVO">
+		select * from item_req_board where req_num = #{req_num}
+	</select>
+	
+	<!-- 재고 요청 게시글 수정 -->
+	<update id="reqBoardupdate" parameterType="com.pyeon2.vo.ReqBoardVO">
+		update item_req_board set title = #{title}, contant = #{contant}, item_name = #{item_name}, position = #{position} where req_num = #{req_num}
+	</update>
+	
+	<!-- 재고 요청 게시글 삭제 -->
+	<delete id="reqBoardDelete" parameterType="com.pyeon2.vo.ReqBoardVO">
+		delete from item_req_board where req_num = #{req_num}
+	</delete>
+	
+	<!-- 아이템 인기상품 가져오기(스낵) -->
+	<select id="getHitSum_s" resultType="com.pyeon2.vo.ItemVO" >
+		select item_name, item_image, category, sum(hit) as hitsum from p2_item where category='스낵'
+		group by item_name, item_image, category order by category, hitsum desc	
+	</select>
+	
+	<!-- 아이템 인기상품 가져오기(인스턴트) -->
+	<select id="getHitSum_i" resultType="com.pyeon2.vo.ItemVO" >
+		select item_name, item_image, category, sum(hit) as hitsum from p2_item where category='인스턴트'
+		group by item_name, item_image, category order by category, hitsum desc
+	</select>
+	
+	<!-- 아이템 인기상품 가져오기(음료) -->
+	<select id="getHitSum_d" resultType="com.pyeon2.vo.ItemVO" >
+		select item_name, item_image, category, sum(hit) as hitsum from p2_item where category='음료'
+		group by item_name, item_image, category order by category, hitsum desc
+	</select>
+	
+	<!-- 아이템 인기상품 가져오기(주류) -->
+	<select id="getHitSum_a" resultType="com.pyeon2.vo.ItemVO" >
+		select item_name, item_image, category, sum(hit) as hitsum from p2_item where category='주류'
+		group by item_name, item_image, category order by category, hitsum desc
+	</select>
+</mapper>
