@@ -11,7 +11,7 @@
 			authentication-failure-url="/login?error"
 			default-target-url="/choice" />
 
-		<security:logout logout-success-url="/login" />
+		<security:logout logout-success-url="/login"  />
 
 		<security:intercept-url pattern="/company/**"
 			access="hasAuthority('ROLE_ADMIN')" />
