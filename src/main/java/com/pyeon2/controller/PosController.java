@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pyeon2.domain.Criteria;
 import com.pyeon2.domain.PageMaker;
 import com.pyeon2.service.CompanyService;
+import com.pyeon2.service.CustomerService;
 import com.pyeon2.service.PosService;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
@@ -884,8 +885,9 @@ public class PosController {
 		
 		vo.setItem_code(request.getParameter("item_code"));
 		vo.setP2_time(request.getParameter("p2_time"));
-		
+		vo.setArea(request.getParameter("area"));
 		posService.deleteOrder(vo);
+		companyService.odertDelete(vo);
 		
 		mav.setViewName(".pos.pos_StateDeleteSuc");
 		return mav;
@@ -1273,12 +1275,12 @@ public class PosController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "pos/ps_notice_repl_delete/{rno}", method=RequestMethod.DELETE)
-	public ResponseEntity<String> noticeReplDelete(@PathVariable("rno")int rno){
+	@RequestMapping(value = "pos/ps_notice_repl_delete", method=RequestMethod.POST)
+	public ResponseEntity<String> noticeReplDelete(@RequestBody NoticeReplVO vo){
 		ResponseEntity<String> entity = null;
 		
 		try {
-			posService.noticeReplDelete(rno);
+			posService.noticeReplDelete(vo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

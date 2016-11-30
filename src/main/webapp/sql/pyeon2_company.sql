@@ -43,14 +43,15 @@ create table calendarMemo(
    content varchar2(500)
 );
 
---create table company_notice_repl(
---   rno number(10),
---   bno number(10),
---   replyText varchar2(1000),
---   replyer varchar2(50),
---   regdate TIMESTAMP,
---   updateDate TIMESTAMP
---);
+ create table company_notice_repl(
+   rno number(10),
+   bno number(10),
+   replyText varchar2(1000),
+   replyer varchar2(50),
+   regdate_char varchar2(50),
+   regdate date,
+   updateDate date
+);
 
 
 --------------- SEQUENCE --------------------
@@ -65,10 +66,10 @@ create sequence noticenum
    start with 1
    nocache;
 
---create sequence noticeRepl_num
---   increment by 1
---   start with 1
---   nocache;
+create sequence noticeRepl_num
+   increment by 1
+   start with 1
+   nocache;
    
    
 --------------- INSERT --------------------
