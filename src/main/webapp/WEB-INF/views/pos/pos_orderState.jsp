@@ -42,7 +42,7 @@
 					<td class="date7">${list.state }</td>
 					<td class="date8"><input width="40" type="image"
 						src="/controller/resources/images/delete.png" alt="button"
-						onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_orderStates?item_code=${list.item_code}&p2_time=${list.p2_time}'">
+						onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_orderStates?item_code=${list.item_code}&p2_time=${list.p2_time}&area=${list.area}'">
 					</td>
 				</tr>
 			</tbody>

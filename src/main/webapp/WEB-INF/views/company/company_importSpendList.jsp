@@ -22,7 +22,7 @@
 						<option value="">지역 선택</option>
 						<option value="판교">판교</option>
 						<option value="야탑">야탑</option>
-						<option value="서현">서현</option>
+						<option value="정자">정자</option>
 					</select> <select class="slt_insert3" name="year">
 						<option value="">년도</option>
 						<option value="2016">2016</option>
