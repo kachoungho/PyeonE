@@ -68,7 +68,7 @@ create sequence noticenum
 
 create sequence noticeRepl_num
    increment by 1
-  start with 1
+   start with 1
    nocache;
    
    
