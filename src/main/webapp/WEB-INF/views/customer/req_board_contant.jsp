@@ -17,7 +17,7 @@
 			document.daily.action = "${pageContext.request.contextPath}/customer/req_board/modify";
 		}
 		if (index == 2) {
-			document.daily.action = "${pageContext.request.contextPath}/customer/req_board/delete";
+			document.daily.action = "${pageContext.request.contextPath}/company/req_board_delete";
 		}
 		document.daily.submit();
 	}
@@ -32,6 +32,17 @@
 			return false;
 		}
 	}
+
+	function button_event2(btn) {
+		var name = btn;
+
+		if (confirm("게시글을 정말로 삭제하시겠습니까?") == true) {
+			document.forms[name].action = "${pageContext.request.contextPath}/company/req_board_delete";
+			document.forms[name].submit();
+		} else {
+			return false;
+		}
+	}
 </script>
 </head>
 
@@ -39,10 +50,12 @@
 	<br>
 	<br>
 	<br>
-	<div style="width: 40%; display: block; margin-left: auto; margin-right: auto;">
+	<div
+		style="width: 40%; display: block; margin-left: auto; margin-right: auto;">
 		<form method="post" name=daily id=daily>
-			<label style="font-size: 20px; font-family: 'Jeju Gothic', sans-serif;">
-			재고 요청 게시판</label> <br>
+			<label
+				style="font-size: 20px; font-family: 'Jeju Gothic', sans-serif;">
+				재고 요청 게시판</label> <br>
 			<c:forEach items="${list}" var="list">
 				<input type="hidden" value="${list.req_num}" name="req_num">
 				<table class="w3-table-all w3-hoverable w3-border">
@@ -66,40 +79,55 @@
 						<tr>
 							<th style="text-align: center; width: 30%" class="w3-blue-grey">내용</th>
 							<td style="text-align: center; width: 70%; height: 400px;"><pre">${list.contant }</pre></td>
-						</tr><!-- <font face="Jeju Gothic"></font> -->
+						</tr>
+						<!-- <font face="Jeju Gothic"></font> -->
 					</thead>
 				</table>
 				<br>
 				<c:if test="${result == 1 }">
-					<input
-						style="display: block; float: left; margin-right: 20px; margin-left: 380px;"
-						width="40" type="image" src="/controller/images/update.png"
-						alt="button" onclick='input(1)' />
+					<sec:authorize access="hasAuthority('ROLE_CUS')">
+						<input
+							style="display: block; float: left; margin-right: 20px; margin-left: 380px;"
+							width="40" type="image" src="/controller/images/update.png"
+							alt="button" onclick='input(1)' />
 
-					<input style="display: block; float: left; margin-right: 20px;"
-						width="40" type="image" src="/controller/images/delete.png"
-						alt="submit" onclick="button_event('daily');return false;">
+						<input style="display: block; float: left; margin-right: 20px;"
+							width="40" type="image" src="/controller/images/delete.png"
+							alt="submit" onclick="button_event('daily');return false;">
+					</sec:authorize>
+					<sec:authorize access="hasAuthority('ROLE_ADMIN')">
 
-
+						<input style="display: block; float: left; margin-left: 440px; margin-right: 20px;"
+							width="40" type="image" src="/controller/images/delete.png"
+							alt="submit" onclick="button_event2('daily');return false;">
+					</sec:authorize>
 				</c:if>
 			</c:forEach>
 		</form>
 	</div>
 
-
-	<c:if test="${result == 1 }">
-		<input style="display: block; float: left; margin-right: 20px;"
-			width="40" type="image" src="/controller/images/list.png"
-			alt="button"
-			onclick="document.location.href='${pageContext.request.contextPath}/customer/req_board_list'" />
-	</c:if>
-	<c:if test="${result == 2 }">
-		<input
-			style="display: block; float: left; margin-right: 20px; margin-left: 900px"
-			width="40" type="image" src="/controller/images/list.png"
-			alt="button"
-			onclick="document.location.href='${pageContext.request.contextPath}/customer/req_board_list'" />
-	</c:if>
+	<sec:authorize access="hasAuthority('ROLE_CUS')">
+		<c:if test="${result == 1 }">
+			<input style="display: block; float: left; margin-right: 20px;"
+				width="40" type="image" src="/controller/images/list.png"
+				alt="button"
+				onclick="document.location.href='${pageContext.request.contextPath}/customer/req_board/list'" />
+		</c:if>
+		<c:if test="${result == 2 }">
+			<input
+				style="display: block; float: left; margin-right: 20px; margin-left: 900px"
+				width="40" type="image" src="/controller/images/list.png"
+				alt="button"
+				onclick="document.location.href='${pageContext.request.contextPath}/customer/req_board/list'" />
+		</c:if>
+	</sec:authorize>
+	
+	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+			<input style="display: block; float: left; margin-right: 20px;"
+				width="40" type="image" src="/controller/images/list.png"
+				alt="button"
+				onclick="document.location.href='${pageContext.request.contextPath}/company/req_board_list'" />
+	</sec:authorize>
 	<br>
 	<br>
 	<br>

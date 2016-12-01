@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pyeon2.domain.Criteria;
 import com.pyeon2.domain.PageMaker;
 import com.pyeon2.service.CompanyService;
+import com.pyeon2.service.CustomerService;
 import com.pyeon2.service.MemberService;
 import com.pyeon2.service.PosService;
 import com.pyeon2.vo.CalendarMemoVO;
@@ -31,7 +32,9 @@ import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.NoticeVO;
+import com.pyeon2.vo.ReqBoardVO;
 import com.pyeon2.vo.SelectSearch;
+import com.pyeon2.vo.UserMemVO;
 
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeFactory;
@@ -42,6 +45,9 @@ public class CompanyController {
 
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private CustomerService customerService;
 	
 	@Autowired
 	private PosService posService;
@@ -630,7 +636,7 @@ public class CompanyController {
 		mav.addObject("pageMaker", pageMaker);
 		mav.addObject("page", pageNum);
 		mav.addObject("titleSearch", titleSearch);
-		mav.setViewName(".company.company_notice_list");
+		mav.setViewName(".company.company_notice_listCall");
 		
 		return mav;
 	}
@@ -964,19 +970,10 @@ public class CompanyController {
 	@RequestMapping(value = "company/com_companyStock2", method = RequestMethod.POST)
 	public ModelAndView comnewprodeuctin(ComItemVO cvo, MultipartHttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		/*ComItemVO cvo = new ComItemVO();*/
 		ItemVO vo = new ItemVO();
 		NoticeVO Nvo = new NoticeVO();
 		MemberVO Mvo = new MemberVO();
-		/*
-		cvo.setItem_name(request.getParameter("item_name"));
-		cvo.setCost(Integer.parseInt(request.getParameter("cost")));
-		cvo.setPrice(Integer.parseInt(request.getParameter("price")));
-		cvo.setCount(Integer.parseInt(request.getParameter("count")));
-		cvo.setCategory(request.getParameter("category"));
-		
-		System.out.println("categorydd"+cvo.getCategory());
-		*/
+
 		String code1 = companyService.newproductcode1(cvo);
 		int code2 = companyService.newproductcode2(cvo)+1;
 		
@@ -1013,6 +1010,130 @@ public class CompanyController {
 		
 		companyService.noticewrite(Nvo);
 		mav.setViewName("redirect:com_companyStock");
+		return mav;
+	}
+	
+	@RequestMapping(value = "company/req_board_list", method = RequestMethod.GET)
+	public ModelAndView ReqBoardlistGET() throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		List<ReqBoardVO> list = customerService.getReqBoardlist();
+		mav.addObject("result", list);
+		mav.setViewName(".companys.customer.req_board_list");
+		return mav;
+	}
+
+	@RequestMapping(value = "company/req_board_list", method = RequestMethod.POST)
+	public ModelAndView ReqBoardlistPOST(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		ReqBoardVO vo = new ReqBoardVO();
+
+		vo.setTitle(request.getParameter("title"));
+		vo.setItem_name(request.getParameter("item_name"));
+		vo.setPosition(request.getParameter("position"));
+		vo.setName(request.getParameter("name"));
+		vo.setContant(request.getParameter("contant"));
+
+		customerService.writeReq(vo);
+		List<ReqBoardVO> list = customerService.getReqBoardlist();
+		mav.addObject("result", list);
+		mav.setViewName(".companys.customer.req_board_listCall");
+		return mav;
+	}
+
+	@RequestMapping(value = "company/req_board_write", method = RequestMethod.POST)
+	public ModelAndView ReqBoardWritePOST(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		UserMemVO vo = new UserMemVO();
+
+		String id = request.getParameter("id");
+
+		vo.setUsername(customerService.getName(id));
+		mav.addObject("name", vo.getUsername());
+		mav.setViewName(".companys.customer.req_board_write");
+		return mav;
+	}
+
+	@RequestMapping(value = "company/req_board_contant", method = RequestMethod.GET)
+	public ModelAndView ReqBoardContantGET(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		ReqBoardVO vo = new ReqBoardVO();
+		int result = 0;
+
+		String sessionid = request.getParameter("sessionid");
+		String sessionid2 = (String) request.getAttribute("sessionid");
+		vo.setReq_num(Integer.parseInt(request.getParameter("req_num")));
+
+		String name = null;
+		System.out.println("sessionid : " + sessionid);
+		System.out.println("sessionid2 : " + sessionid2);
+		if (sessionid != null) {
+			name = customerService.getName(sessionid);
+		} else if (sessionid2 != null) {
+			name = customerService.getName(sessionid2);
+		}
+
+		System.out.println("name : " + name);
+		List<ReqBoardVO> list = customerService.getReqBoardContant(vo);
+		System.out.println("list.get(0).getName() : " + list.get(0).getName());
+		System.out.println("name.equals(list.get(0).getName()) : " + name.equals(list.get(0).getName()));
+		/*if (name.equals(list.get(0).getName())) {
+			result = 1;
+		} else {
+			result = 2;
+		}*/
+		result = 1;
+		mav.addObject("result", result);
+		mav.addObject("list", list);
+		mav.setViewName(".companys.customer.req_board_contant");
+		return mav;
+	}
+
+	@RequestMapping(value = "company/req_board_modify", method = RequestMethod.POST)
+	public ModelAndView ReqBoardModifyPOST(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		ReqBoardVO vo = new ReqBoardVO();
+		vo.setReq_num(Integer.parseInt(request.getParameter("req_num")));
+
+		List<ReqBoardVO> list = customerService.getReqBoardContant(vo);
+
+		mav.addObject("list", list);
+		mav.setViewName(".companys.customer.req_board_modify");
+		return mav;
+	}
+
+	@RequestMapping(value = "company/req_board_update", method = RequestMethod.POST)
+	public ModelAndView ReqBoardUpdatePOST(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		ReqBoardVO vo = new ReqBoardVO();
+		vo.setReq_num(Integer.parseInt(request.getParameter("req_num")));
+		vo.setTitle(request.getParameter("title"));
+		vo.setContant(request.getParameter("contant"));
+		vo.setItem_name(request.getParameter("item_name"));
+		vo.setPosition(request.getParameter("position"));
+		customerService.reqBoardupdate(vo);
+
+		String id = request.getParameter("id");
+		request.setAttribute("sessionid", id);
+		request.setAttribute("req_num", vo.getReq_num());
+
+		mav = ReqBoardContantGET(request);
+		return mav;
+	}
+
+	@RequestMapping(value = "company/req_board_delete", method = RequestMethod.POST)
+	public ModelAndView ReqBoardDeletePOST(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		ReqBoardVO vo = new ReqBoardVO();
+
+		vo.setReq_num(Integer.parseInt(request.getParameter("req_num")));
+		customerService.reqBoardDelete(vo);
+
+		mav = ReqBoardlistGET();
 		return mav;
 	}
 	

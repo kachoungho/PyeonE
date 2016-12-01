@@ -12,7 +12,7 @@
 	
 	<!-- 회원가입시 아이디 비번 추가 처리(p2_member 에 입력) -->
 	<insert id="memberJoin2" parameterType="com.pyeon2.vo.UserMemVO">
-		insert into p2_member(id, pwd, area) values(#{userid}, #{userpwd}, 'x')
+		insert into p2_member(id, pwd, name,  area) values(#{userid}, #{userpwd}, #{username}, 'x')
 	</insert>
 	
 	<!-- 신규회원 권한 주입 -->
