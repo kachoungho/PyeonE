@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@
 						<c:forEach items="${ result1}" var="list">
 							<tr>
 								<td class="td1">${list.sold }</td>
-								<td class="td1">${list.pay }</td>
+								<td class="td1"><fmt:formatNumber value="${list.pay }" groupingUsed="true"/>원</td>
 								<td class="td1">${list.sal_time }</td>
 							</tr>
 						</c:forEach>
@@ -45,7 +46,7 @@
 						<c:forEach items="${ result2}" var="list2">
 							<tr>
 								<td class="td1">${list2.spend }</td>
-								<td class="td1">${list2.pay }</td>
+								<td class="td1"><fmt:formatNumber value="${list2.pay }" groupingUsed="true"/>원</td>
 								<td class="td1">${list2.sal_time }</td>
 							</tr>
 						</c:forEach>
