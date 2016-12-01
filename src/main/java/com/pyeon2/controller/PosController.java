@@ -1042,7 +1042,11 @@ public class PosController {
 			vo.setPaynum(0);
 			vo.setTitle(list2.get(i).getSpend());
 			vo.setContent("지출");
-			vo.setPay(list2.get(i).getPay());
+			if(list2.get(i).getPay() == 0){
+				continue;
+			} else {
+				vo.setPay(list2.get(i).getPay());
+			}
 			vo.setP2_time(list2.get(i).getSpend_date());
 			vo.setBillnum("");
 			System.out.println("p2_time : " + list2.get(i).getSal_time());
@@ -1058,7 +1062,6 @@ public class PosController {
 		posService.dayspenddelete(vo);
 		System.out.println("pay2 : " + pay2);
 
-		
 		int total = pay1 - pay2;
 		
 		vo.setArea(request.getParameter("area"));

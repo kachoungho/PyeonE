@@ -417,17 +417,17 @@
 	
 	<!-- orderSpend 리스트 delete -->
 	<delete id="dayspenddelete" parameterType="com.pyeon2.vo.ItemVO">
-		delete from orderSpend where area = #{area}
+		delete from orderSpend where area = #{area} and pay != 0
 	</delete>
 	
 	<!-- sal 리스트 총액 -->
 	<select id="daysaltotalpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
-		select sum(pay) as pay from p2_daymoney where area like #{area} and title = '판매' and year like #{year} and month like #{month}
+		select sum(pay) as pay from p2_daymoney where area like #{area} and content = '수입' and year like #{year} and month like #{month}
 	</select>
 	
 	<!-- sal 리스트 총액 -->
 	<select id="daysalspendpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
-		select sum(pay) as pay from p2_daymoney where area like #{area} and title = '지출' and year like #{year} and month like #{month}
+		select sum(pay) as pay from p2_daymoney where area like #{area} and content = '지출' and year like #{year} and month like #{month}
 	</select>
 	
 	<!-- daymoney의 총 컬럼 수 -->

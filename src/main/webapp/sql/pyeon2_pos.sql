@@ -7,6 +7,7 @@ select * from p2_daymoney;
 select * from p2_dayCalc;
 select * from p2_weekCalc;
 select * from p2_monthCalc;
+select * from ORDERSPEND;
 
 drop table p2_item;
 drop table p2_member;
