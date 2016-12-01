@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,6 +49,40 @@
 						<td class="date2">${ list.area }</td>
 						<td class="date2">${ list.p2_time }</td>
 						<td class="date2">${ list.state }</td>
+					</tr>
+				</tbody>
+			</c:forEach>
+		</table>
+		<br><br>
+		
+		<table class="ex1">
+			<thead>
+				<tr>
+					<th style="text-align: left; background-color: #FFFFFF;"><font
+						color="#054A75"> 재고 요청 게시판 </font><input
+						style="float: right; margin-right: 20px;" type="image"
+						src="/controller/resources/images/more.png" alt="button"
+						onclick="document.location.href='${pageContext.request.contextPath}/company/req_board_list'" /></th>
+				</tr>
+			</thead>
+		</table>
+
+		<table class="ex1">
+			<thead>
+				<tr class="odd">
+					<th scope="col">제목</th>
+					<th scope="col">작성일</th>
+				</tr>
+			</thead>
+			<sec:authentication property="name" var="LoingUser" />
+			<c:forEach items="${ reqlist }" var="reqlist">
+				<tbody>
+					<tr class="odd">
+						<td class="date4"><a
+							href="${pageContext.request.contextPath}/company/req_board_contant?req_num=${ reqlist.req_num }&sessionid=${LoingUser}">${ reqlist.title }</a></td>
+						<td class="date2">
+						<fmt:formatDate value="${ reqlist.req_date }" pattern="yyyy-MM-dd HH:mm"/>
+						</td>
 					</tr>
 				</tbody>
 			</c:forEach>

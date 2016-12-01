@@ -394,4 +394,9 @@ public class PosDAOImpl implements PosDAO {
 	public int num(ItemVO vo) throws Exception {
 		return session.selectOne(namespace+".num",vo);
 	}
+
+	@Override
+	public List<ItemVO> itemcodeselect(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".itemcodeselect",vo);
+	}
 }

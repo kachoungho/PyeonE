@@ -12,6 +12,7 @@ import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeVO;
+import com.pyeon2.vo.ReqBoardVO;
 
 @Repository
 public class CompanyDAOImpl implements CompanyDAO{
@@ -204,6 +205,11 @@ public class CompanyDAOImpl implements CompanyDAO{
 	@Override
 	public void newproductareainsert(ItemVO vo) throws Exception {
 		session.insert(namespace+".newproductareainsert" , vo);
+	}
+
+	@Override
+	public List<ReqBoardVO> getReqBoardList() throws Exception {
+		return session.selectList(namespace+".getReqBoardList");
 	}
 
 }

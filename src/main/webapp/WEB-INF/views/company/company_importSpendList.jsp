@@ -73,7 +73,7 @@
 								<td class="td1">${list.area }</td>
 								<td class="td1">${list.title }</td>
 								<td class="td1">${list.content }</td>
-								<td class="td1">${list.pay }</td>
+								<td class="td1"><fmt:formatNumber value="${list.pay }" groupingUsed="true"/>원</td>
 								<td class="td1"><fmt:formatDate value="${list.dayda }"
 										pattern="yyyy-MM-dd" /></td>
 							</tr>
@@ -88,16 +88,16 @@
 
 						<tr>
 							<td class="td1">수입</td>
-							<td class="td1">${pay1 }</td>
+							<td class="td1"><fmt:formatNumber value="${pay1 }" groupingUsed="true"/>원</td>
 							<td class="td1">지출</td>
-							<td class="td1">${pay2 }</td>
+							<td class="td1"><fmt:formatNumber value="${pay2 }" groupingUsed="true"/>원</td>
 							<td class="td1"></td>
 						</tr>
 						<tr>
 							<td class="td1">순이익</td>
 							<td class="td1"></td>
 							<td class="td1"></td>
-							<td class="td1">${total }</td>
+							<td class="td1"><fmt:formatNumber value="${total }" groupingUsed="true"/>원</td>
 							<td class="td1"></td>
 						</tr>
 					</table>
