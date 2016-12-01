@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,8 +76,8 @@
 					<td class="date2">${list.category}</td>
 					<td class="date3">${list.item_code}</td>
 					<td class="date4">${list.item_name}</td>
-					<td class="date5">${list.cost} 원</td>
-					<td class="date9">${list.price} 원</td>
+					<td class="date5"><fmt:formatNumber value="${list.cost}" groupingUsed="true"/>원</td>
+					<td class="date9"><fmt:formatNumber value="${list.price}" groupingUsed="true"/>원</td>
 					<td class="date6">${list.count} 개</td>
 				</tr>
 				</tbody>
