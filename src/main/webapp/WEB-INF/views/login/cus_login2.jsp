@@ -13,6 +13,18 @@
 </head>
 <body>
 
+	<sec:authorize ifAnyGranted="ROLE_ADMIN">
+		<meta http-equiv="Refresh"
+			content="0; url=${pageContext.request.contextPath}/company">
+	</sec:authorize>
+	<sec:authorize ifAnyGranted="ROLE_USER ,ROLE_MANAGER">
+		<meta http-equiv="Refresh"
+			content="0; url=${pageContext.request.contextPath}/pos">
+	</sec:authorize>
+	<sec:authorize ifAnyGranted="ROLE_CUS">
+		<meta http-equiv="Refresh"
+			content="0; url=${pageContext.request.contextPath}/customer">
+	</sec:authorize>
 	<section class="container">
 		<article class="half">
 			<h1>PMART</h1>
@@ -23,18 +35,22 @@
 				<div class="signin-cont cont">
 					<c:url value="/j_spring_security_check" var="loginURL"></c:url>
 					<form action="${loginURL}" method="post">
-						<label for="userid">아이디</label> <input type="text" name="j_username"
-							id="userid" class="inpt" required="required" placeholder="아이디 입력">
-
-
-						<label for="password">비밀번호</label> <input type="password"
-							name="j_password" id="password" class="inpt" required="required"
-							placeholder="비밀번호 입력">
+						<label for="userid">아이디</label> <input type="text"
+							name="j_username" id="userid" class="inpt" required="required"
+							placeholder="아이디 입력"> <label for="password">비밀번호</label>
+						<input type="password" name="j_password" id="password"
+							class="inpt" required="required" placeholder="비밀번호 입력">
 
 						<div class="submit-wrap">
 							<input type="submit" value="로그인" class="submit">
-							<a href="${pageContext.request.contextPath}/cus_idPwd" class="more">아이디 / 비밀번호 찾기</a>
-							<a href="${pageContext.request.contextPath}/cus_join" class="more">회원 가입</a>
+							<c:if test="${check == 1}">
+								<a href="${pageContext.request.contextPath}/cus_idPwd"
+									class="more">아이디 / 비밀번호 찾기</a>
+								<a href="${pageContext.request.contextPath}/cus_join"
+									class="more">회원 가입</a>
+								<a href="${pageContext.request.contextPath}/customer"
+									class="more">메인으로</a>
+							</c:if>
 						</div>
 					</form>
 				</div>
@@ -42,33 +58,5 @@
 			</div>
 		</article>
 	</section>
-
-<!-- 
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript">
-		$('.tabs .tab').click(function() {
-			if ($(this).hasClass('signin')) {
-				$('.tabs .tab').removeClass('active');
-				$(this).addClass('active');
-				$('.cont').hide();
-				$('.signin-cont').show();
-			}
-			if ($(this).hasClass('signup')) {
-				$('.tabs .tab').removeClass('active');
-				$(this).addClass('active');
-				$('.cont').hide();
-				$('.signup-cont').show();
-			}
-		});
-		$('.container .bg').mousemove(
-				function(e) {
-					var amountMovedX = (e.pageX * -1 / 30);
-					var amountMovedY = (e.pageY * -1 / 9);
-					$(this).css('background-position',
-							amountMovedX + 'px ' + amountMovedY + 'px');
-				});
-	</script> -->
 </body>
 </html>

@@ -16,9 +16,14 @@
 	<br>
 	<br>
 	<sec:authentication property="name" var="LoingUser" />
-	
-	<form action="${pageContext.request.contextPath}/customer/req_board/write"
-		method="post">
+	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+		<form action="${pageContext.request.contextPath}/company/req_board_write"
+			method="post">
+	</sec:authorize>
+	<sec:authorize access="hasAuthority('ROLE_CUS')">
+		<form action="${pageContext.request.contextPath}/customer/req_board/write"
+			method="post">
+	</sec:authorize>
 		<input type="hidden" name="id" value="${LoingUser}">
 		<div style="width:80%; display:block; margin-left: auto; margin-right: auto;" >
 			<table class="w3-table w3-hoverable w3-border">
@@ -33,8 +38,13 @@
 				<c:forEach items="${result }" var="list">
 					<tr>
 						<td style="text-align: center">${list.req_num }</td>
-						<td><a
-							href="${pageContext.request.contextPath}/customer/req_board/contant?req_num=${list.req_num}&sessionid=${LoingUser}">${list.title }</a></td>
+						<td>
+						<sec:authorize access="hasAuthority('ROLE_CUS')">
+							<a href="${pageContext.request.contextPath}/customer/req_board/contant?req_num=${list.req_num}&sessionid=${LoingUser}">${list.title }</a></td>
+						</sec:authorize>
+						<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+							<a href="${pageContext.request.contextPath}/company/req_board_contant?req_num=${list.req_num}&sessionid=${LoingUser}">${list.title }</a></td>
+						</sec:authorize>
 						<td style="text-align: center">${list.name}</td>
 						<td style="text-align: center"><fmt:formatDate value="${list.req_date }"
 								pattern="yyyy-MM-dd-ss:ss" /></td>

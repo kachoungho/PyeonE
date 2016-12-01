@@ -38,6 +38,8 @@
 						href="${pageContext.request.contextPath}/company/com_notice_list">공
 						지 사 항</a>
 					<a
+						href="${pageContext.request.contextPath}/company/req_board_list">재고 요청 게시판</a>
+					<a
 						href="${pageContext.request.contextPath}/company/com_importSpendList">매장별 수입/지출</a>
 				</sec:authorize>
 			</div>

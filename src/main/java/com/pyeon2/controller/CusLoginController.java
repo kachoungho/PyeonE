@@ -19,9 +19,14 @@ public class CusLoginController {
 	@Autowired
 	private CusLoginService loginService;
 	/*cus_login*/
-	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String loginGET() {
-		return "login/cus_login2";
+	@RequestMapping(value = "customer/login", method = RequestMethod.GET)
+	public ModelAndView loginGET() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("check", 1);
+		mav.setViewName("login/cus_login2");
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "cus_join", method = RequestMethod.GET)

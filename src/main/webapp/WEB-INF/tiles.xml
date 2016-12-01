@@ -20,6 +20,9 @@
 	<definition name=".company.*" extends=".company">
 		<put-attribute name="body" value="/WEB-INF/views/company/{1}.jsp" />
 	</definition>
+	<definition name=".companys.customer.*" extends=".company">
+		<put-attribute name="body" value="/WEB-INF/views/customer/{1}.jsp" />
+	</definition>
 	
 
 

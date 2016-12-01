@@ -40,7 +40,7 @@
 	
 	<!-- 로그인한 유저의 이름 가져오기 -->
 	<select id="getName" resultType="java.lang.String">
-		select username from USER_MEMBER where userid = #{id}
+		select name from p2_MEMBER where id = #{id}
 	</select>
 	
 	<!-- 재고 요청 게시판 글쓰기 -->

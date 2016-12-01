@@ -18,12 +18,11 @@ public class LoginController {
 
 	@Autowired
 	public MemberService memberService;
-/*
-	@RequestMapping(value="login", method = RequestMethod.GET)
-	public String login() {
 
-		return "login/login";
-	}*/
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public String login() {
+		return "login/cus_login2";
+	}
 	
 	@RequestMapping(value="choice", method = RequestMethod.GET)
 	public String choice(HttpServletRequest request) {

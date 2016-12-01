@@ -15,28 +15,35 @@
 	<br> <br> <br>
 
 	<sec:authorize ifNotGranted="ROLE_CUS">
-		<a style="color: #054A75" href="${pageContext.request.contextPath}/login"><i class="fa fa-lock"
-			aria-hidden="true"></i>&nbsp;&nbsp;로그인</a>
+		<a style="color: #054A75"
+			href="${pageContext.request.contextPath}/customer/login"><i
+			class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;로그인</a>
+	</sec:authorize>
+	<sec:authorize ifNotGranted="ROLE_CUS">
+		<a style="color: #054A75"
+			href="${pageContext.request.contextPath}/cus_join"><i
+			class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;회원가입</a>
 	</sec:authorize>
 
 	<sec:authorize access="hasAuthority('ROLE_CUS')">
-		<a style="color: #054A75" href="${pageContext.request.contextPath}/j_spring_security_logout"><i
+		<a style="color: #054A75"
+			href="${pageContext.request.contextPath}/j_spring_security_logout"><i
 			class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;&nbsp;로그아웃</a>
 	</sec:authorize>
 
 	<br> <br> <br> <a
-		href="${pageContext.request.contextPath}/customer"><i class="fa fa-search"
-		aria-hidden="true"></i>&nbsp;&nbsp;상품 검색</a>
+		href="${pageContext.request.contextPath}/customer"><i
+		class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;상품 검색</a>
 	<sec:authorize ifNotGranted="ROLE_CUS">
-		<a href="${pageContext.request.contextPath}/login"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;재고
-			요청 게시판</a>
+		<a href="${pageContext.request.contextPath}/customer/login"><i
+			class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;재고 요청 게시판</a>
 	</sec:authorize>
 	<sec:authorize access="hasAuthority('ROLE_CUS')">
-		<a href="${pageContext.request.contextPath}/customer/req_board/list"><i class="fa fa-list-alt"
-			aria-hidden="true"></i>&nbsp;&nbsp;재고 요청 게시판</a>
+		<a href="${pageContext.request.contextPath}/customer/req_board/list"><i
+			class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;재고 요청 게시판</a>
 	</sec:authorize>
-	<a href="${pageContext.request.contextPath}/customer/cus_hit"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;인기
-		상품</a>
+	<a href="${pageContext.request.contextPath}/customer/cus_hit"><i
+		class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;인기 상품</a>
 
 	<!-- <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav ">닫기 &times;</a> -->
 </nav>
@@ -59,7 +66,7 @@
 
 <div
 	style="float: left; width: 33%; margin-top: 90px; text-align: right;">
-	
+
 
 </div>
 
