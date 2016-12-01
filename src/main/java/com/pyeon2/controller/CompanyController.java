@@ -1010,10 +1010,10 @@ public class CompanyController {
 		
 		List<MemberVO> list1= memberService.getname(Mvo);
 		
-		Nvo.setTitle("pmart 신제품 출시!!");
+		Nvo.setTitle("[신상품 출시] " + cvo.getItem_name() + " 제품 출시");
 		Nvo.setName(list1.get(0).getName());
 		Nvo.setPosition(list1.get(0).getPosition());
-		Nvo.setContant(cvo.getItem_name() + "를 출시 하였습니다. 많은 이용 바랍니다.");
+		Nvo.setContant("안녕하십니까? PMART 본사입니다.\n" + cvo.getItem_name() + " 출시했습니다. 많은 홍보 바랍니다.");
 		
 		companyService.noticewrite(Nvo);
 		mav.setViewName("redirect:com_companyStock");
