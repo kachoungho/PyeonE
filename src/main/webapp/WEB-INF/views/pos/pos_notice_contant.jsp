@@ -84,15 +84,14 @@
 	<br>
 	<br>
 	
-	<!-- <ul id="replies">
-	</ul> -->
-	
 	<div align="center">
-	<table id="replies" style="">
+		<table id="replies" style="">
 		
-	</table>
+		</table>
 	</div>
+	
 	<br>
+	
 	<div align="center">
 		<div>
 			<textarea rows="4" cols="40" name="replytext" id="newReplyText">
@@ -103,22 +102,11 @@
 		<button type="button" id="replyAddBtn" >ADD REPLY</button>
 	</div>
 	
-	<div id='modDiv' style="display: none;">
-		<div class='modal-title'></div>
-		<div>
-			<input type='text' id='replytext'>
-		</div>
-		<div>
-			<button type="button" id="replyModBtn">Modify</button>
-			<button type="button" id="replyDelBtn">DELETE</button>
-			<button type="button" id='closeBtn'>Close</button>
-		</div>
-	</div>
-	
 <script>
 getAllList();
-var loginID = "${LoingUser}";
+var loginID = "${LoingUser}"; //로그인 아이디
 
+//댓글 리스트 가져오기
 function getAllList(){
 	var bno = ${num};
 	//var id =${id};
@@ -143,6 +131,7 @@ function getAllList(){
 	});	
 }
 
+//댓글 쓰기
 $("#replyAddBtn").on("click", function() {
 	
 	var bno = ${num};
@@ -172,23 +161,20 @@ $("#replyAddBtn").on("click", function() {
 
 				//alert("등록 되었습니다.");
 				getAllList();
-
+				$("#newReplyText").val('');
 			}
 		}
 	});
 });
 
+//댓글 지우기
 $("#replies").on("click", ".replyLi button", function() {
 
 	var reply = $(this).parent();
 	console.log(reply);
 	var rno = reply.attr("data-rno");
 	console.log(rno);
-	//var replytext = reply.text();
 
-	//$(".modal-title").html(rno);
-	//$("#replytext").val(replytext);
-	//$("#modDiv").show("slow");
 	$.ajax({
 		type : 'post',
 		url : 'ps_notice_repl_delete',
@@ -204,61 +190,11 @@ $("#replies").on("click", ".replyLi button", function() {
 			console.log("result: " + result);
 			if (result == 'SUCCESS') {
 				alert("삭제 되었습니다.");
-				//$("#modDiv").hide("slow");
 				getAllList();
 			}
 		}
 	});
-});
-
-$("#replyDelBtn").on("click", function() {
-
-	var rno = $(".modal-title").html();
-	var replytext = $("#replytext").val();
-
-	$.ajax({
-		type : 'delete',
-		url : 'ps_notice_repl_delete' + rno,
-		headers : {
-			"Content-Type" : "application/json",
-			"X-HTTP-Method-Override" : "DELETE"
-		},
-		dataType : 'text',
-		success : function(result) {
-			console.log("result: " + result);
-			if (result == 'SUCCESS') {
-				alert("삭제 되었습니다.");
-				$("#modDiv").hide("slow");
-				getAllList();
-			}
-		}
-	});
-});
-
-$("#replyModBtn").on("click",function(){
-	  
-	  var rno = $(".modal-title").html();
-	  var replytext = $("#replytext").val();
-	  
-	  $.ajax({
-			type:'put',
-			url:'ps_notice_repl_update'+rno,
-			headers: { 
-			      "Content-Type": "application/json",
-			      "X-HTTP-Method-Override": "PUT" },
-			data:JSON.stringify({replytext:replytext}), 
-			dataType:'text', 
-			success:function(result){
-				console.log("result: " + result);
-				if(result == 'SUCCESS'){
-					alert("수정 되었습니다.");
-					 $("#modDiv").hide("slow");
-					//getAllList();
-					 getPageList(replyPage);
-				}
-			}
-	  });
-});		
+});	
 
 </script>	
 </body>

@@ -1257,24 +1257,6 @@ public class PosController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "pos/ps_notice_repl_update/{bno}", method= {RequestMethod.PUT, RequestMethod.PATCH})
-	public ResponseEntity<String> noticeReplUpdate(@PathVariable("bno")int bno,
-			@RequestBody NoticeReplVO vo) {
-		ResponseEntity<String> entity = null;
-		
-		try {
-			vo.setRno(bno);
-			posService.noticeReplUpdate(vo);
-			
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		
-		return entity;
-	}
-	
 	@RequestMapping(value = "pos/ps_notice_repl_delete", method=RequestMethod.POST)
 	public ResponseEntity<String> noticeReplDelete(@RequestBody NoticeReplVO vo){
 		ResponseEntity<String> entity = null;

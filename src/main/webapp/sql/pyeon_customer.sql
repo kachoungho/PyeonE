@@ -9,7 +9,7 @@ select * from ROLE;
 
 insert into ROLE(id, role_name) values('user1', 'ROLE_CUS');
 insert into ROLE(id, role_name) values('user2', 'ROLE_CUS');
-insert into ROLE(id, role_name) values('user3', 'ROLE_CUS');
+insert into ROLE(id, role_name) values('repl', 'ROLE_CUS');
 insert into ROLE(id, role_name) values('choungho', 'ROLE_CUS');
 
 select userid from user_member where username = '����ȣ' and useremail = 'kachounghoa@naver.com'
@@ -22,6 +22,7 @@ SELECT USERID, USERPWD, 1 ENABLED FROM USER_MEMBER WHERE USERID = 'user1';
 
 update p2_sector_p set item_name = '���ѱ⿾��������' where item_name = '���ѱ⿾�����������';
 
+drop table role_user;
 drop table p2_sector_p;
 drop table p2_sector_j;
 drop table p2_sector_y;
