@@ -192,19 +192,7 @@ function getAllList(){
 				+ "<tr style='background: #f9f9f9;'><td style='width:400px;' colspan='3'>" + this.replyText + "</td>";
 
 				str += "</tr><tr><td>　</td></tr>";
-			
-			
-			
-			/* str += "<tr>"
-			+ "<td>" + this.replyer + "</td>"
-			+ "<td>" + this.replyText + "</td>"
-			+ "<td>" + this.regdate_char + "</td>";
-			if(this.replyer != loginID){
-				
-			}
-			else{
-				str += "<td style='width:5px; text-align: center;' data-rno='"+this.rno+"' class='replyLi'><button>delete</button><td></tr>";
-			} */
+
 		});
 		
 		$("#replies").html(str);
