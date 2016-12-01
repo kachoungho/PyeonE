@@ -5,6 +5,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.h{
+	font-size: 20px;
+	font-family: 'Jeju Gothic', sans-serif;
+}
+input.submit {
+	font-size: 12px;
+	line-height: 42px;
+	width: 100px;
+	height: 40px;
+	cursor: pointer;
+	vertical-align: middle;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #263238;
+	border: 1px solid #263238;
+	background: transparent;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	font-family: 'Jeju Gothic', sans-serif;
+}
+
+input.submit:hover {
+	background-color: #263238;
+	color: #ffffff;
+	-moz-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}
+.inpt {
+	font-family: 'Jeju Gothic', sans-serif;
+	font-size: 14px;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 16px 13px;
+	color: black;
+	border: 1px solid #d9d9d9;
+	background: transparent;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	resize: none;
+}
+</style>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <sec:authentication property="name" var="LoingUser" />
@@ -107,24 +156,31 @@
 	<br>
 	<br>
 	<br>
-	
-	<div align="center">
-		<table id="replies" style="">
-		
-		</table>
-	</div>
-	
 	<br>
-	
-	<div align="center">
-		<div>
-			<textarea rows="4" cols="40" name="replytext" id="newReplyText">
-			
-			</textarea>
-			<!-- <input type="text" name="replytext" id="newReplyText"> -->
+	<br>
+	<div style="width:100%; overflow: hidden;">
+		<div style=" float:left; width: 34%">　</div>
+		<div style=" float:left;width: 32%">
+			<font class="h">댓글 입력</font>
+			<div>
+				<textarea class="inpt" rows="4" cols="45" name="replytext" id="newReplyText"></textarea>
+			</div>
+			<br>
+			<div style="float: right;">
+				<input class="submit" type="button" id="replyAddBtn" value="입력"/>
+			</div>
 		</div>
-		<button type="button" id="replyAddBtn" >ADD REPLY</button>
+		<div style=" float:left; width: 34%;">　</div>
 	</div>
+	<br>
+	<div style="width:100%">
+		<div align="center" >
+			<table id="replies" style="">
+			
+			</table>
+		</div>
+	</div>
+	<br>
 	
 <script>
 getAllList();
@@ -139,16 +195,17 @@ function getAllList(){
 		var str = "";
 		
 		$(data).each(function(){
-			str += "<tr>"
-			+ "<td>" + this.replyer + "</td>"
-			+ "<td>" + this.replyText + "</td>"
-			+ "<td>" + this.regdate_char + "</td>";
-			/* if(this.replyer != loginID){
-				
-			}
-			else{ */
-				str += "<td data-rno='"+this.rno+"' class='replyLi'><button>delete</button><td></tr>";
-			/* } */
+			str += "<tr style='background: #f9f9f9; font-family: 'Jeju Gothic', sans-serif;'>"
+			+ "<td style='width:5px; text-align: center;' data-rno='"+this.rno+"' class='replyLi'><input style='display: block; float: left;' width='15px' type='image' src='/controller/resources/images/delete.png' alt='button'/></td>"
+			+ "<td style='width:200px; text-align: left;' class='admin'><img src='/controller/resources/images/admin.png' height='20px'></td>"
+			+ "<td style='width:200px; text-align: center;'>" + this.regdate_char + "</td></tr>"
+			
+			
+			
+			+ "<tr style='background: #f9f9f9;'><td style='width:400px;' colspan='3'>" + this.replyText + "</td>";
+
+			str += "</tr><tr><td>　</td></tr>";
+
 		});
 		
 		$("#replies").html(str);
@@ -160,7 +217,7 @@ $("#replyAddBtn").on("click", function() {
 	
 	var bno = ${num};
 	var replyer = "${LoingUser}";
-	var replyText = $("#newReplyText").val();
+	var replyText = $("#newReplyText").val().replace(/\n/g, '<br>');
 
 	console.log(bno);
 	console.log(replyer);
@@ -182,8 +239,6 @@ $("#replyAddBtn").on("click", function() {
 		success : function(result) {
 
 			if (result == 'SUCCESS') {
-
-				//alert("등록 되었습니다.");
 				getAllList();
 				$("#newReplyText").val('');
 			}
@@ -192,7 +247,7 @@ $("#replyAddBtn").on("click", function() {
 });
 
 //댓글 지우기
-$("#replies").on("click", ".replyLi button", function() {
+$("#replies").on("click", ".replyLi input", function() {
 
 	var reply = $(this).parent();
 	console.log(reply);
@@ -221,5 +276,6 @@ $("#replies").on("click", ".replyLi button", function() {
 });	
 
 </script>
+
 </body>
 </html>

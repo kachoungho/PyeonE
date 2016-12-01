@@ -10,7 +10,6 @@ drop table calendarMemo;
 drop sequence company_item_num;
 drop sequence noticenum;
 
-
 --------------- TABLE --------------------
 
 create table company_item(
@@ -29,7 +28,7 @@ create table company_item(
 
 create table company_notice(
    noticenum number(10) not null,
-   title varchar2(50) not null,
+   title varchar2(150) not null,
    name varchar2(30) not null,
    position varchar2(30) not null,
    contant varchar2(1000) not null,
@@ -277,6 +276,8 @@ alter table company_item add code2 number(10);
 ALTER TABLE company_item
 MODIFY (item_image varchar2(2000));
 
+alter table company_notice
+modify (title varchar2(150));
 
 ---------------x UPDATE x--------------------
 

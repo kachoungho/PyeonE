@@ -145,10 +145,7 @@ table.ex1 {
 	margin-left: 5%;
 	padding: 9px 0;
 	width: 10%;
-	color: #000; /* 
-	border: 1px solid transparent;
-	border-bottom: 1px solid #009688;
-	border-right: 1px solid #009688; */
+	color: #000;
 	font-family: 'Jeju Gothic', sans-serif;
 	float: left;
 	margin-top: 5%;
@@ -310,3 +307,4 @@ table.ex1 {
 	border-bottom: 1px solid #009688;
 	font-family: 'Jeju Gothic', sans-serif;
 }
+

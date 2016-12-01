@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
-	href="/controller/resources/css/listcss.css">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	href="/controller/resources/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,14 +14,14 @@
 	<table class="ex1">
 		<thead>
 			<tr>
-				<th scope="col">Ä«Å×°í¸®</th>
-				<th scope="col">»óÇ° ÄÚµå</th>
-				<th scope="col">»ó Ç° ¸í</th>
-				<th scope="col">¼ö ·®</th>
-				<th scope="col">Áö Á¡</th>
-				<th scope="col">¹ßÁÖ ¿äÃ» ½Ã°£</th>
-				<th scope="col">¹ßÁÖ ½ÂÀÎ</th>
-				<th scope="col">¹ßÁÖ ¹Ì½ÂÀÎ</th>
+				<th scope="col">ì¹´í…Œê³ ë¦¬</th>
+				<th scope="col">ìƒí’ˆ ì½”ë“œ</th>
+				<th scope="col">ìƒ í’ˆ ëª…</th>
+				<th scope="col">ìˆ˜ ëŸ‰</th>
+				<th scope="col">ì§€ ì </th>
+				<th scope="col">ë°œì£¼ ìš”ì²­ ì‹œê°„</th>
+				<th scope="col">ë°œì£¼ ìŠ¹ì¸</th>
+				<th scope="col">ë°œì£¼ ë¯¸ìŠ¹ì¸</th>
 			</tr>
 		</thead>
 
@@ -43,8 +43,8 @@
 						<td class="date2">${orderList.count}</td>
 						<td class="date2">${orderList.area}</td>
 						<td class="date2">${orderList.p2_time}</td>
-						<td class="date2"><input type="submit" value="½ÂÀÎ"></td>
-						<td class="date2"><input type="button" value="¹Ì½ÂÀÎ"
+						<td class="date2"><input class="submit2" type="submit" value="ìŠ¹ì¸"></td>
+						<td class="date2"><input class="submit2" type="button" value="ë¯¸ìŠ¹ì¸"
 							onclick="document.location.href='${pageContext.request.contextPath}/company/com_orderCancel?item_code=${orderList.item_code}&area=${orderList.area}&count=${orderList.count}&item_name=${orderList.item_name}&category=${orderList.category}&p2_time=${orderList.p2_time}'"></td>
 					</tr>
 				</form>

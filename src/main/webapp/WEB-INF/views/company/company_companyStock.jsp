@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -7,7 +7,9 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/listcss.css">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<link rel="stylesheet" type="text/css"
+	href="/controller/resources/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -15,17 +17,15 @@
 		action="${pageContext.request.contextPath}/company/com_companyStock"
 		method="post">
 		<select class="com_stock_select1" name="category">
-			<option value="all">ÀüÃ¼º¸±â</option>
-			<option value="À½·á">À½·á</option>
-			<option value="½º³¼">½º³¼</option>
-			<option value="ÀÎ½ºÅÏÆ®">ÀÎ½ºÅÏÆ®</option>
-			<option value="ÁÖ·ù">ÁÖ·ù</option>
+			<option value="all">ì „ì²´ë³´ê¸°</option>
+			<option value="ìŒë£Œ">ìŒë£Œ</option>
+			<option value="ìŠ¤ë‚µ">ìŠ¤ë‚µ</option>
+			<option value="ì¸ìŠ¤í„´íŠ¸">ì¸ìŠ¤í„´íŠ¸</option>
+			<option value="ì£¼ë¥˜">ì£¼ë¥˜</option>
 		</select> 
 		
 		<input class="com_stock_button" width="40" type="image" src="/controller/resources/images/choice.png" alt="submit">
-		
-		<input type="button" value="ÀçÇ° Ãß°¡"
-				onclick="document.location.href='${pageContext.request.contextPath}/company/com_newproduct'" />
+		<input style="margin-top: 4.5%; float: right; margin-right: 5%;" class="submit" type="button" value="ì‹ ê·œ ì œí’ˆ ì¶”ê°€" onclick="document.location.href='${pageContext.request.contextPath}/company/com_newproduct'" />
 	</form>
 
 	<c:if test="${result == null}">
@@ -60,13 +60,13 @@
 		<table class="ex1">
 			<thead>
 				<tr>
-					<th scope="col">»óÇ° ÀÌ¹ÌÁö</th>
-					<th scope="col">Ä« Å× °í ¸®</th>
-					<th scope="col">»ó Ç° ÄÚ µå</th>
-					<th scope="col">»ó Ç° ¸í</th>
-					<th scope="col">¿ø °¡</th>
-					<th scope="col">¼ÒºñÀÚ °¡°İ</th>
-					<th scope="col">Àç°í ¼ö·®</th>
+					<th scope="col">ìƒí’ˆ ì´ë¯¸ì§€</th>
+					<th scope="col">ì¹´ í…Œ ê³  ë¦¬</th>
+					<th scope="col">ìƒ í’ˆ ì½” ë“œ</th>
+					<th scope="col">ìƒ í’ˆ ëª…</th>
+					<th scope="col">ì› ê°€</th>
+					<th scope="col">ì†Œë¹„ì ê°€ê²©</th>
+					<th scope="col">ì¬ê³  ìˆ˜ëŸ‰</th>
 				</tr>
 			</thead>
 			<c:forEach items="${result}" var="list">
@@ -76,9 +76,13 @@
 					<td class="date2">${list.category}</td>
 					<td class="date3">${list.item_code}</td>
 					<td class="date4">${list.item_name}</td>
-					<td class="date5"><fmt:formatNumber value="${list.cost}" groupingUsed="true"/>¿ø</td>
-					<td class="date9"><fmt:formatNumber value="${list.price}" groupingUsed="true"/>¿ø</td>
-					<td class="date6">${list.count} °³</td>
+					<td class="date5">${list.cost} ì›</td>
+					<td class="date9">${list.price} ì›</td>
+					<td class="date6">${list.count} ê°œ</td>
+
+					<td class="date5"><fmt:formatNumber value="${list.cost}" groupingUsed="true"/>ï¿½ï¿½</td>
+					<td class="date9"><fmt:formatNumber value="${list.price}" groupingUsed="true"/>ï¿½ï¿½</td>
+					<td class="date6">${list.count} ï¿½ï¿½</td>
 				</tr>
 				</tbody>
 			</c:forEach>
