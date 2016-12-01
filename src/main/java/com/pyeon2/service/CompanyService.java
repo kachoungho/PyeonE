@@ -8,6 +8,7 @@ import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeVO;
+import com.pyeon2.vo.ReqBoardVO;
 
 public interface CompanyService {
 	// 발주 목록 확인 메소드
@@ -120,4 +121,7 @@ public interface CompanyService {
 		
 	//각각지점에 신제품 입력
 	public void newproductareainsert(ItemVO vo) throws Exception;
+	
+	//고객 요청 게시판에서 최근 5개글 띄우기
+	public List<ReqBoardVO> getReqBoardList() throws Exception;
 }

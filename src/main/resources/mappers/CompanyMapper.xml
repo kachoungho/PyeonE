@@ -326,4 +326,12 @@
 		(select item_image from company_item where item_code= #{item_code}),(select price from company_item where item_code= #{item_code}),0,0,(select category from company_item where item_code= #{item_code}),
 		#{area})
 	</insert>
+	
+	<!-- 고객 요청 게시판에서 최근 5개글 띄우기 -->
+	<select id="getReqBoardList" resultType="com.pyeon2.vo.ReqBoardVO">
+		SELECT * FROM ( SELECT * FROM ITEM_REQ_BOARD ORDER BY REQ_NUM DESC )
+		<![CDATA[
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
 </mapper>

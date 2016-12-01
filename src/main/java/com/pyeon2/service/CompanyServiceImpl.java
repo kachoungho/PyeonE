@@ -15,6 +15,7 @@ import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeVO;
+import com.pyeon2.vo.ReqBoardVO;
 
 @Repository
 public class CompanyServiceImpl implements CompanyService {
@@ -232,5 +233,10 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void newproductareainsert(ItemVO vo) throws Exception {
 		comDao.newproductareainsert(vo);
+	}
+
+	@Override
+	public List<ReqBoardVO> getReqBoardList() throws Exception {
+		return comDao.getReqBoardList();
 	}
 }

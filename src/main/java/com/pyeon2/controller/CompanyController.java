@@ -111,6 +111,13 @@ public class CompanyController {
 			mav.addObject("result", list);
 			mav.addObject("count", count);
 			// 미승인건 관련 부분 end
+			// 고객 요청 게시판 관련 부분
+			List<ReqBoardVO> list2;
+			list2 = companyService.getReqBoardList();
+			
+			mav.addObject("reqlist", list2);
+			// 고객 요청 게시판 관련 부분 end
+			
 			mav.setViewName(".company.company_main");
 			vo.setYear(Integer.toString(year));
 			vo.setMonth(Integer.toString(month));
