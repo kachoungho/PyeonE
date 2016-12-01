@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<sec:authentication property="name" var="LoingUser" />
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <script type="text/javascript">
@@ -101,5 +103,119 @@
 	<br>
 	<br>
 	<br>
+	
+		<div align="center">
+		<table id="replies" style="">
+		
+		</table>
+	</div>
+	
+	<br>
+	
+	<div align="center">
+		<div>
+			<textarea rows="4" cols="40" name="replytext" id="newReplyText">
+			
+			</textarea>
+			<!-- <input type="text" name="replytext" id="newReplyText"> -->
+		</div>
+		<button type="button" id="replyAddBtn" >ADD REPLY</button>
+	</div>
+	
+<script>
+getAllList();
+var loginID = "${LoingUser}"; //로그인 아이디
+
+//댓글 리스트 가져오기
+function getAllList(){
+	var bno = ${req_num};
+	//var id =${id};
+	$.getJSON("cus_item_req_board_repl_list/" + bno, function(data){
+		console.log(data.length);
+		var str = "";
+		
+		$(data).each(function(){
+			str += "<tr>"
+			+ "<td>" + this.replyer + "</td>"
+			+ "<td>" + this.replyText + "</td>"
+			+ "<td>" + this.regdate_char + "</td>";
+			if(this.replyer != loginID){
+				
+			}
+			else{
+				str += "<td data-rno='"+this.rno+"' class='replyLi'><button>delete</button><td></tr>";
+			}
+		});
+		
+		$("#replies").html(str);
+	});	
+}
+
+//댓글 쓰기
+$("#replyAddBtn").on("click", function() {
+	
+	var bno = ${req_num};
+	var replyer = "${LoingUser}";
+	var replyText = $("#newReplyText").val();
+
+	console.log(bno);
+	console.log(replyer);
+	console.log(replyText);
+	
+	$.ajax({
+		type : 'post',
+		url : 'cus_item_req_board_repl_write',
+		headers : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "POST"
+		},
+		dataType : 'text',
+		data : JSON.stringify({
+			bno : bno,
+			replyer : replyer,
+			replyText : replyText
+		}),
+		success : function(result) {
+
+			if (result == 'SUCCESS') {
+
+				//alert("등록 되었습니다.");
+				getAllList();
+				$("#newReplyText").val('');
+			}
+		}
+	});
+});
+
+//댓글 지우기
+$("#replies").on("click", ".replyLi button", function() {
+
+	var reply = $(this).parent();
+	console.log(reply);
+	var rno = reply.attr("data-rno");
+	console.log(rno);
+
+	$.ajax({
+		type : 'post',
+		url : 'cus_item_req_board_repl_delete',
+		headers : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "POST"
+		},
+		dataType : 'text',
+		data : JSON.stringify({
+			rno : rno
+		}),
+		success : function(result) {
+			console.log("result: " + result);
+			if (result == 'SUCCESS') {
+				alert("삭제 되었습니다.");
+				getAllList();
+			}
+		}
+	});
+});	
+
+</script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pyeon2.vo.GpsVO;
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.ReqBoardVO;
 import com.pyeon2.vo.SectorVO;
 import com.pyeon2.vo.UserMemVO;
@@ -98,5 +99,25 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Override
 	public List<ItemVO> getHitSum_a() throws Exception {
 		return session.selectList(namespace + ".getHitSum_a");
+	}
+
+	@Override
+	public List<NoticeReplVO> reqBoardReplList(int bno) throws Exception {
+		return session.selectList(namespace + ".reqBoardReplList", bno);
+	}
+
+	@Override
+	public void reqBoardReplWrite(NoticeReplVO vo) throws Exception {
+		session.insert(namespace + ".reqBoardReplWrite", vo);
+	}
+
+	@Override
+	public void reqBoardReplUpdate(NoticeReplVO vo) throws Exception {
+		session.update(namespace + ".reqBoardReplUpdate", vo);
+	}
+
+	@Override
+	public void reqBoardReplDelete(NoticeReplVO vo) throws Exception {
+		session.delete(namespace + ".reqBoardReplDelete", vo);
 	}
 }

@@ -4,56 +4,69 @@ import java.util.List;
 
 import com.pyeon2.vo.GpsVO;
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.ReqBoardVO;
 import com.pyeon2.vo.SectorVO;
 import com.pyeon2.vo.UserMemVO;
 
 public interface CustomerService {
-	// ¹°Ç° ÀÌ¸§°ú ÁöÁ¡¸íÀ¸·Î °Ë»ö
+	// ï¿½ï¿½Ç° ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
 	public List<ItemVO> searchItem(ItemVO vo) throws Exception;
 
-	// ¹°Ç° ÀÌ¸§À¸·Î °Ë»ö
+	// ï¿½ï¿½Ç° ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
 	public List<ItemVO> searchItem_name(ItemVO vo) throws Exception;
 
-	// ÁÖ¼Ò°Ë»ö
+	// ï¿½Ö¼Ò°Ë»ï¿½
 	public List<GpsVO> getAddress(GpsVO vo) throws Exception;
 
-	// ¾ÆÀÌÅÛ ¼½ÅÍ °¡Á®¿À±â(ÆÇ±³)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Ç±ï¿½)
 	public List<SectorVO> getSector_p(SectorVO vo) throws Exception;
 
-	// ¾ÆÀÌÅÛ ¼½ÅÍ °¡Á®¿À±â(Á¤ÀÚ)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 	public List<SectorVO> getSector_j(SectorVO vo) throws Exception;
 
-	// ¾ÆÀÌÅÛ ¼½ÅÍ °¡Á®¿À±â(¾ßÅ¾)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Å¾)
 	public List<SectorVO> getSector_y(SectorVO vo) throws Exception;
 
-	// Àç°í ¿äÃ» °Ô½ÃÆÇ ¸®½ºÆ® ºÒ·¯¿À±â
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 	public List<ReqBoardVO> getReqBoardlist() throws Exception;
 
-	// ·Î±×ÀÎÇÑ À¯ÀúÀÇ ÀÌ¸§ °¡Á®¿À±â
+	// ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String getName(String id) throws Exception;
 
-	// Àç°í ¿äÃ» °Ô½ÃÆÇ ±Û¾²±â
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½
 	public void writeReq(ReqBoardVO vo) throws Exception;
 
-	// Àç°í ¿äÃ» °Ô½Ã±Û ÀÚ¼¼È÷ º¸±â
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½Ô½Ã±ï¿½ ï¿½Ú¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<ReqBoardVO> getReqBoardContant(ReqBoardVO vo) throws Exception;
 
-	// Àç°í ¿äÃ» °Ô½Ã±Û ¼öÁ¤
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void reqBoardupdate(ReqBoardVO vo) throws Exception;
 
-	// Àç°í ¿äÃ» °Ô½Ã±Û »èÁ¦
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void reqBoardDelete(ReqBoardVO vo) throws Exception;
 
-	// ÀÎ±â »óÇ° °¡Á®¿À±â(½º³¼)
+	// ï¿½Î±ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 	public List<ItemVO> getHitSum_s() throws Exception;
 
-	// ÀÎ±â »óÇ° °¡Á®¿À±â(ÀÎ½ºÅÏÆ®)
+	// ï¿½Î±ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Î½ï¿½ï¿½ï¿½Æ®)
 	public List<ItemVO> getHitSum_i() throws Exception;
 
-	// ÀÎ±â »óÇ° °¡Á®¿À±â(À½·á)
+	// ï¿½Î±ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 	public List<ItemVO> getHitSum_d() throws Exception;
 
-	// ÀÎ±â »óÇ° °¡Á®¿À±â(ÁÖ·ù)
+	// ï¿½Î±ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Ö·ï¿½)
 	public List<ItemVO> getHitSum_a() throws Exception;
+	
+	//ìƒí’ˆ ì‹ ì²­ ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸
+	public List<NoticeReplVO> reqBoardReplList(int bno) throws Exception;
+	
+	//ìƒí’ˆ ì‹ ì²­ ëŒ“ê¸€ ì“°ê¸°
+	public void reqBoardReplWrite(NoticeReplVO vo) throws Exception;
+	
+	//ìƒí’ˆ ì‹ ì²­ ëŒ“ê¸€ ìˆ˜ì •
+	public void reqBoardReplUpdate(NoticeReplVO vo) throws Exception;
+	
+	//ìƒí’ˆ ì‹ ì²­ ëŒ“ê¸€ ì‚­ì œ
+	public void reqBoardReplDelete(NoticeReplVO vo) throws Exception;
 }

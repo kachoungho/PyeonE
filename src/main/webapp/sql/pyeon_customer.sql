@@ -53,6 +53,20 @@ create sequence req_num
    start with 1
    nocache;
 
+create table item_req_board_repl(
+   rno number(10),
+   bno number(10),
+   replyText varchar2(1000),
+   replyer varchar2(50),
+   regdate_char varchar2(50),
+   regdate date,
+   updateDate date
+);
+
+create sequence item_req_board_repl_num
+   increment by 1
+   start with 1
+   nocache;
 
 create table user_member(
 	mem_num number,

@@ -5,8 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pyeon2.service.CustomerService;
 import com.pyeon2.vo.GpsVO;
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.ReqBoardVO;
 import com.pyeon2.vo.SectorVO;
 import com.pyeon2.vo.UserMemVO;
@@ -144,6 +149,7 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView();
 		ReqBoardVO vo = new ReqBoardVO();
 		int result = 0;
+		int req_num = 0;
 
 		String sessionid = request.getParameter("sessionid");
 		String sessionid2 = (String) request.getAttribute("sessionid");
@@ -162,7 +168,10 @@ public class CustomerController {
 		} else {
 			result = 2;
 		}
+		
+		req_num = vo.getReq_num();
 
+		mav.addObject("req_num", req_num);
 		mav.addObject("result", result);
 		mav.addObject("list", list);
 		mav.setViewName(".customer.req_board_contant");
@@ -234,4 +243,45 @@ public class CustomerController {
 		return mav;
 	}
 
+	@RequestMapping(value = "customer/req_board/cus_item_req_board_repl_write", method=RequestMethod.POST)
+	public ResponseEntity<String> reqBoardReplRegister(@RequestBody NoticeReplVO vo) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			customerService.reqBoardReplWrite(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "customer/req_board/cus_item_req_board_repl_list/{bno}", method=RequestMethod.GET)
+	public ResponseEntity<List<NoticeReplVO>> reqBoardReplList(@PathVariable("bno")int bno) {
+		ResponseEntity<List<NoticeReplVO>> entity = null;
+		try {
+			entity = new ResponseEntity<>(customerService.reqBoardReplList(bno), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value = "customer/req_board/cus_item_req_board_repl_delete", method=RequestMethod.POST)
+	public ResponseEntity<String> reqBoardReplDelete(@RequestBody NoticeReplVO vo){
+		ResponseEntity<String> entity = null;
+		
+		try {
+			customerService.reqBoardReplDelete(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 }
