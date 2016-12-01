@@ -1068,11 +1068,14 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView();
 		ReqBoardVO vo = new ReqBoardVO();
 		int result = 0;
+		int req_num;
+		String select = "company";
 
 		String sessionid = request.getParameter("sessionid");
 		String sessionid2 = (String) request.getAttribute("sessionid");
 		vo.setReq_num(Integer.parseInt(request.getParameter("req_num")));
-
+		req_num = vo.getReq_num();
+		
 		String name = null;
 		System.out.println("sessionid : " + sessionid);
 		System.out.println("sessionid2 : " + sessionid2);
@@ -1092,6 +1095,8 @@ public class CompanyController {
 			result = 2;
 		}*/
 		result = 1;
+		mav.addObject("select", select);
+		mav.addObject("req_num", req_num);
 		mav.addObject("result", result);
 		mav.addObject("list", list);
 		mav.setViewName(".companys.customer.req_board_contant");
@@ -1177,6 +1182,48 @@ public class CompanyController {
 		
 		try {
 			posService.noticeReplDelete(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value = "company/com_item_req_board_repl_write", method=RequestMethod.POST)
+	public ResponseEntity<String> reqBoardReplRegister(@RequestBody NoticeReplVO vo) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			customerService.reqBoardReplWrite(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "company/com_item_req_board_repl_list/{bno}", method=RequestMethod.GET)
+	public ResponseEntity<List<NoticeReplVO>> reqBoardReplList(@PathVariable("bno")int bno) {
+		ResponseEntity<List<NoticeReplVO>> entity = null;
+		try {
+			entity = new ResponseEntity<>(customerService.reqBoardReplList(bno), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value = "company/com_item_req_board_repl_delete", method=RequestMethod.POST)
+	public ResponseEntity<String> reqBoardReplDelete(@RequestBody NoticeReplVO vo){
+		ResponseEntity<String> entity = null;
+		
+		try {
+			customerService.reqBoardReplDelete(vo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

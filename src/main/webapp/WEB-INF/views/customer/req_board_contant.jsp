@@ -154,11 +154,21 @@
 getAllList();
 var loginID = "${LoingUser}"; //로그인 아이디
 
+
 //댓글 리스트 가져오기
 function getAllList(){
 	var bno = ${req_num};
+	var url = "";
+	var select = "${select}";
 	//var id =${id};
-	$.getJSON("cus_item_req_board_repl_list/" + bno, function(data){
+	console.log(select);
+	if(select == "customer"){
+		url = "cus_item_req_board_repl_list/";
+	}
+	else if(select == "company"){
+		url = "com_item_req_board_repl_list/";
+	}
+	$.getJSON(url + bno, function(data){
 		console.log(data.length);
 		var str = "";
 		
@@ -181,10 +191,19 @@ function getAllList(){
 
 //댓글 쓰기
 $("#replyAddBtn").on("click", function() {
-	
+	var select = "${select}";
+	console.log(select);
 	var bno = ${req_num};
 	var replyer = "${LoingUser}";
 	var replyText = $("#newReplyText").val();
+	
+	var url1 = "";
+	if(select == "customer"){
+		url1 = "cus_item_req_board_repl_write";
+	}
+	else if(select == "company"){
+		url1 = "com_item_req_board_repl_write";
+	}
 
 	console.log(bno);
 	console.log(replyer);
@@ -192,7 +211,7 @@ $("#replyAddBtn").on("click", function() {
 	
 	$.ajax({
 		type : 'post',
-		url : 'cus_item_req_board_repl_write',
+		url : url1,
 		headers : {
 			"Content-Type" : "application/json",
 			"X-HTTP-Method-Override" : "POST"
@@ -217,15 +236,24 @@ $("#replyAddBtn").on("click", function() {
 
 //댓글 지우기
 $("#replies").on("click", ".replyLi button", function() {
-
+	var select = "${select}";
+	console.log(select);
 	var reply = $(this).parent();
 	console.log(reply);
 	var rno = reply.attr("data-rno");
 	console.log(rno);
+	
+	var url1 = "";
+	if(select == "customer"){
+		url1 = "cus_item_req_board_repl_delete";
+	}
+	else if(select == "company"){
+		url1 = "com_item_req_board_repl_delete";
+	}
 
 	$.ajax({
 		type : 'post',
-		url : 'cus_item_req_board_repl_delete',
+		url : url1,
 		headers : {
 			"Content-Type" : "application/json",
 			"X-HTTP-Method-Override" : "POST"

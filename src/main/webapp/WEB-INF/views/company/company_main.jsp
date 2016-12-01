@@ -79,7 +79,7 @@
 				<tbody>
 					<tr class="odd">
 						<td class="date4"><a
-							href="${pageContext.request.contextPath}/company/req_board_contant?req_num=${ reqlist.req_num }&sessionid=${LoingUser}">${ reqlist.title }</a></td>
+							href="${pageContext.request.contextPath}/company/req_board_contant?req_num=${reqlist.req_num }&sessionid=${LoingUser}">${ reqlist.title }</a></td>
 						<td class="date2">
 						<fmt:formatDate value="${ reqlist.req_date }" pattern="yyyy-MM-dd HH:mm"/>
 						</td>
