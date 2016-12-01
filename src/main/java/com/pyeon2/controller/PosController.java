@@ -818,8 +818,8 @@ public class PosController {
 
 		// 바코드 생성 코드
 		Barcode barcode = BarcodeFactory.createCode128B(billnum);
-
-		File file = new File("C:\\Bill\\" + billnum + ".jpg");
+		// C:/springProject/workspace/PyeonE/src/main/webapp/resources/item_image/
+		File file = new File("C:\\springProject\\workspace\\PyeonE\\src\\main\\webapp\\resources\\Bill\\" + billnum + ".jpg");
 		BarcodeImageHandler.saveJPEG(barcode, file);
 		///////////////////////////////////////////////////////////
 		
