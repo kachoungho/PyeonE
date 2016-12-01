@@ -447,7 +447,7 @@
 	<select id="getLessItem" parameterType="com.pyeon2.vo.MemberVO" resultType="com.pyeon2.vo.ItemVO">
 		SELECT * FROM P2_ITEM 
 		<![CDATA[
-		WHERE COUNT <= 10
+		WHERE COUNT <= 10 AND HIT != 0
 		]]>
 		AND AREA = #{area}
 	</select>
@@ -456,7 +456,7 @@
 	<select id="getLessItemCount" parameterType="com.pyeon2.vo.MemberVO" resultType="Integer">
 		SELECT COUNT(*) FROM P2_ITEM
 		<![CDATA[
-		WHERE COUNT <= 10
+		WHERE COUNT <= 10 AND HIT != 0
 		]]>
 		AND AREA = #{area}
 	</select>

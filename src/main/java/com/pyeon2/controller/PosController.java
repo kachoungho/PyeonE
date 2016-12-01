@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pyeon2.domain.Criteria;
 import com.pyeon2.domain.PageMaker;
 import com.pyeon2.service.CompanyService;
-import com.pyeon2.service.CustomerService;
 import com.pyeon2.service.PosService;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
@@ -819,8 +818,8 @@ public class PosController {
 
 		// 바코드 생성 코드
 		Barcode barcode = BarcodeFactory.createCode128B(billnum);
-
-		File file = new File("C:\\Bill\\" + billnum + ".jpg");
+		// C:/springProject/workspace/PyeonE/src/main/webapp/resources/item_image/
+		File file = new File("C:\\springProject\\workspace\\PyeonE\\src\\main\\webapp\\resources\\Bill\\" + billnum + ".jpg");
 		BarcodeImageHandler.saveJPEG(barcode, file);
 		///////////////////////////////////////////////////////////
 		
