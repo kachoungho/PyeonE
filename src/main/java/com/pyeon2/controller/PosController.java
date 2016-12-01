@@ -740,11 +740,14 @@ public class PosController {
 		int total = 0;
 		/*int pay = vo.getPay();*/
 		List<ItemVO> list = posService.calcList();
+		
 		for(int i =0 ; i < list.size() ; i++){
 			if(vo.getItem_code().equals(list.get(i).getItem_code())&& vo.getArea().equals(list.get(i).getArea())){
 				cal = 1;
 			}
 		}
+		List<ItemVO> list2 = posService.itemcodeselect(vo);
+		
 		
 		switch (cal) {
 			case 1:
@@ -754,7 +757,9 @@ public class PosController {
 			}
 			case 0:
 			{
-				posService.calcinsert(vo);
+				if(list2.size() != 0){
+					posService.calcinsert(vo);
+				}
 				break;
 			}
 			default:
@@ -1145,7 +1150,7 @@ public class PosController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "pop_calcrefurnd" , method = RequestMethod.GET)
+	@RequestMapping(value = "pop_calcrefurnd")
 	public ModelAndView calcrefurnd(HttpServletRequest request,Model model) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		
@@ -1167,14 +1172,19 @@ public class PosController {
 		vo.setArea(request.getParameter("area"));
 		List<ItemVO> list = posService.daycalclist(vo);
 		
-		int num =  posService.num(vo);
-		
-		System.out.println("num = " + num);
-		mav.addObject("billnum",vo.getBillnum());
-		mav.addObject("num",num);
-		mav.addObject("area",request.getParameter("area"));
-		mav.addObject("result" , list);
-		mav.setViewName("pop/pop_calcrefurndlist");
+		if(list.size() != 0){
+			int num =  posService.num(vo);
+			
+			mav.addObject("billnum",vo.getBillnum());
+			mav.addObject("num",num);
+			mav.addObject("area",request.getParameter("area"));
+			mav.addObject("result" , list);
+			mav.setViewName("pop/pop_calcrefurndlist");
+		}
+		else{
+			mav.addObject("area",request.getParameter("area"));
+			mav.setViewName("pop/pop_calcrefurnd");
+		}
 		return mav;
 	}
 	

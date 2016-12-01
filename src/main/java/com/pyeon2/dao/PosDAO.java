@@ -235,4 +235,7 @@ public interface PosDAO {
 	
 	//댓글 삭제
 	public void noticeReplDelete(NoticeReplVO vo) throws Exception;
+	
+	//p2_item 리스트 item_code로 비교
+	public List<ItemVO> itemcodeselect(ItemVO vo) throws Exception;
 }

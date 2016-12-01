@@ -393,4 +393,9 @@ public class PosServiceImpl implements PosService {
 	public void noticeReplDelete(NoticeReplVO vo) throws Exception {
 		posDao.noticeReplDelete(vo);
 	}
+
+	@Override
+	public List<ItemVO> itemcodeselect(ItemVO vo) throws Exception {
+		return posDao.itemcodeselect(vo);
+	}
 }

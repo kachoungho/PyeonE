@@ -537,4 +537,9 @@
 	<delete id="noticeReplDelete" parameterType="com.pyeon2.vo.NoticeReplVO">
 		delete from company_notice_repl where rno = #{rno}
 	</delete>
+	
+	<!-- itemcode로 p2_item select -->
+	<select id="itemcodeselect" parameterType="com.pyeon2.vo.NoticeReplVO" resultType="com.pyeon2.vo.NoticeReplVO">
+		select item_code from p2_item where item_code = #{item_code}
+	</select>
 </mapper>
