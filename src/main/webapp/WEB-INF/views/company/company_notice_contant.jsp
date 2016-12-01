@@ -197,8 +197,15 @@ function getAllList(){
 		$(data).each(function(){
 			str += "<tr style='background: #f9f9f9; font-family: 'Jeju Gothic', sans-serif;'>"
 			+ "<td style='width:5px; text-align: center;' data-rno='"+this.rno+"' class='replyLi'><input style='display: block; float: left;' width='15px' type='image' src='/controller/resources/images/delete.png' alt='button'/></td>"
-			+ "<td style='width:200px; text-align: left;' class='admin'><img src='/controller/resources/images/admin.png' height='20px'></td>"
-			+ "<td style='width:200px; text-align: center;'>" + this.regdate_char + "</td></tr>"
+			+ "<td style='width:200px; text-align: left;' class='admin'>";
+			
+			if(this.replyer != loginID){
+				str += this.replyer;
+			} else {
+				str += "<img src='/controller/resources/images/admin.png' height='20px'>";
+			}
+			
+			str += "</td><td style='width:200px; text-align: center;'>" + this.regdate_char + "</td></tr>"
 			
 			
 			
