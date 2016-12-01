@@ -1013,8 +1013,6 @@ public class CompanyController {
 		return mav;
 	}
 	
-<<<<<<< HEAD
-	
 	@RequestMapping(value = "company/req_board_list", method = RequestMethod.GET)
 	public ModelAndView ReqBoardlistGET() throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -1137,7 +1135,8 @@ public class CompanyController {
 
 		mav = ReqBoardlistGET();
 		return mav;
-=======
+	}
+	
 	@RequestMapping(value = "company/com_notice_repl_write", method=RequestMethod.POST)
 	public ResponseEntity<String> noticeReplRegister(@RequestBody NoticeReplVO vo) throws Exception {
 		ResponseEntity<String> entity = null;
@@ -1178,6 +1177,5 @@ public class CompanyController {
 		}
 		
 		return entity;
->>>>>>> 855384e6a5fa294b74da6f79d7403e2999ad406e
 	}
 }
