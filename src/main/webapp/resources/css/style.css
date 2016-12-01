@@ -172,14 +172,7 @@ input.submit:hover {
 	font-family: 'Jeju Gothic', sans-serif;
 }
 
-.div_col2 {
-	position: relative;
-	min-height: 1px;
-	padding-left: 15px;
-	padding-right: 15px;
-	width: 100%;
-	font-family: 'Jeju Gothic', sans-serif;
-}
+
 
 .table {
 	width: 100%;
@@ -257,6 +250,8 @@ input.submit2:hover {
 	-webkit-transition: all 0.2s;
 	transition: all 0.2s;
 }
+
+
 
 .h {
   font-family: 'Jeju Gothic', sans-serif;
