@@ -1044,6 +1044,7 @@ public class PosController {
 			vo.setContent("지출");
 			vo.setPay(list2.get(i).getPay());
 			vo.setP2_time(list2.get(i).getSpend_date());
+			vo.setBillnum("");
 			System.out.println("p2_time : " + list2.get(i).getSal_time());
 			posService.daymoneyinsert(vo);
 		}
