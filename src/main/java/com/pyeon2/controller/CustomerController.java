@@ -150,6 +150,7 @@ public class CustomerController {
 		ReqBoardVO vo = new ReqBoardVO();
 		int result = 0;
 		int req_num = 0;
+		String select = "customer";
 
 		String sessionid = request.getParameter("sessionid");
 		String sessionid2 = (String) request.getAttribute("sessionid");
@@ -171,6 +172,7 @@ public class CustomerController {
 		
 		req_num = vo.getReq_num();
 
+		mav.addObject("select", select);
 		mav.addObject("req_num", req_num);
 		mav.addObject("result", result);
 		mav.addObject("list", list);
