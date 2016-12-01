@@ -64,8 +64,10 @@
 					<th scope="col">Àç°í·®</th>
 				</tr>
 			</thead>
+			
 
 			<c:forEach items="${ list2 }" var="list">
+				<c:if test="${ list2 != null }">
 				<tbody>
 					<tr class="odd">
 						<td class="date2">${ list.category }</td>
@@ -73,6 +75,7 @@
 						<td class="date2">${ list.count }</td>
 					</tr>
 				</tbody>
+				</c:if>
 			</c:forEach>
 		</table>
 	</div>

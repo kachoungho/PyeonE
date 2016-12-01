@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pyeon2.domain.Criteria;
 import com.pyeon2.domain.PageMaker;
 import com.pyeon2.service.CompanyService;
-import com.pyeon2.service.CustomerService;
 import com.pyeon2.service.PosService;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
