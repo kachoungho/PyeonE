@@ -30,23 +30,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<GpsVO> getAddress(GpsVO vo) throws Exception {
+	public List<GpsVO> getAddress(SectorVO vo) throws Exception {
 		return cusDao.getAddress(vo);
 	}
 
 	@Override
-	public List<SectorVO> getSector_p(SectorVO vo) throws Exception {
-		return cusDao.getSector_p(vo);
-	}
-
-	@Override
-	public List<SectorVO> getSector_j(SectorVO vo) throws Exception {
-		return cusDao.getSector_j(vo);
-	}
-
-	@Override
-	public List<SectorVO> getSector_y(SectorVO vo) throws Exception {
-		return cusDao.getSector_y(vo);
+	public List<SectorVO> getSector(SectorVO vo) throws Exception {
+		return cusDao.getSector(vo);
 	}
 
 	@Override

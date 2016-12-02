@@ -67,7 +67,7 @@
 				</tr>
 				<tr>
 					<td id="td1">홈페이지</td>
-					<td id="td2"><a href="${pageContext.request.contextPath}/customer/cus_sector?area=${list.area}">홈페이지 이동</a></td>
+					<td id="td2"><a href="${pageContext.request.contextPath}/customer/cus_sector?area=${list.area}&item_name=${item_name}">홈페이지 이동</a></td>
 				</tr>
 					</c:forEach>
 			</table>

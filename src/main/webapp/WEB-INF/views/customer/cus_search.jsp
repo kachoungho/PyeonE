@@ -285,7 +285,7 @@ input.submit:hover {
 									재고 유무 : <label style="color: blue;"><b>재고 없음</b></label> 
 								</c:if>
 								<br> 지 점 : <label><b><a
-										href="cus_map?area=${list.area}">${list.area}점</a></b></label><br>
+										href="cus_map?area=${list.area}&item_name=${list.item_name}">${list.area}점</a></b></label><br>
 							</p>
 						</div>
 					</div>

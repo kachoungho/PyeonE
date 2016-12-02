@@ -32,23 +32,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public List<GpsVO> getAddress(GpsVO vo) throws Exception {
+	public List<GpsVO> getAddress(SectorVO vo) throws Exception {
 		return session.selectList(namespace + ".getAddress", vo);
 	}
 
 	@Override
-	public List<SectorVO> getSector_p(SectorVO vo) throws Exception {
-		return session.selectList(namespace + ".getSector_p", vo);
-	}
-
-	@Override
-	public List<SectorVO> getSector_j(SectorVO vo) throws Exception {
-		return session.selectList(namespace + ".getSector_j", vo);
-	}
-
-	@Override
-	public List<SectorVO> getSector_y(SectorVO vo) throws Exception {
-		return session.selectList(namespace + ".getSector_y", vo);
+	public List<SectorVO> getSector(SectorVO vo) throws Exception {
+		return session.selectList(namespace + ".getSector", vo);
 	}
 
 	@Override

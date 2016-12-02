@@ -60,44 +60,36 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "customer/cus_map")
-	public ModelAndView cus_mapPOST(HttpServletRequest request) throws Exception {
+	public ModelAndView cus_mapPOST(SectorVO vo) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		GpsVO vo = new GpsVO();
-
-		vo.setArea(request.getParameter("area"));
-
 		List<GpsVO> list = customerService.getAddress(vo);
 
 		mav.addObject("list", list);
+		mav.addObject("item_name", vo.getItem_name());
 		mav.setViewName(".customer.cus_map2");
 		return mav;
 	}
 
 	@RequestMapping(value = "customer/cus_sector", method = RequestMethod.GET)
-	public ModelAndView cus_sectorPOST(HttpServletRequest request) throws Exception {
+	public ModelAndView cus_sectorPOST(SectorVO vo) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		SectorVO vo = new SectorVO();
 		List<SectorVO> list;
-
-		String area = request.getParameter("area");
-		vo.setArea(area);
-
-		if (area.equals("판교")) {
-			list = customerService.getSector_p(vo);
-			mav.addObject("list", list);
+		
+		System.out.println("vo.getArea() : " + vo.getArea());
+		System.out.println("vo.getItem_name()" + vo.getItem_name());
+		
+		list = customerService.getSector(vo);
+		System.out.println("list.size() : " + list.size());
+		mav.addObject("list", list);
+		mav.addObject("name", vo.getItem_name());
+		if (list.get(0).getArea().equals("판교")) {
 			mav.setViewName(".customer.cus_pangyo");
-
-		} else if (area.equals("정자")) {
-			list = customerService.getSector_j(vo);
-			mav.addObject("list", list);
+		} else if (list.get(0).getArea().equals("정자")) {
 			mav.setViewName(".customer.cus_jeongja");
-
-		} else if (area.equals("야탑")) {
-			list = customerService.getSector_y(vo);
-			mav.addObject("list", list);
+		} else if (list.get(0).getArea().equals("야탑")) {
 			mav.setViewName(".customer.cus_yatap");
 		}
-
+		
 		return mav;
 	}
 
