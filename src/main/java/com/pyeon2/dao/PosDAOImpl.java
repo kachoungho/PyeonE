@@ -399,4 +399,19 @@ public class PosDAOImpl implements PosDAO {
 	public List<ItemVO> itemcodeselect(ItemVO vo) throws Exception {
 		return session.selectList(namespace+".itemcodeselect",vo);
 	}
+
+	@Override
+	public void payinsert(UserVO vo) throws Exception {
+		session.insert(namespace+".payinsert",vo);
+	}
+
+	@Override
+	public void paydelete(UserVO vo) throws Exception {
+		session.delete(namespace+".paydelete",vo);
+	}
+
+	@Override
+	public List<UserVO> selectmanpayAll1(UserVO vo) throws Exception {
+		return session.selectList(namespace + ".selectmanpayAll1", vo);
+	}
 }

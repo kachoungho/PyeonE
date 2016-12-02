@@ -1287,4 +1287,54 @@ public class PosController {
 		
 		return entity;
 	}
+	
+	@RequestMapping(value = "pos/ps_paygive", method = RequestMethod.GET)
+	public ModelAndView paygive(HttpServletRequest request, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		List<UserVO> list;
+		System.out.println("userid :" + request.getParameter("userid"));
+		String userid = request.getParameter("userid");
+		
+		ItemVO ivo = new ItemVO();
+		UserVO vo = new UserVO();
+		vo.setUserid(request.getParameter("id"));
+		list = posService.selectmanpayAll1(vo);
+		
+		
+		if(userid != null){
+			vo.setUserid(request.getParameter("userid"));
+			for(int i = 0 ; i <list.size() ; i++){
+				if(list.get(i).getUserid().equals(vo.getUserid())){
+					vo.setArea(list.get(i).getArea());
+					vo.setHour(list.get(i).getHour());
+					vo.setMoney(list.get(i).getMoney());
+					
+					posService.payinsert(vo);
+					
+					ivo.setPaynum(0);
+					ivo.setTitle("인건비");
+					ivo.setContent("지출");
+					ivo.setPay(vo.getMoney());
+					ivo.setArea(vo.getArea());
+					ivo.setBillnum("");
+					posService.daymoneyinsert(ivo);
+					
+					posService.paydelete(vo);
+				}
+			}
+			
+			vo.setUserid(request.getParameter("id"));
+			list = posService.selectmanpayAll1(vo);
+		}
+		
+		
+		mav.addObject("list", list);
+		mav.addObject("id",request.getParameter("id"));
+		mav.setViewName(".pos.pos_paygive");
+	
+
+		return mav;
+	}
+	
+	
 }

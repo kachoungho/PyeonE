@@ -237,4 +237,13 @@ public interface PosService {
 	
 	//p2_item 리스트 item_code로 비교
 	public List<ItemVO> itemcodeselect(ItemVO vo) throws Exception;
+	
+	//월급 부여
+	public void payinsert(UserVO vo) throws Exception;
+	
+	//지급한 월급 삭제
+	public void paydelete(UserVO vo)  throws Exception;
+	
+	// 알바 일했던지금리스트
+	public List<UserVO> selectmanpayAll1(UserVO vo) throws Exception;
 }

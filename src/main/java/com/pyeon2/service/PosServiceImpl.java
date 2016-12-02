@@ -398,4 +398,19 @@ public class PosServiceImpl implements PosService {
 	public List<ItemVO> itemcodeselect(ItemVO vo) throws Exception {
 		return posDao.itemcodeselect(vo);
 	}
+
+	@Override
+	public void payinsert(UserVO vo) throws Exception {
+		posDao.payinsert(vo);
+	}
+
+	@Override
+	public void paydelete(UserVO vo) throws Exception {
+		posDao.paydelete(vo);
+	}
+
+	@Override
+	public List<UserVO> selectmanpayAll1(UserVO vo) throws Exception {
+		return posDao.selectmanpayAll1(vo);
+	}
 }

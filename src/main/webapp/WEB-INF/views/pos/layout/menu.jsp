@@ -60,6 +60,8 @@
 					<a
 						href="${pageContext.request.contextPath}/pos/ps_user_insertForm?id=${LoingUser}">아르바이트생
 						정보 등록</a>
+					<a
+						href="${pageContext.request.contextPath}/pos/ps_paygive?id=${LoingUser}">월급주기</a>
 				</sec:authorize>
 			</div></li>
 
