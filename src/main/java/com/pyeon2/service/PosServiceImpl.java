@@ -398,4 +398,19 @@ public class PosServiceImpl implements PosService {
 	public List<ItemVO> itemcodeselect(ItemVO vo) throws Exception {
 		return posDao.itemcodeselect(vo);
 	}
+
+	@Override
+	public void orderTempTempInsert(ItemVO vo) throws Exception {
+		posDao.orderTempTempInsert(vo);
+	}
+
+	@Override
+	public List<ItemVO> orderTempTempList(ItemVO vo) throws Exception {
+		return posDao.orderTempTempList(vo);
+	}
+
+	@Override
+	public void orderTempTempDelete() throws Exception {
+		posDao.orderTempTempDelete();
+	}
 }

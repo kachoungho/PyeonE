@@ -43,7 +43,38 @@
 	
 	<!-- 발주 신청 리스트 입력 -->
 	<insert id="orderInsert">
-		insert into orderReqState values(orderReqState_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area}, #{p2_time}, #{state})
+		<!-- insert into orderReqState values(orderReqState_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area}, #{p2_time}, #{state}) -->
+		<![CDATA[
+		MERGE INTO orderReqState a
+            USING dual
+               on (a.item_code = #{item_code} AND 
+                   a.area = #{area})
+             WHEN MATCHED THEN
+             UPDATE SET
+                 a.count = a.count + #{count}, a.p2_time = sysdate
+                 where a.item_code = #{item_code} and a.area = #{area}
+              WHEN NOT MATCHED THEN
+                INSERT (      
+                			  a.bno,
+                              a.item_code, 
+                              a.item_name, 
+                              a.count, 
+                              a.category,
+                              a.area,
+                              a.state,
+                              a.p2_time
+                        ) 
+                values (
+                			  orderReq_num.nextVal,
+                              #{item_code},
+                              #{item_name},
+                              #{count},
+                              #{category},
+                              #{area},
+                              #{state},
+                              #{p2_time}
+                        )
+          ]]>
 	</insert>
 	
 	<!-- 발주 신청 임시 리스트 삭제 -->
@@ -542,4 +573,19 @@
 	<select id="itemcodeselect" parameterType="com.pyeon2.vo.NoticeReplVO" resultType="com.pyeon2.vo.NoticeReplVO">
 		select item_code from p2_item where item_code = #{item_code}
 	</select>
+	
+	<!-- 발주 신청 ajax 쓰기 -->
+	<insert id="orderTempTempInsert" parameterType="com.pyeon2.vo.ItemVO">
+		insert into orderTempTemp(item_code, item_name, category, area) values(#{item_code}, #{item_name}, #{category}, #{area})
+	</insert>
+	
+	<!-- //발주 신청 ajax 리스트 -->
+	<select id="orderTempTempList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select item_code, item_name, category, area from orderTempTemp
+	</select>
+	
+	<delete id="orderTempTempDelete">
+		delete from orderTempTemp
+	</delete>
+
 </mapper>

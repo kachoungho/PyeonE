@@ -237,4 +237,13 @@ public interface PosService {
 	
 	//p2_item 리스트 item_code로 비교
 	public List<ItemVO> itemcodeselect(ItemVO vo) throws Exception;
+	
+	//발주 신청 ajax 쓰기
+	public void orderTempTempInsert(ItemVO vo) throws Exception;
+	
+	//발주 신청 ajax 리스트
+	public List<ItemVO> orderTempTempList(ItemVO vo) throws Exception;
+	
+	//발주 신청 ajax 지우기
+	public void orderTempTempDelete() throws Exception;
 }

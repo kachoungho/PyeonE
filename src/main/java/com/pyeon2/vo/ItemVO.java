@@ -23,7 +23,14 @@ public class ItemVO {
 	private Criteria cri;
 	private String state;
 	private int totalPrice;
+	private String name;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	private Date dayda;
 	private Date sys_time;
 	private String spend_date;
