@@ -234,7 +234,7 @@ function getAllList(){
 			str += "<tr style='background: #f9f9f9; font-family: 'Jeju Gothic', sans-serif;'>";
 			if(this.replyer == loginID) {
 				str += "<td style='width:5px; text-align: center;' data-rno='"+this.rno+"' class='replyLi'><input style='display: block; float: left;' width='15px' type='image' src='/controller/resources/images/delete.png' alt='button'/></td>";
-			} else if(this.replyer != admin) {
+			} else if(loginID == admin) {
 				str += "<td style='width:5px; text-align: center;' data-rno='"+this.rno+"' class='replyLi'><input style='display: block; float: left;' width='15px' type='image' src='/controller/resources/images/delete.png' alt='button'/></td>";
 			} else {
 				str += "<td> </td>";

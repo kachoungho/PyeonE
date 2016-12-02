@@ -26,6 +26,7 @@
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	font-family: 'Jeju Gothic', sans-serif;
 }
 
 .header {
