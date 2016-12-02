@@ -247,4 +247,14 @@ public interface PosDAO {
 	
 	//발주 신청 ajax 지우기
 	public void orderTempTempDelete() throws Exception;
+
+	//월급 부여
+	public void payinsert(UserVO vo) throws Exception;
+	
+	//지급한 월급 삭제
+	public void paydelete(UserVO vo)  throws Exception;
+	
+	// 알바 일했던지금리스트
+	public List<UserVO> selectmanpayAll1(UserVO vo) throws Exception;
+
 }

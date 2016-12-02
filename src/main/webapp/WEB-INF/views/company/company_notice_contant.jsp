@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <style type="text/css">
 .h{
 	font-size: 20px;
@@ -58,45 +59,6 @@ input.submit:hover {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <sec:authentication property="name" var="LoingUser" />
 <title>Insert title here</title>
-<style type="text/css">
-.table_write {
-	margin-left: auto;
-	margin-right: auto;
-	width: 40%;
-	text-align: center;
-	border-collapse: collapse;
-	font-family: 'Jeju Gothic', sans-serif;
-}
-
-.th_write {
-	text-align: left;
-	background: #054A75;
-	color: #fff;
-	text-align: center;
-	border-right: 1px solid #fff;
-	height: 40px;
-	width: 20%;
-}
-
-.tr_write {
-	background: #f9f9f9;
-	width: 80%;
-}
-
-.tr_write:hover {
-	background: #F3F5BB
-}
-
-.td_write1 {
-	height: 50px;
-}
-
-.td_write2 {
-	height: 400px;
-	font-family: 'Jeju Gothic', sans-serif;
-}
-</style>
-
 
 <script type="text/javascript">
 	function input(index) {
@@ -119,22 +81,23 @@ input.submit:hover {
 	<form method="post" name=daily id=daily>
 		<c:forEach items="${result }" var="list">
 			<input type="hidden" value="${ list.noticenum}" name="noticenum">
-			<table class="table_write">
-				<tr class="tr_write">
-					<th class="th_write">제목</th>
-					<td class="td_write1">${list.title }</td>
+			<table class="w3-table w3-hoverable w3-border" style="width: 40%; margin-left: auto;
+	margin-right: auto;">
+				<tr>
+					<th class="w3-blue-grey" style="width: 20%; text-align: center">제목</th>
+					<td style="text-align: center">${list.title }</td>
 				</tr>
-				<tr class="tr_write">
-					<th class="th_write">이름</th>
-					<td class="td_write1">${list.name }</td>
+				<tr>
+					<th class="w3-blue-grey" style="width: 20%; text-align: center">이름</th>
+					<td style="text-align: center">${list.name }</td>
 				</tr>
-				<tr class="tr_write">
-					<th class="th_write">직급</th>
-					<td class="td_write1">${list.position }</td>
+				<tr>
+					<th class="w3-blue-grey" style="width: 20%; text-align: center">직급</th>
+					<td style="text-align: center">${list.position }</td>
 				</tr>
-				<tr class="tr_write">
-					<th class="th_write">내용</th>
-					<td class="td_write2"><pre><font face="Jeju Gothic">${list.contant }</font></pre></td>
+				<tr>
+					<th class="w3-blue-grey" style="width: 20%; text-align: center">내용</th>
+					<td style="text-align: center;height: 400px;"><pre><font face="Jeju Gothic">${list.contant }</font></pre></td>
 				</tr>
 			</table>
 			<br>

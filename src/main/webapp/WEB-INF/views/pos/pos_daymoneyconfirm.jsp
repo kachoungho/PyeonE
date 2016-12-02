@@ -5,6 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.th {
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	background-color: #607D8B;
+	color: white;
+	text-align: center;
+	font-family: 'Jeju Gothic', sans-serif;
+	height: 50px;
+}
+</style>
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -60,10 +71,10 @@
 				<c:if test="${result != null }">
 					<table class="table">
 						<tr>
-							<th class="th1">제목</th>
-							<th class="th1">수입 / 지출</th>
-							<th class="th1">금액</th>
-							<th class="th1">날짜</th>
+							<th class="th">제목</th>
+							<th class="th">수입 / 지출</th>
+							<th class="th">금액</th>
+							<th class="th">날짜</th>
 						</tr>
 						<c:forEach items="${ result}" var="list">
 							<tr>

@@ -413,4 +413,18 @@ public class PosServiceImpl implements PosService {
 	public void orderTempTempDelete() throws Exception {
 		posDao.orderTempTempDelete();
 	}
+	
+	public void payinsert(UserVO vo) throws Exception {
+		posDao.payinsert(vo);
+	}
+
+	@Override
+	public void paydelete(UserVO vo) throws Exception {
+		posDao.paydelete(vo);
+	}
+
+	@Override
+	public List<UserVO> selectmanpayAll1(UserVO vo) throws Exception {
+		return posDao.selectmanpayAll1(vo);
+	}
 }

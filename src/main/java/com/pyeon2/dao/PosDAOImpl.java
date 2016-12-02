@@ -401,6 +401,7 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
+
 	public void orderTempTempInsert(ItemVO vo) throws Exception {
 		session.insert(namespace +".orderTempTempInsert", vo);
 	}
@@ -413,5 +414,20 @@ public class PosDAOImpl implements PosDAO {
 	@Override
 	public void orderTempTempDelete() throws Exception {
 		session.delete(namespace + ".orderTempTempDelete");
+	}
+	
+	public void payinsert(UserVO vo) throws Exception {
+		session.insert(namespace+".payinsert",vo);
+	}
+
+	@Override
+	public void paydelete(UserVO vo) throws Exception {
+		session.delete(namespace+".paydelete",vo);
+	}
+
+	@Override
+	public List<UserVO> selectmanpayAll1(UserVO vo) throws Exception {
+		return session.selectList(namespace + ".selectmanpayAll1", vo);
+
 	}
 }
