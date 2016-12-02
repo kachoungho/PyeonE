@@ -138,9 +138,11 @@ public class PosController {
 		System.out.println("order POST 요청 성공");
 		List<ItemVO> list;
 		int compare = 0;
+		String area = "";
 		list = posService.orderTempCompare();
 		System.out.println("item_code : " + vo.getItem_code());
 		System.out.println("area : " + vo.getArea());
+		area = vo.getArea();
 		for(int i = 0; i < list.size(); i++){
 			if(list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())){
 				compare = 1;
@@ -154,6 +156,7 @@ public class PosController {
 			posService.insertOrderTemp(vo);
 		}
 		
+		mav.addObject("area", area);
 		mav.addObject("list", list);
 		mav.setViewName("redirect:ps_order");
 		
@@ -1287,4 +1290,165 @@ public class PosController {
 		
 		return entity;
 	}
+	
+	//상품 선택 ajax 
+	@RequestMapping(value = "pos/ps_order_temp_write", method=RequestMethod.POST)
+	public ResponseEntity<String> orderTempWrite(@RequestBody ItemVO vo) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			String area = posService.getArea(vo.getName());
+			vo.setArea(area);
+			posService.orderTempTempInsert(vo);
+			
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	//선택된 상품 뿌려주는 ajax
+	@RequestMapping(value = "pos/ps_order_temp_list", method=RequestMethod.GET)
+	public ResponseEntity<List<ItemVO>> orderTempList(ItemVO vo) {
+		ResponseEntity<List<ItemVO>> entity = null;
+		try {
+			entity = new ResponseEntity<>(posService.orderTempTempList(vo), HttpStatus.OK);
+			posService.orderTempTempDelete();
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	//선택된 상품 발주 하는 ajax
+	@RequestMapping(value = "pos/ps_order_selected_write", method=RequestMethod.POST)
+	public ResponseEntity<String> orderselectedWrite(@RequestBody ItemVO vo) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			List<ItemVO> list;
+			int compare = 0;
+			String area = "";
+			list = posService.orderTempCompare();
+			System.out.println("item_code : " + vo.getItem_code());
+			System.out.println("area : " + vo.getArea());
+			/*area = vo.getArea();
+			for(int i = 0; i < list.size(); i++){
+				if(list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())){
+					compare = 1;
+				}
+			}
+			
+			if(compare == 1){
+				posService.updateOrderTemp(vo);
+			}
+			else{
+				posService.insertOrderTemp(vo);
+			}*/
+			if(vo.getCount() != 0){
+				area = vo.getArea();
+				for(int i = 0; i < list.size(); i++){
+					if(list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())){
+						compare = 1;
+					}
+				}
+				
+				if(compare == 1){
+					posService.updateOrderTemp(vo);
+				}
+				else{
+					posService.insertOrderTemp(vo);
+				}
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			}
+			else{
+				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "pos/ps_order_selected_List", method=RequestMethod.GET)
+	public ResponseEntity<List<ItemVO>> orderSelectedList() throws Exception {
+		ResponseEntity<List<ItemVO>> entity = null;
+		
+		try {
+			
+			entity = new ResponseEntity<>(posService.orderTempCompare(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "pos/ps_order_selected_delete", method=RequestMethod.POST)
+	public ResponseEntity<String> orderSelectedDelete(@RequestBody ItemVO vo) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			posService.orderTempDelete(vo);
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+	@RequestMapping(value = "pos/ps_paygive", method = RequestMethod.GET)
+	public ModelAndView paygive(HttpServletRequest request, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		List<UserVO> list;
+		System.out.println("userid :" + request.getParameter("userid"));
+		String userid = request.getParameter("userid");
+		
+		ItemVO ivo = new ItemVO();
+		UserVO vo = new UserVO();
+		vo.setUserid(request.getParameter("id"));
+		list = posService.selectmanpayAll1(vo);
+		
+		
+		if(userid != null){
+			vo.setUserid(request.getParameter("userid"));
+			for(int i = 0 ; i <list.size() ; i++){
+				if(list.get(i).getUserid().equals(vo.getUserid())){
+					vo.setArea(list.get(i).getArea());
+					vo.setHour(list.get(i).getHour());
+					vo.setMoney(list.get(i).getMoney());
+					
+					posService.payinsert(vo);
+					
+					ivo.setPaynum(0);
+					ivo.setTitle("인건비");
+					ivo.setContent("지출");
+					ivo.setPay(vo.getMoney());
+					ivo.setArea(vo.getArea());
+					ivo.setBillnum("");
+					posService.daymoneyinsert(ivo);
+					
+					posService.paydelete(vo);
+				}
+			}
+			
+			vo.setUserid(request.getParameter("id"));
+			list = posService.selectmanpayAll1(vo);
+		}
+		
+		
+		mav.addObject("list", list);
+		mav.addObject("id",request.getParameter("id"));
+		mav.setViewName(".pos.pos_paygive");
+	
+
+		return mav;
+	}
+	
 }

@@ -133,7 +133,6 @@ create table p2_monthCalc(
    constraint monthCalc_pk  primary key(item_code, area)
 );
 
-
 --------------- SEQUENCE --------------------
 
 create sequence p2_item_num
@@ -625,3 +624,4 @@ alter table p2_member add address varchar2(200);
 alter table p2_member add address2 varchar2(200);
 
 alter table p2_member add postcode varchar2(20);
+

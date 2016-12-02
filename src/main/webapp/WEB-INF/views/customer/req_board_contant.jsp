@@ -305,7 +305,7 @@ $("#replyAddBtn").on("click", function() {
 });
 
 //댓글 지우기
-$("#replies").on("click", ".replyLi button", function() {
+$("#replies").on("click", ".replyLi input", function() {
 	var select = "${select}";
 	console.log(select);
 	var reply = $(this).parent();
