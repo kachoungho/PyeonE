@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <style>
 #div_style {
 	width: 100%;
@@ -12,23 +13,16 @@
 }
 
 #table_style {
-	border: 1px;
+	border: 1px soild;
 	border-collapse: collapse;
 	margin: auto;
 	font-family: 'Jeju Gothic', sans-serif;
 }
 
 #tr_style {
-	padding: 10px;
+	padding: 30px;
 }
 
-#td_style {
-	height: 250px;
-}
-
-#h_style {
-	font-weight: bold;
-}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
@@ -37,17 +31,19 @@
 	<br>
 	<br>
 	<div id="div_style">
-		<table id="table_style">
+		<table class="w3-table w3-hoverable w3-border" style="width: 80%; margin-left: auto;
+	margin-right: auto;">
 			<tr id="tr_style">
-				<td style="width:20%" ><h4 id="h_style">인기 순위</h4></td>
-				<td style="width:20%" ><h4 id="h_style">스낵</h4></td>
-				<td style="width:20%" ><h4 id="h_style">인스턴트</h4></td>
-				<td style="width:20%" ><h4 id="h_style">음료</h4></td>
-				<td style="width:20%" ><h4 id="h_style">주류</h4></td>
+				<th class="w3-blue-grey" style="width:20%; height: 50px; padding-top: 15px; text-align: center">인기 순위</th>
+				<th class="w3-blue-grey" style="width:20%; height: 50px; padding-top: 15px; text-align: center">스낵</th>
+				<th class="w3-blue-grey" style="width:20%; height: 50px; padding-top: 15px; text-align: center">인스턴트</th>
+				<th class="w3-blue-grey" style="width:20%; height: 50px; padding-top: 15px; text-align: center">음료</th>
+				<th class="w3-blue-grey" style="width:20%; height: 50px; padding-top: 15px; text-align: center">주류</th>
 			</tr>
-			<tr id="tr_style">
-				<td id="td_style"><img width="100" height="100"
-					src="/controller/images/rank1.png"></td>
+			<tr align="center" id="tr_style">
+				<td >
+					<img style="width: 150px; height: 150px; display:block; margin: auto; padding-top: auto;" src="/controller/images/rank1.png">
+				</td>
 				<c:forEach items="${ result1 }" var="list" begin="0" end="0">
 					<td><img width="130" height="160" src="/controller/resources/item_image/${ list.item_image }"><br>${ list.item_name }</td>
 				</c:forEach>
@@ -62,7 +58,7 @@
 				</c:forEach>
 			</tr>
 			<tr>
-				<td id="td_style"><img width="100" height="100"
+				<td id="td_style"><img  style="width: 150px; height: 150px; display:block; margin: auto; padding-top: auto;"
 					src="/controller/images/rank2.png"></td>
 				<c:forEach items="${ result1 }" var="list" begin="1" end="1">
 					<td><img width="130" height="160" src="/controller/resources/item_image/${ list.item_image }"><br>${ list.item_name }</td>
@@ -78,7 +74,7 @@
 				</c:forEach>
 			</tr>
 			<tr>
-				<td id="td_style"><img width="100" height="100"
+				<td id="td_style"><img  style="width: 150px; height: 150px; display:block; margin: auto; padding-top: auto;"
 					src="/controller/images/rank3.png"></td>
 				<c:forEach items="${ result1 }" var="list" begin="2" end="2">
 					<td><img width="130" height="160" src="/controller/resources/item_image/${ list.item_image }"><br>${ list.item_name }</td>

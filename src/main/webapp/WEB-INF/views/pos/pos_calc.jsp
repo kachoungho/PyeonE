@@ -9,6 +9,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.th {
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	background-color: #607D8B;
+	color: white;
+	text-align: center;
+	font-family: 'Jeju Gothic', sans-serif;
+	height: 50px;
+}
+</style>
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -58,11 +69,11 @@
 				<div class="div_col">
 					<table class="table">
 						<tr>
-							<th class="th1">상품 코드</th>
-							<th class="th1">상 품 명</th>
-							<th class="th1">개 수</th>
-							<th class="th1">카테고리</th>
-							<th class="th1">금 액</th>
+							<th class="th">상품 코드</th>
+							<th class="th">상 품 명</th>
+							<th class="th">개 수</th>
+							<th class="th">카테고리</th>
+							<th class="th">금 액</th>
 						</tr>
 						<c:forEach items="${result }" var="cal">
 							<tr>
@@ -79,7 +90,7 @@
 				<div class="div_col">
 					<table class="table">
 						<tr>
-							<th class="th1">총액</th>
+							<th class="th">총액</th>
 							<td class="td1" colspan="2"><input type="hidden"
 								name="total" value="${total}"> <input class="inpt"
 								type="text"
@@ -89,7 +100,7 @@
 						</tr>
 
 						<tr>
-							<th class="th1">지 불 액</th>
+							<th class="th">지 불 액</th>
 							<td class="td1"><input class="inpt" type="text" name="pay"
 								value="0"></td>
 							<td class="td1"><input class="submit2" type="button"
@@ -97,7 +108,7 @@
 						</tr>
 
 						<tr>
-							<th class="th1">거스름돈</th>
+							<th class="th">거스름돈</th>
 							<td class="td1" colspan="2"><input type="hidden" name="pay"
 								value="${pay }"> <input class="inpt" type="text"
 								value="<fmt:formatNumber value="${pay}"
@@ -111,7 +122,7 @@
 				<div class="div_col">
 					<table class="table" style="margin-top: 50px">
 						<tr>
-							<th class="th1">상품 코드</th>
+							<th class="th">상품 코드</th>
 							<td class="td1"><input class="inpt" type="text"
 								name="item_code" id="item_code"
 								onkeypress="if(event.keyCode==13) {input(1);}">
