@@ -250,7 +250,10 @@ public class CustomerController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			customerService.reqBoardReplWrite(vo);
+			if(!vo.getReplyText().equals("")){
+				customerService.reqBoardReplWrite(vo);
+			}
+			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

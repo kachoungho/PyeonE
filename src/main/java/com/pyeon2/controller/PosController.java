@@ -1248,7 +1248,10 @@ public class PosController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			posService.noticeReplWrite(vo);
+			if(!vo.getReplyText().equals("")){
+				posService.noticeReplWrite(vo);
+			}
+			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
