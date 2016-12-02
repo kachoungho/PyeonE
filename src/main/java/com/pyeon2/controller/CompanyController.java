@@ -1154,7 +1154,10 @@ public class CompanyController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			posService.noticeReplWrite(vo);
+			if(!vo.getReplyText().equals("")){
+				posService.noticeReplWrite(vo);
+			}
+			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1196,7 +1199,10 @@ public class CompanyController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			customerService.reqBoardReplWrite(vo);
+			if(!vo.getReplyText().equals("")){
+				customerService.reqBoardReplWrite(vo);
+			}
+			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
