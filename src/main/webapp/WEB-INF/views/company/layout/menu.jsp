@@ -10,7 +10,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 
-<div>
+<div class="w3-container">
 	<ul class="w3-navbar w3-card-2 w3-center"
 		style="background-color: #D5D9DF; font-family: 'Jeju Gothic', sans-serif;">
 		<li></li>

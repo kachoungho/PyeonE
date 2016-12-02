@@ -33,6 +33,7 @@ import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.ReqBoardVO;
+import com.pyeon2.vo.SectorVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserMemVO;
 
@@ -973,13 +974,15 @@ public class CompanyController {
 	public String comnewprodeuct() {
 		return ".company.company_newproduct";
 	}
-	/*HttpServletRequest request, Model model*/
+	
+
 	@RequestMapping(value = "company/com_companyStock2", method = RequestMethod.POST)
 	public ModelAndView comnewprodeuctin(ComItemVO cvo, MultipartHttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
 		NoticeVO Nvo = new NoticeVO();
 		MemberVO Mvo = new MemberVO();
+		SectorVO Svo = new SectorVO();
 
 		String code1 = companyService.newproductcode1(cvo);
 		int code2 = companyService.newproductcode2(cvo)+1;
@@ -1001,9 +1004,16 @@ public class CompanyController {
 		vo.setItem_code(result);
 		List<ItemVO> list = companyService.newproductarea();
 		
+		Svo.setCode1(code1);
+		Svo.setCode2(code2);
+		Svo.setItem_name(cvo.getItem_name());
+		
 		for(int i = 0 ; i < list.size() ; i++){
 			vo.setArea(list.get(i).getArea());
-			companyService.newproductareainsert(vo);
+			Svo.setArea(vo.getArea());
+			companyService.newproductareainsert(vo);	
+			companyService.newProductSector(Svo);
+			//여기에 지점별로 신규 재고 입력 메소드 추가
 		}
 		
 		Mvo.setId(request.getParameter("id"));
