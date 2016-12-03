@@ -427,4 +427,5 @@ public class PosServiceImpl implements PosService {
 	public List<UserVO> selectmanpayAll1(UserVO vo) throws Exception {
 		return posDao.selectmanpayAll1(vo);
 	}
+
 }
