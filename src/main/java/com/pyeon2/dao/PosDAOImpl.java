@@ -430,4 +430,5 @@ public class PosDAOImpl implements PosDAO {
 		return session.selectList(namespace + ".selectmanpayAll1", vo);
 
 	}
+
 }

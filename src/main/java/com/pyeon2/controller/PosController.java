@@ -226,7 +226,7 @@ public class PosController {
 			if(temp == 1){
 				vo.setTotalPrice(totalPrice);
 				vo.setArea(list.get(0).getArea());
-				posService.orderSpendTemp(vo);
+				posService.orderSpendTemp(vo); //발주 신청시 0원으로 입력
 				posService.orderTempDeleteAll();
 			}
 			

@@ -321,6 +321,7 @@ public class CompanyController {
 			vo.setBno(sequence);
 			System.out.println("sequence : " + sequence);
 			posService.orderSpend(vo);
+
 			mav.setViewName(".company.orderApprovalsuc");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -332,16 +333,17 @@ public class CompanyController {
 	public ModelAndView orderCancelGET(HttpServletRequest request) {
 		System.out.println("orderCancel GET 요청 성공");
 		ModelAndView mav = new ModelAndView();
-
 		ItemVO vo = new ItemVO();
-
+		
 		vo.setItem_code(request.getParameter("item_code"));
 		vo.setCount(Integer.parseInt(request.getParameter("count")));
 		vo.setArea(request.getParameter("area"));
 		vo.setState("발주 미승인");
+
 		try {
 			companyService.updateOrderState(vo);
 			companyService.odertDelete(vo);
+
 			mav.setViewName(".company.orderCancelSuc");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -682,15 +684,16 @@ public class CompanyController {
 	@RequestMapping(value = "company/com_notice_contant" , method = RequestMethod.POST)
 	public ModelAndView comnoticecontantPO(HttpServletRequest request ,Model model)throws Exception{
 		ModelAndView mav = new ModelAndView();
-		
+		int num = 0;
 		NoticeVO Nvo = new NoticeVO();
 		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
 		Nvo.setTitle(request.getParameter("title"));
 		Nvo.setContant(request.getParameter("contant"));
-		
+		num = Nvo.getNoticenum();
 		companyService.noticeupdate(Nvo);
 		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
 		
+		mav.addObject("num", num);
 		mav.addObject("result",list);
 		mav.setViewName(".company.company_notice_contant");
 		return mav;
@@ -699,12 +702,13 @@ public class CompanyController {
 	@RequestMapping(value ="company/com_notice_modify",method = RequestMethod.POST)
 	public ModelAndView comnoticecontantmo(HttpServletRequest request ,Model model)throws Exception{
 		ModelAndView mav = new ModelAndView();
-		
+		int num = 0;
 		NoticeVO Nvo = new NoticeVO();
 		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
-		
+		num = Nvo.getNoticenum();
 		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
 		
+		mav.addObject("num", num);
 		mav.addObject("result",list);
 		mav.setViewName(".company.company_notice_modify");
 		return mav;
