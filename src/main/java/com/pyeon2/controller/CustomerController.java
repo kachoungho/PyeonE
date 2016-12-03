@@ -53,6 +53,7 @@ public class CustomerController {
 			list = customerService.searchItem(vo);
 			mav.addObject("list", list);
 			mav.addObject("size", list.size());
+			System.out.println("list.get(0).getCount() :" + list.get(0).getCount());
 		}
 		mav.setViewName(".customer.cus_search");
 
