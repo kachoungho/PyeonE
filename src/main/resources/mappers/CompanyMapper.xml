@@ -334,4 +334,11 @@
 		WHERE ROWNUM <= 5
 		]]>
 	</select>
+	
+	<!-- 매장별 수입/지출에 월별 그래프 그리기 -->
+	<select id="drawPayGraph" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.vo.ItemVO">
+		SELECT YEAR, MONTH, SUM(PAY) AS PAY, AREA FROM P2_DAYMONEY WHERE CONTENT = '수입'
+		GROUP BY YEAR, MONTH, AREA
+		ORDER BY MONTH, AREA
+	</select>
 </mapper>

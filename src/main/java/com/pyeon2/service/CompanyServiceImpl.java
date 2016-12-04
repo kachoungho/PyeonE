@@ -239,4 +239,9 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<ReqBoardVO> getReqBoardList() throws Exception {
 		return comDao.getReqBoardList();
 	}
+
+	@Override
+	public List<ItemVO> drawPayGraph(ItemVO vo) throws Exception {
+		return comDao.drawPayGraph(vo);
+	}
 }

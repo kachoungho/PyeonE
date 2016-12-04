@@ -124,4 +124,7 @@ public interface CompanyService {
 	
 	//고객 요청 게시판에서 최근 5개글 띄우기
 	public List<ReqBoardVO> getReqBoardList() throws Exception;
+	
+	//매장별 수입/지출에 월별 그래프 그리기
+	public List<ItemVO> drawPayGraph(ItemVO vo) throws Exception;
 }

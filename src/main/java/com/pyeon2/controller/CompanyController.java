@@ -953,7 +953,12 @@ public class CompanyController {
 		int total = pay1 - pay2;
 
 		List<ItemVO> list3 = posService.daymoneylist(vo);
-
+		
+		// 그래프 그리기 위한 값 select
+		List<ItemVO> list;
+		list = companyService.drawPayGraph(vo);
+		mav.addObject("list", list);
+		// 그래프 end
 		
 		mav.addObject("pay1",pay1);
 		mav.addObject("pay2",pay2);

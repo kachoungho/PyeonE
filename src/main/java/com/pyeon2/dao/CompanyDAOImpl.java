@@ -204,12 +204,17 @@ public class CompanyDAOImpl implements CompanyDAO{
 
 	@Override
 	public void newproductareainsert(ItemVO vo) throws Exception {
-		session.insert(namespace+".newproductareainsert" , vo);
+		session.insert(namespace + ".newproductareainsert" , vo);
 	}
 
 	@Override
 	public List<ReqBoardVO> getReqBoardList() throws Exception {
-		return session.selectList(namespace+".getReqBoardList");
+		return session.selectList(namespace + ".getReqBoardList");
+	}
+
+	@Override
+	public List<ItemVO> drawPayGraph(ItemVO vo) throws Exception {
+		return session.selectList(namespace + ".drawPayGraph", vo);
 	}
 
 }
