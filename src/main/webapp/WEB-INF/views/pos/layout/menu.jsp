@@ -17,7 +17,7 @@
 		<li style="width: 20%" class="w3-dropdown-hover"><a href="#">재고
 				관리 <i class="fa fa-caret-down"></i>
 		</a>
-			<div style="width: 266.5px;"
+			<div style="width: 263px;"
 				class="w3-dropdown-content w3-light-gray w3-card-4">
 				<sec:authorize access="hasAuthority('ROLE_MANAGER')">
 					<a href="${pageContext.request.contextPath}/pos/ps_order">발 주 신
@@ -34,7 +34,7 @@
 
 		<li style="width: 20%" class="w3-dropdown-hover"><a href="#">매출
 				관리 <i class="fa fa-caret-down"></i> </a>
-			<div style="width: 266.5px;" class="w3-dropdown-content w3-light-gray w3-card-4">
+			<div style="width: 263px;" class="w3-dropdown-content w3-light-gray w3-card-4">
 				<a href="${pageContext.request.contextPath}/pos/ps_daymoney?id=${LoingUser}">일 일 정 산</a> 
 			</div>
 		</li>
@@ -42,7 +42,7 @@
 		<li style="width: 20%" class="w3-dropdown-hover"><a href="#">출
 				/ 퇴근 관리 <i class="fa fa-caret-down"></i>
 		</a>
-			<div style="width: 266.5px;"
+			<div style="width: 263px;"
 				class="w3-dropdown-content w3-light-gray w3-card-4">
 
 				<sec:authorize access="hasAuthority('ROLE_USER')">
@@ -60,6 +60,8 @@
 					<a
 						href="${pageContext.request.contextPath}/pos/ps_user_insertForm?id=${LoingUser}">아르바이트생
 						정보 등록</a>
+					<a
+						href="${pageContext.request.contextPath}/pos/ps_paygive?id=${LoingUser}">월급주기</a>
 				</sec:authorize>
 			</div></li>
 

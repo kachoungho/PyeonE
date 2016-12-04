@@ -13,6 +13,7 @@ import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.ReqBoardVO;
+import com.pyeon2.vo.SectorVO;
 
 @Repository
 public class CompanyDAOImpl implements CompanyDAO{
@@ -215,6 +216,11 @@ public class CompanyDAOImpl implements CompanyDAO{
 	@Override
 	public List<ItemVO> drawPayGraph(ItemVO vo) throws Exception {
 		return session.selectList(namespace + ".drawPayGraph", vo);
+	}
+
+	@Override
+	public void newProductSector(SectorVO Svo) throws Exception {
+		session.insert(namespace+ ".newProductSector", Svo);
 	}
 
 }

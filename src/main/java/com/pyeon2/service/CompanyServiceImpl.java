@@ -16,6 +16,7 @@ import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.ReqBoardVO;
+import com.pyeon2.vo.SectorVO;
 
 @Repository
 public class CompanyServiceImpl implements CompanyService {
@@ -243,5 +244,10 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public List<ItemVO> drawPayGraph(ItemVO vo) throws Exception {
 		return comDao.drawPayGraph(vo);
+	}
+	
+	@Override
+	public void newProductSector(SectorVO Svo) throws Exception {
+		comDao.newProductSector(Svo);
 	}
 }

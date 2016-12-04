@@ -9,6 +9,7 @@ import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.ReqBoardVO;
+import com.pyeon2.vo.SectorVO;
 
 public interface CompanyService {
 	// 발주 목록 확인 메소드
@@ -70,61 +71,64 @@ public interface CompanyService {
 
 	// 발주 승인,미승인 수정 메소드
 	public void updateOrderState(ItemVO vo) throws Exception;
-	
-	//공지사항 리스트 가져오기
-	public List<NoticeVO> getnoticelist(NoticeVO Nvo) throws Exception; 
-		
-	//동지사항 글쓰기
+
+	// 공지사항 리스트 가져오기
+	public List<NoticeVO> getnoticelist(NoticeVO Nvo) throws Exception;
+
+	// 동지사항 글쓰기
 	public void noticewrite(NoticeVO Nvo) throws Exception;
-		
-	//공지사항 가져오기
+
+	// 공지사항 가져오기
 	public List<NoticeVO> getnoticecontant(NoticeVO Nvo) throws Exception;
-		
-	//공지사항 업데이트
+
+	// 공지사항 업데이트
 	public void noticeupdate(NoticeVO Nvo) throws Exception;
-		
-	//공지사항 삭제
+
+	// 공지사항 삭제
 	public void noticedelete(NoticeVO Nvo) throws Exception;
-	
+
 	// 메인 페이지에 공지사항 최근 5개글 띄우기
 	public List<NoticeVO> getNotConfirm() throws Exception;
-	
+
 	// 미승인 건 카운트
 	public int getNotConfirmCount() throws Exception;
-	
+
 	// 달렵 메모 입력 / 업데이트
 	public void calendarMemoInsert(CalendarMemoVO vo) throws Exception;
-	
+
 	// 달력 메모 출력
 	public List<CalendarMemoVO> calendarMemoList(CalendarMemoVO vo) throws Exception;
-	
+
 	// 달력 메모 WriteForm에 띄우기
 	public List<CalendarMemoVO> calendarMemoSelect(CalendarMemoVO vo) throws Exception;
-	
+
 	// 달력 메모 삭제하기
 	public void calendarMemoDelete(CalendarMemoVO vo) throws Exception;
 
-	//공지사항 컬럼 수
+	// 공지사항 컬럼 수
 	public String getNoticeCount(NoticeVO nvo) throws Exception;
-	
-	//재품 추가
+
+	// 재품 추가
 	public void newproduct(ComItemVO cvo) throws Exception;
-		
-	//재품 code1 가져오기
+
+	// 재품 code1 가져오기
 	public String newproductcode1(ComItemVO cvo) throws Exception;
-	
-	//재품 code2 가져오기
+
+	// 재품 code2 가져오기
 	public int newproductcode2(ComItemVO cvo) throws Exception;
-		
-	//지점 검색 해오기
+
+	// 지점 검색 해오기
 	public List<ItemVO> newproductarea() throws Exception;
-		
-	//각각지점에 신제품 입력
+
+	// 각각지점에 신제품 입력
 	public void newproductareainsert(ItemVO vo) throws Exception;
-	
-	//고객 요청 게시판에서 최근 5개글 띄우기
+
+	// 고객 요청 게시판에서 최근 5개글 띄우기
 	public List<ReqBoardVO> getReqBoardList() throws Exception;
 	
 	//매장별 수입/지출에 월별 그래프 그리기
 	public List<ItemVO> drawPayGraph(ItemVO vo) throws Exception;
+
+// Sector table에 신규 재고 입력
+	public void newProductSector(SectorVO Svo) throws Exception;
 }

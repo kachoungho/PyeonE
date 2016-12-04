@@ -1,14 +1,24 @@
 package com.pyeon2.vo;
 
 public class SectorVO {
-	private String sectors, item_name, area;
+	private String code1, item_name, area;
+	private int code2;
 
-	public String getSectors() {
-		return sectors;
+	public String getCode1() {
+		return code1;
 	}
 
-	public void setSectors(String sectors) {
-		this.sectors = sectors;
+	public void setCode1(String code1) {
+		this.code1 = code1;
+	}
+
+
+	public int getCode2() {
+		return code2;
+	}
+
+	public void setCode2(int code2) {
+		this.code2 = code2;
 	}
 
 	public String getItem_name() {
@@ -26,6 +36,6 @@ public class SectorVO {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	
+
 	
 }

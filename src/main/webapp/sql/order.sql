@@ -62,6 +62,13 @@ create table orderSpend(
 	area varchar2(20)
 );
 
+create table orderTempTemp(
+	item_code varchar2(30),
+	item_name varchar2(30),
+	category varchar2(20),
+	area varchar2(20)
+);
+
 --------------- SEQUENCE --------------------
 
 create sequence orderReq_num

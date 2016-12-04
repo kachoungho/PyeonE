@@ -33,6 +33,7 @@ import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.ReqBoardVO;
+import com.pyeon2.vo.SectorVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserMemVO;
 
@@ -320,6 +321,7 @@ public class CompanyController {
 			vo.setBno(sequence);
 			System.out.println("sequence : " + sequence);
 			posService.orderSpend(vo);
+
 			mav.setViewName(".company.orderApprovalsuc");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -331,16 +333,17 @@ public class CompanyController {
 	public ModelAndView orderCancelGET(HttpServletRequest request) {
 		System.out.println("orderCancel GET 요청 성공");
 		ModelAndView mav = new ModelAndView();
-
 		ItemVO vo = new ItemVO();
-
+		
 		vo.setItem_code(request.getParameter("item_code"));
 		vo.setCount(Integer.parseInt(request.getParameter("count")));
 		vo.setArea(request.getParameter("area"));
 		vo.setState("발주 미승인");
+
 		try {
 			companyService.updateOrderState(vo);
 			companyService.odertDelete(vo);
+
 			mav.setViewName(".company.orderCancelSuc");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -681,15 +684,16 @@ public class CompanyController {
 	@RequestMapping(value = "company/com_notice_contant" , method = RequestMethod.POST)
 	public ModelAndView comnoticecontantPO(HttpServletRequest request ,Model model)throws Exception{
 		ModelAndView mav = new ModelAndView();
-		
+		int num = 0;
 		NoticeVO Nvo = new NoticeVO();
 		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
 		Nvo.setTitle(request.getParameter("title"));
 		Nvo.setContant(request.getParameter("contant"));
-		
+		num = Nvo.getNoticenum();
 		companyService.noticeupdate(Nvo);
 		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
 		
+		mav.addObject("num", num);
 		mav.addObject("result",list);
 		mav.setViewName(".company.company_notice_contant");
 		return mav;
@@ -698,12 +702,13 @@ public class CompanyController {
 	@RequestMapping(value ="company/com_notice_modify",method = RequestMethod.POST)
 	public ModelAndView comnoticecontantmo(HttpServletRequest request ,Model model)throws Exception{
 		ModelAndView mav = new ModelAndView();
-		
+		int num = 0;
 		NoticeVO Nvo = new NoticeVO();
 		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
-		
+		num = Nvo.getNoticenum();
 		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
 		
+		mav.addObject("num", num);
 		mav.addObject("result",list);
 		mav.setViewName(".company.company_notice_modify");
 		return mav;
@@ -978,13 +983,15 @@ public class CompanyController {
 	public String comnewprodeuct() {
 		return ".company.company_newproduct";
 	}
-	/*HttpServletRequest request, Model model*/
+	
+
 	@RequestMapping(value = "company/com_companyStock2", method = RequestMethod.POST)
 	public ModelAndView comnewprodeuctin(ComItemVO cvo, MultipartHttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
 		NoticeVO Nvo = new NoticeVO();
 		MemberVO Mvo = new MemberVO();
+		SectorVO Svo = new SectorVO();
 
 		String code1 = companyService.newproductcode1(cvo);
 		int code2 = companyService.newproductcode2(cvo)+1;
@@ -1006,9 +1013,16 @@ public class CompanyController {
 		vo.setItem_code(result);
 		List<ItemVO> list = companyService.newproductarea();
 		
+		Svo.setCode1(code1);
+		Svo.setCode2(code2);
+		Svo.setItem_name(cvo.getItem_name());
+		
 		for(int i = 0 ; i < list.size() ; i++){
 			vo.setArea(list.get(i).getArea());
-			companyService.newproductareainsert(vo);
+			Svo.setArea(vo.getArea());
+			companyService.newproductareainsert(vo);	
+			companyService.newProductSector(Svo);
+			//여기에 지점별로 신규 재고 입력 메소드 추가
 		}
 		
 		Mvo.setId(request.getParameter("id"));

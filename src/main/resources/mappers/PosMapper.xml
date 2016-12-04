@@ -43,7 +43,38 @@
 	
 	<!-- 발주 신청 리스트 입력 -->
 	<insert id="orderInsert">
-		insert into orderReqState values(orderReqState_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area}, #{p2_time}, #{state})
+		<!-- insert into orderReqState values(orderReqState_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area}, #{p2_time}, #{state}) -->
+		<![CDATA[
+		MERGE INTO orderReqState a
+            USING dual
+               on (a.item_code = #{item_code} AND 
+                   a.area = #{area})
+             WHEN MATCHED THEN
+             UPDATE SET
+                 a.count = a.count + #{count}, a.p2_time = sysdate
+                 where a.item_code = #{item_code} and a.area = #{area}
+              WHEN NOT MATCHED THEN
+                INSERT (      
+                			  a.bno,
+                              a.item_code, 
+                              a.item_name, 
+                              a.count, 
+                              a.category,
+                              a.area,
+                              a.state,
+                              a.p2_time
+                        ) 
+                values (
+                			  orderReq_num.nextVal,
+                              #{item_code},
+                              #{item_name},
+                              #{count},
+                              #{category},
+                              #{area},
+                              #{state},
+                              #{p2_time}
+                        )
+          ]]>
 	</insert>
 	
 	<!-- 발주 신청 임시 리스트 삭제 -->
@@ -114,22 +145,22 @@
 	
 	<!-- 알바가 일한 월 -->
 	<select id="selectalpayAll" resultType="com.pyeon2.vo.UserVO" parameterType="com.pyeon2.vo.UserVO">
-		select userid,year,month,area,sum(hour) as hour,sum(money) as money from p2_userMoney where userid=(SELECT TO_CHAR(NAME) as NAME FROM P2_MEMBER WHERE ID = #{userid}) group by area,userid,year,month order by area,userid,year,month
+		select userid,year,month,area,sum(hour) as hour,sum(money) as money from p2_usermoneyfin where userid=(SELECT TO_CHAR(NAME) as NAME FROM P2_MEMBER WHERE ID = #{userid}) group by area,userid,year,month order by area,userid,year,month
 	</select>
 	
 	<!-- 알바가 지정한 월 -->
 	<select id="selectalpay" resultType="com.pyeon2.vo.UserVO" parameterType="com.pyeon2.vo.UserVO">
-		select userid,year,month,area,sum(hour) as hour,sum(money) as money from p2_userMoney where userid=(SELECT TO_CHAR(NAME) as NAME FROM P2_MEMBER WHERE ID = #{userid}) and year=#{year} and month = #{month} group by area,userid,year,month order by area,userid,year,month 
+		select userid,year,month,area,sum(hour) as hour,sum(money) as money from p2_usermoneyfin where userid=(SELECT TO_CHAR(NAME) as NAME FROM P2_MEMBER WHERE ID = #{userid}) and year=#{year} and month = #{month} group by area,userid,year,month order by area,userid,year,month 
 	</select>
 	
 	<!-- 메니저  -->
 	<select id="selectmanpayAll" resultType="com.pyeon2.vo.UserVO" parameterType="com.pyeon2.vo.UserVO">
-		select userid,year,month,area,sum(hour) as hour,sum(money) as money from p2_userMoney where area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{userid}) group by area,userid,year,month order by area,userid,year,month 
+		select userid,year,month,area,sum(hour) as hour,sum(money) as money from p2_usermoneyfin where area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{userid}) group by area,userid,year,month order by area,userid,year,month 
 	</select>
 	
 	<!-- 메니저  지정 월-->
 	<select id="selectmanpay" resultType="com.pyeon2.vo.UserVO" parameterType="com.pyeon2.vo.UserVO">
-		select userid,year,month,area,sum(hour) as hour,sum(money) as money from p2_userMoney where year=#{year} and month =#{month} and area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{userid}) group by area,userid,year,month order by area,userid,year,month
+		select userid,year,month,area,sum(hour) as hour,sum(money) as money from p2_usermoneyfin where year=#{year} and month =#{month} and area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{userid}) group by area,userid,year,month order by area,userid,year,month
 	</select>
 	
 	<!-- 아르바이트 리스트 불러오기 (position=user인 아이들) -->
@@ -351,7 +382,7 @@
 	
 	<!-- price 계산 전 임시로 orderSpend 컬럼 생성 -->
 	<insert id="orderSpendTemp" parameterType="com.pyeon2.vo.ItemVO">
-		insert into orderSpend (bno, spend, pay, spend_date, area) values(orderSpend_num.nextVal, '발주', 0, SYSDATE, #{area})
+		insert into orderSpend (bno, spend, pay, spend_date, area) values(orderSpend_num.nextVal, '발주', ${totalPrice}, SYSDATE, #{area})
 	</insert>
 	
 		<!-- sal 리스트 가져오기 -->
@@ -362,7 +393,7 @@
 	
 	<!-- orderspend 리스트 가져오기 -->
 	<select id="orderSpendlist" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
-		select spend , pay , TO_CHAR(spend_date, 'YYYY-MM-dd HH24:mi' ) as sal_time from orderspend where area = #{area}
+		select spend , pay , TO_CHAR(spend_date, 'YYYY-MM-dd HH24:mi' ) as sal_time from orderspend where area = #{area} and pay != 0
 	</select>
 	
 	<!-- sal , orderspend 리스트 p2_daymoney 에 insert -->
@@ -542,4 +573,36 @@
 	<select id="itemcodeselect" parameterType="com.pyeon2.vo.NoticeReplVO" resultType="com.pyeon2.vo.NoticeReplVO">
 		select item_code from p2_item where item_code = #{item_code}
 	</select>
+	
+	<!-- 발주 신청 ajax 쓰기 -->
+	<insert id="orderTempTempInsert" parameterType="com.pyeon2.vo.ItemVO">
+		insert into orderTempTemp(item_code, item_name, category, area) values(#{item_code}, #{item_name}, #{category}, #{area})
+	</insert>
+	
+	<!-- //발주 신청 ajax 리스트 -->
+	<select id="orderTempTempList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select item_code, item_name, category, area from orderTempTemp
+	</select>
+	
+	<delete id="orderTempTempDelete">
+		delete from orderTempTemp
+	</delete>
+
+	<!-- 알바 월급 주기 -->
+	<insert id="payinsert" parameterType="com.pyeon2.vo.UserVO">
+		insert into p2_usermoneyfin(year,month,day,userid,hour,money,area) 
+		values ((SELECT TO_CHAR(sysdate, 'YYYY' ) as year FROM dual),
+		(SELECT TO_CHAR(sysdate, 'MM' ) as month FROM dual) ,(SELECT TO_CHAR(sysdate, 'dd' ) as day FROM dual),
+		#{userid},#{hour},#{money},#{area})
+	</insert>
+	
+	<!-- 압바 급여 지급 삭제 -->
+	<delete id="paydelete" parameterType="com.pyeon2.vo.UserVO">
+		delete from p2_usermoney where userid = #{userid}
+	</delete>
+	
+	<select id="selectmanpayAll1" resultType="com.pyeon2.vo.UserVO" parameterType="com.pyeon2.vo.UserVO">
+		select userid,area,sum(hour) as hour,sum(money) as money from p2_userMoney where area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{userid}) group by userid,area
+	</select>
+
 </mapper>

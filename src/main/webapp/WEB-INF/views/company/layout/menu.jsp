@@ -10,14 +10,14 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 
-<div>
+<div class="w3-container">
 	<ul class="w3-navbar w3-card-2 w3-center"
 		style="background-color: #D5D9DF; font-family: 'Jeju Gothic', sans-serif;">
 		<li></li>
 		<li style="width: 33.33%" class="w3-dropdown-hover"><a href="#">재고
 				관리 <i class="fa fa-caret-down"></i>
 		</a>
-			<div style="width: 454px;"
+			<div style="width: 438px;"
 				class="w3-dropdown-content w3-light-gray w3-card-4">
 				<a
 					href="${pageContext.request.contextPath}/company/com_orderApproval">발
@@ -31,7 +31,7 @@
 		<li style="width: 33.33%" class="w3-dropdown-hover"><a href="#">매장
 				관리 <i class="fa fa-caret-down"></i>
 		</a>
-			<div style="width: 454px;"
+			<div style="width: 438px;"
 				class="w3-dropdown-content w3-light-gray w3-card-4">
 				<sec:authorize access="hasAuthority('ROLE_ADMIN')">
 					<a
@@ -49,7 +49,7 @@
 		<li style="width: 33.33%" class="w3-dropdown-hover"><a href="#">인사
 				관리 <i class="fa fa-caret-down"></i>
 		</a>
-			<div style="width: 454px;"
+			<div style="width: 438px;"
 				class="w3-dropdown-content w3-light-gray w3-card-4">
 				<a href="${pageContext.request.contextPath}/company/com_searchForm">직원
 					검색</a> <a

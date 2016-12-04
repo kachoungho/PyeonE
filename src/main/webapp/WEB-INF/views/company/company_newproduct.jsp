@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -101,45 +101,45 @@ input.submit3 {
 					<table class="table" style="margin-top: 50px">
 						<tr>
 							<td colspan="2" class="h"
-								style="font-size: 30px; padding-bottom: 20px;">╫е╠т а╕г╟ цъ╟║</td>
+								style="font-size: 30px; padding-bottom: 20px;">Л▀═Й╥° Л═°М▓┬ Л╤■Й╟─</td>
 						</tr>
 						<tr>
-							<th class="th1" style="width: 30%">╩С г╟ ╦М</th>
+							<th class="th1" style="width: 30%">Л┐│ М▓┬ К╙┘</th>
 							<td class="td1" style="width: 70%"><input class="inpts"
 								type="text" name="item_name" /></td>
 						</tr>
 						<tr>
-							<th class="th1">╩Сг╟ юл╧лаЖ</th>
+							<th class="th1">Л┐│М▓┬ Л²╢К╞╦Л╖─</th>
 							<td class="td1"><input class="submit3" type="file"
 								name="file" readonly="readonly"></td>
 						</tr>
 						<tr>
-							<th class="th1">©Ь ╟║</th>
+							<th class="th1">Л⌡░ Й╟─</th>
 							<td class="td1"><input class="inpts" type="text" name="cost" /></td>
 						</tr>
 						<tr>
-							<th class="th1">фг ╦е ╟║</th>
+							<th class="th1">М▄░ К╖╓ Й╟─</th>
 							<td class="td1"><input class="inpts" type="text"
 								name="price" /></td>
 						</tr>
 						<tr>
-							<th class="th1">╪Ж╥╝</th>
+							<th class="th1">Л┬≤К÷┴</th>
 							<td class="td1"><input class="inpts" type="text"
 								name="count" /></td>
 						</tr>
 						<tr>
-							<th class="th1">д╚еб╟М╦╝</th>
+							<th class="th1">Л╧╢М┘▄ЙЁ═К╕╛</th>
 							<td class="td1"><select class="slt" name="category">
-									<option value="all">╪╠ец</option>
-									<option value="ю╫╥А">ю╫╥А</option>
-									<option value="╫╨Ё╪">╫╨Ё╪</option>
-									<option value="юн╫╨еоф╝">юн╫╨еоф╝</option>
-									<option value="аж╥Ы">аж╥Ы</option>
+									<option value="all">Л└═М┐²</option>
+									<option value="Л²▄Кё▄">Л²▄Кё▄</option>
+									<option value="Л┼╓К┌╣">Л┼╓К┌╣</option>
+									<option value="Л²╦Л┼╓М└╢М┼╦">Л²╦Л┼╓М└╢М┼╦</option>
+									<option value="Лё╪К╔≤">Лё╪К╔≤</option>
 							</select></td>
 						</tr>
 					</table>
 					<input type="hidden" name="id" value="${LoingUser}"> <input
-						class="submit" style="float: right" type="submit" value="цъ╟║">
+						class="submit" style="float: right" type="submit" value="Л╤■Й╟─">
 
 				</div>
 				<div class="div_col_l_r"></div>

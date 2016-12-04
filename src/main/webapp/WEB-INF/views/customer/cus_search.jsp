@@ -278,14 +278,14 @@ input.submit:hover {
 							<label style="font-size: 20px">${list.item_name}</label>
 							<p>
 								상품 가격 : <label><b>${list.price} 원</b></label><br>
-								<c:if test="${list.price > 0}">
+								<c:if test="${list.count >= 1}">
 									재고 유무 : <label style="color: blue;"><b>재고 있음</b></label>
 								</c:if>
-								<c:if test="${list.price <= 0}">
-									재고 유무 : <label style="color: blue;"><b>재고 없음</b></label> 
+								<c:if test="${list.count <= 0}">
+									재고 유무 : <label style="color: red;"><b>재고 없음</b></label> 
 								</c:if>
 								<br> 지 점 : <label><b><a
-										href="cus_map?area=${list.area}">${list.area}점</a></b></label><br>
+										href="cus_map?area=${list.area}&item_name=${list.item_name}">${list.area}점</a></b></label><br>
 							</p>
 						</div>
 					</div>

@@ -1,10 +1,11 @@
 
 select * from p2_user;
 select * from p2_userMoney;
+select * from p2_usermoneyfin;
 
 drop table p2_user;
 drop table p2_userMoney;
-
+drop table p2_usermoneyfin;
 
 --------------- TABLE --------------------
 
@@ -25,7 +26,15 @@ create table p2_userMoney(
 	area varchar2(30) not null
 );
 
-
+create table p2_usermoneyfin(
+	year varchar2(10),
+	month varchar2(10),
+	day varchar2(10),
+	userid varchar2(30),
+	hour number(10),
+	money number(10),
+	area varchar2(30) not null
+);
 --------------- INSERT --------------------
 
 insert into p2_user(userid , go_time) values ('지상동',sysdate);

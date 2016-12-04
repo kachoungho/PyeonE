@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Refresh" content="0; url=${pageContext.request.contextPath}/company/com_searchForm">
 <script type="text/javascript">
-	alert("糕滚 殿废 己傍!");
+	alert("氅る矂 霌彪 靹标车!");
 	history.go(1);
 </script>
 
-<title>糕滚 殿废 己傍</title>
+<title>氅る矂 霌彪 靹标车</title>
 </head>
 <body>
 

@@ -17,16 +17,10 @@ public interface CustomerDAO {
 	public List<ItemVO> searchItem_name(ItemVO vo) throws Exception;
 
 	// �ּҰ˻�
-	public List<GpsVO> getAddress(GpsVO vo) throws Exception;
+	public List<GpsVO> getAddress(SectorVO vo) throws Exception;
 
-	// ������ ���� ��������(�Ǳ�)
-	public List<SectorVO> getSector_p(SectorVO vo) throws Exception;
-
-	// ������ ���� ��������(����)
-	public List<SectorVO> getSector_j(SectorVO vo) throws Exception;
-
-	// ������ ���� ��������(��ž)
-	public List<SectorVO> getSector_y(SectorVO vo) throws Exception;
+	// 아이템 섹터 가져오기
+	public List<SectorVO> getSector(SectorVO vo) throws Exception;
 
 	// ��� ��û �Խ��� ����Ʈ �ҷ�����
 	public List<ReqBoardVO> getReqBoardlist() throws Exception;

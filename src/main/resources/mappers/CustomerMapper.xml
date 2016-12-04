@@ -14,23 +14,13 @@
 	</select>
 	
 	<!-- 주소검색 -->
-	<select id="getAddress" resultType="com.pyeon2.vo.GpsVO" parameterType="com.pyeon2.vo.GpsVO">
+	<select id="getAddress" resultType="com.pyeon2.vo.GpsVO" parameterType="com.pyeon2.vo.SectorVO">
 		select * from p2_gps where area = #{area}
 	</select>
 	
-	<!-- 아이템 섹터 가져오기(판교) -->
-	<select id="getSector_p"  resultType="com.pyeon2.vo.SectorVO" parameterType="com.pyeon2.vo.SectorVO">
-		select sectors, item_name from p2_sector_p where area = #{area}
-	</select>
-	
-	<!-- 아이템 섹터 가져오기(정자) -->
-	<select id="getSector_j"  resultType="com.pyeon2.vo.SectorVO" parameterType="com.pyeon2.vo.SectorVO">
-		select sectors, item_name from p2_sector_j where area = #{area}
-	</select>
-	
-	<!-- 아이템 섹터 가져오기(야탑) -->
-	<select id="getSector_y"  resultType="com.pyeon2.vo.SectorVO" parameterType="com.pyeon2.vo.SectorVO">
-		select sectors, item_name from p2_sector_y where area = #{area}
+	<!-- 아이템 섹터 가져오기 -->
+	<select id="getSector"  resultType="com.pyeon2.vo.SectorVO" parameterType="com.pyeon2.vo.SectorVO">
+		select * from p2_sector where area = #{area}
 	</select>
 	
 	<!-- 재고 요청 게시판 리스트 불러오기 -->
