@@ -8,6 +8,87 @@
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--     <script type="text/javascript">
+		$(function() {
+			var result = new Array();
+			
+			<c:forEach items="${ list }" var="list">
+				var json = new Object();
+				json.area = "${ list.area }";
+				json.pay = "${ list.pay }";
+				json.month = "${ list.month}";
+				result.push(json);
+			</c:forEach>
+			
+			alert("jsoninfo=" + JSON.stringify(result));
+		});
+    </script> -->
+    
+    <script type="text/javascript">
+   	function btn_event(btn) {
+	  	var name = btn;
+	  	var val = document.forms[name].elements['pay'].value;
+	    alert(val);
+   	}
+    </script>
+    
+
+    <script type="text/javascript">
+    
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+	
+  function drawChart() {
+	    
+    var data = new google.visualization.DataTable();
+    
+    data.addColumn('number', 'Day');
+    data.addColumn('number', '야탑');
+    data.addColumn('number', '정자');
+    data.addColumn('number', '판교');
+    
+/*     data.addRows([
+        [1,  'obj3[0].value', 'obj3[1].value', 'obj3[2].value]',
+        [2,  'obj3[3].value', 'obj3[4].value', 'obj3[5].value'],
+        [3,  'obj3[6].value', 'obj3[7].value', 'obj3[8].value'],
+        [4,  'obj3[9].value', 'obj3[10].value', 'obj3[11].value'],
+        [5,  'obj3[12].value', 'obj3[13].value', 'obj3[14].value']
+    ]); */
+    
+      data.addRows([
+        [1,  30.9, 69.5, 32.4],
+        [2,  30.9, 69.5, 32.4],
+        [3,  25.4,   57, 25.7],
+        [4,  11.7, 18.8, 10.5],
+        [5,  11.9, 17.6, 10.4],
+        [6,   8.8, 13.6,  7.7],
+        [7,   7.6, 12.3,  9.6],
+        [8,  12.3, 29.2, 10.6],
+        [9,  16.9, 42.9, 14.8],
+        [10, 12.8, 30.9, 11.6],
+        [11,  5.3,  7.9,  4.7],
+        [12,  6.6,  8.4,  5.2],
+        [13,  4.8,  6.3,  3.6],
+        [14,  4.2,  6.2,  3.4]
+    ]);
+ 
+    var options = {
+      chart: {
+        title: '지점별 수입 현황',
+        subtitle: '(WON)'
+      },
+      width: 900,
+      height: 500
+    };
+
+    var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+</script>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -127,6 +208,17 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<form name="${ list.pay }">
+		<c:forEach items="${ list }" var="list" varStatus="idx">
+			<input type="hidden" value="${ list.pay }" name="pay">
+			<input onclick="btn_event('${ list.pay }');return false;">
+		</c:forEach>
+	</form>
+	
+	<div id="linechart_material" style="width: 900px; height: 500px;" align="center">
+
 	</div>
 </body>
 </html>
