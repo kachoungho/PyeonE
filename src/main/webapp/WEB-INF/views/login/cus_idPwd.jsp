@@ -10,6 +10,7 @@
 	href="/controller/resources/css/login.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<title>아이디 / 비밀번호 찾기</title>
 </head>
 <body>
 

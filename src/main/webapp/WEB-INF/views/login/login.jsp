@@ -42,7 +42,7 @@ div {
 }
 
 </style>
-<title>로그인해주세요</title>
+<title>로그인</title>
 </head>
 <body>
 <center>
