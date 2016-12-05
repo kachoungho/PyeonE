@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <sec:authentication property="name" var="LoingUser" />
-<title>Insert title here</title>
+<title>재고 요청 게시판 상세보기</title>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 
 <style type="text/css">

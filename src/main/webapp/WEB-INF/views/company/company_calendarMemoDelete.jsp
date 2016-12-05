@@ -9,7 +9,6 @@
 	window.opener.location.reload();
 	window.close();
 </script>
-<title>Insert title here</title>
 </head>
 <body>
 </body>

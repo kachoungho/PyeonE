@@ -9,7 +9,6 @@
 	history.go(1);
 </script>
 
-<title>멤버 등록 성공</title>
 </head>
 <body>
 

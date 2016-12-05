@@ -145,7 +145,7 @@
 	}
 </script>
 
-<title>Insert title here</title>
+<title>매장별 수입/지출</title>
 </head>
 <body>
 	<div style="float: left; width: 50%">
