@@ -91,10 +91,12 @@
 	</div>
 
 	<div style="float: left; width: 50%;">
-	<br><br>
-		<table class="w3-table w3-hoverable">
+	<br>
+		<center>
+		<table>
 			<tr>
 				<td>
+
 					<!-- 년 도--> <a
 					href="${pageContext.request.contextPath}/company?year=${year-1}&month=${month}">◀</a>
 					${year}년 <a
@@ -103,12 +105,13 @@
 					href="${pageContext.request.contextPath}/company?year=${year}&month=${month-1}">◀</a>
 					${month+1}월 <a
 					href="${pageContext.request.contextPath}/company?year=${year}&month=${month+1}">▶</a>
+
 				</td>
 			</tr>
 		</table>
+		</center>
 
-		<table class="w3-table w3-hoverable w3-border" ><!--  class="ex1"
-			style="width: 630px; font-family: 'Jeju Gothic', sans-serif;" -->
+		<table class="w3-table w3-hoverable w3-border" >
 			<!-- 달력 부분 -->
 			<thead>
 				<tr class="w3-blue-grey">
@@ -129,7 +132,8 @@
 				</tr>
 			</thead>
 		</table>
-		<table class="w3-table w3-hoverable w3-border" >
+		<!-- <table class="w3-table w3-hoverable w3-border" > -->
+		<table style="width: 100%; background: #ffffff; TABLE-layout:fixed; font-family: 'Jeju Gothic', sans-serif;">
 			<tr height=70>
 				<c:set var="br" value="0" />
 				<c:forEach var="i" begin="1" end="${startDay-1}">
@@ -143,8 +147,8 @@
 				<c:forEach var="a" begin="1" end="${end}" varStatus="idx">
 					<td
 						style="width: 90px; vertical-align: top; cursor: pointer; overflow: hidden; text-overflow: ellipsis;"
-						onmouseover="this.style.backgroundColor='#F3F5BB'"
-						onmouseout="this.style.backgroundColor='#f9f9f9'"
+						onmouseover="this.style.backgroundColor='#ccc'"
+						onmouseout="this.style.backgroundColor='#ffffff'"
 						onclick="window.open('${pageContext.request.contextPath}/company/com_calendarMemo?year=${year }&month=${month}&day=${idx.index }',
 						'window','width=250,height=330,left=500,top=50')">
 						<nobr>
