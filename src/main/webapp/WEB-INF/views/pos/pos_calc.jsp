@@ -23,7 +23,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>상품 계산</title>
 
 <script type="text/javascript">
 	function input(index) {

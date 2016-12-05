@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>직원 정보 수정</title>
 </head>
 <body>
 

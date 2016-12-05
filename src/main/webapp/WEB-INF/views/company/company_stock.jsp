@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/listcss.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>매장별 재고 현황</title>
 
 </head>
 <body>

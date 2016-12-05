@@ -240,8 +240,6 @@ public class CompanyController {
 			ss.setPerPageNum(perPageNum);
 			ss.setItem_name("%"+item_name+"%");
 			ss.setCategory(category);
-
-			System.out.println("나와랏 :" + ss.getItem_name());
 			
 			count = posService.getSelectCount(vo);
 			System.out.println("count : " + posService.getSelectCount(vo));
@@ -262,7 +260,6 @@ public class CompanyController {
 			mav.setViewName(".company.company_stock_select");
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>일일 정산</title>
 </head>
 <body>
 	<form action="ps_daymoneyconfirm" method="POST">
