@@ -877,6 +877,8 @@ public class PosController {
 		
 		vo.setArea(request.getParameter("area"));
 		posService.calcdelete(vo);
+		int total = 0;
+		mav.addObject("total",total);
 		mav.addObject("area", vo.getArea());
 		mav.setViewName(".pos.pos_calc");
 		return mav;
