@@ -47,7 +47,7 @@
 }
 </style>
 <meta charset="utf-8">
-<title>키워드로 장소검색하기</title>
+<title>매장 위치</title>
 
 </head>
 <body>

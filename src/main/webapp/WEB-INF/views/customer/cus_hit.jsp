@@ -25,7 +25,7 @@
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title> 인 기 상 품  </title>
 </head>
 <body>
 	<br>

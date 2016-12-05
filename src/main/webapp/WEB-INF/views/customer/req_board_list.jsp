@@ -9,7 +9,7 @@
 <head>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>재고 요청 게시판 리스트</title>
 </head>
 <body>
 	<br>

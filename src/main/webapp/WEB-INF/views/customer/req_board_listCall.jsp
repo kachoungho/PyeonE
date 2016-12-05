@@ -15,7 +15,6 @@
 		content="0; url=${pageContext.request.contextPath}/company/req_board_list">
 </sec:authorize>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 

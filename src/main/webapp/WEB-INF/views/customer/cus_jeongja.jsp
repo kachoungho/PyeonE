@@ -74,7 +74,7 @@
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>상품 배치도(정자)</title>
 </head>
 <body>
 <h1 align="center"><b>정자점</b></h1>
