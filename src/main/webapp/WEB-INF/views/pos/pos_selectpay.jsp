@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<title>Insert title here</title>
+<title>급여 조회</title>
 </head>
 <body>
 

@@ -14,7 +14,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <sec:authentication property="name" var="LoingUser" />
-<title>Insert title here</title>
+<title>발주 신청</title>
 </head>
 <body>
 	<br>
