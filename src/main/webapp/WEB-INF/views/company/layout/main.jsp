@@ -42,7 +42,6 @@
 .clearfix { overflow: auto; }
 
 </style>
-<title>스프링 프로젝트</title>
 </head>
 <body>
 	<div class="test">

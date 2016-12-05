@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>본사 재고 현황</title>
 </head>
 <body>
 	<form

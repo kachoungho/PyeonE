@@ -5,7 +5,6 @@
 <head>
 <meta http-equiv="Refresh" content="0; url=${pageContext.request.contextPath}/company/com_notice_list">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 

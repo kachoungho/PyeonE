@@ -22,7 +22,7 @@
 		}
 	}
 </script>
-<title>관리자/지점장 선택 후 리스트 출력</title>
+<title>직책 검색</title>
 </head>
 <body>
 

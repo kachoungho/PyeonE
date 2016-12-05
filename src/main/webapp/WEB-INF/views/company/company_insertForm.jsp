@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>정보 입력 폼</title>
+<title>직원 정보 등록</title>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/company/com_insert"
