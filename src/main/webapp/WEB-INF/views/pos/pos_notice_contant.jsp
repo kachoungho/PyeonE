@@ -59,7 +59,7 @@ input.submit:hover {
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>공지사항 상세보기</title>
 
 </head>
 <body>

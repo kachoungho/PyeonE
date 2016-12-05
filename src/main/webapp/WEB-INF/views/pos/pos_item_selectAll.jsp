@@ -11,7 +11,7 @@
 <head>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>상품 리스트</title>
 </head>
 <body>
 	<sec:authentication property="name" var="LoingUser" />
