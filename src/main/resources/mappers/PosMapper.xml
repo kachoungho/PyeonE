@@ -607,4 +607,8 @@
 		select userid,area,sum(hour) as hour,sum(money) as money from p2_userMoney where area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{userid}) group by userid,area
 	</select>
 
+	<!-- count 카운트 가져오기 -->
+	<select id="countselect" resultType="Integer">
+		select count from p2_item where area = #{area} and item_code = #{item_code}
+	</select>
 </mapper>
