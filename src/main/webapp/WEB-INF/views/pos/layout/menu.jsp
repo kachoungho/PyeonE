@@ -39,29 +39,25 @@
 			</div>
 		</li>
 
-		<li style="width: 20%" class="w3-dropdown-hover"><a href="#">출
-				/ 퇴근 관리 <i class="fa fa-caret-down"></i>
+		<li style="width: 20%" class="w3-dropdown-hover"><a href="#">인사 관리<i class="fa fa-caret-down"></i>
 		</a>
 			<div style="width: 263px;"
 				class="w3-dropdown-content w3-light-gray w3-card-4">
 
 				<sec:authorize access="hasAuthority('ROLE_USER')">
-					<a
-						href="${pageContext.request.contextPath}/pos/ps_selectpay?id=${LoingUser}">출
-						/ 퇴근 이력 조회</a>
+					<a href="${pageContext.request.contextPath}/pos/ps_selectpay?id=${LoingUser}">급여 조회</a>
 				</sec:authorize>
 				<sec:authorize access="hasAuthority('ROLE_MANAGER')">
 					<a
-						href="${pageContext.request.contextPath}/pos/ps_selectpays?id=${LoingUser}">출
-						/ 퇴근 이력 조회</a>
+						href="${pageContext.request.contextPath}/pos/ps_paygive?id=${LoingUser}">급여 지급</a>
+					<a
+						href="${pageContext.request.contextPath}/pos/ps_selectpays?id=${LoingUser}">급여 조회</a>
 					<a
 						href="${pageContext.request.contextPath}/pos/ps_user_selectForm?id=${LoingUser}">아르바이트생
 						현황</a>
 					<a
 						href="${pageContext.request.contextPath}/pos/ps_user_insertForm?id=${LoingUser}">아르바이트생
-						정보 등록</a>
-					<a
-						href="${pageContext.request.contextPath}/pos/ps_paygive?id=${LoingUser}">월급주기</a>
+						정보 등록</a>					
 				</sec:authorize>
 			</div></li>
 

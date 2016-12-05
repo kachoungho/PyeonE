@@ -20,7 +20,7 @@
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/id.png">아이디</th>
-				<th><input id="ipt_insert" type="text" name="id" readonly="readonly" value="${ list.id }"></th>
+				<th><input id="ipt_insert" class="ipt_insert" type="text" name="id" readonly="readonly" value="${ list.id }"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
@@ -30,25 +30,25 @@
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/name.png">이름</th>
-				<th><input id="ipt_insert" type="text" name="name" value="${ list.name }"></th>
+				<th><input id="ipt_insert" class="ipt_insert" type="text" name="name" value="${ list.name }"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/phone.png">전화번호</th>
-				<th><input id="ipt_insert" type="text" name="phone" value="${ list.phone }"></th>
+				<th><input id="ipt_insert" class="ipt_insert" type="text" name="phone" value="${ list.phone }"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/age.png">생년월일</th>
-				<th><input id="ipt_insert" type="text" name="age" value="${ list.age }"></th>
+				<th><input id="ipt_insert" class="ipt_insert" type="text" name="age" value="${ list.age }"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/address.png">주소</th>
 				<th>
-				<input id="postcode" type="text" id="postcode" placeholder="우편번호" name="postcode" value="${ list.postcode }">
+				<input class="ipt_insert2" id="postcode" type="text" id="postcode" placeholder="우편번호" name="postcode" value="${ list.postcode }">
 				<input class="submit" type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-				<input id="address" type="text" id="address" placeholder="주소" name="address" value="${ list.address }">
-				<input id="address2" type="text" id="address2" placeholder="상세주소" name="address2" value="${ list.address2 }">
+				<input class="ipt_insert" id="address" type="text" id="address" placeholder="주소" name="address" value="${ list.address }">
+				<input class="ipt_insert" id="address2" type="text" id="address2" placeholder="상세주소" name="address2" value="${ list.address2 }">
 
 				</th>
 			</tr>
@@ -56,14 +56,14 @@
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/gender.png">성별</th>
 				<th>
-				<input id="ipt_insert" type="text" name="gender"
+				<input class="ipt_insert" id="ipt_insert" type="text" name="gender"
 						value="${ list.gender }">
 				</th>
 			</tr>
 				<tr>
 					<th id="tr2_insert"><img class="img_insert"
 						src="/controller/resources/images/area.png">지점</th>
-					<th><input id="ipt_insert" type="text" name="area"
+					<th><input class="ipt_insert" id="ipt_insert" type="text" name="area"
 						value="${ list.area }" readonly="readonly"></th>
 				</tr>
 
