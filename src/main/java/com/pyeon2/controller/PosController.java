@@ -746,33 +746,36 @@ public class PosController {
 		/*int pay = vo.getPay();*/
 		List<ItemVO> list = posService.calcList();
 		
-		for(int i =0 ; i < list.size() ; i++){
-			if(vo.getItem_code().equals(list.get(i).getItem_code())&& vo.getArea().equals(list.get(i).getArea())){
-				cal = 1;
-			}
-		}
-		List<ItemVO> list2 = posService.itemcodeselect(vo);
+		int count = posService.countselect(vo);
+		if(count != 0){
 		
-		
-		switch (cal) {
-			case 1:
-			{
-				posService.clacupdate(vo);
-				break;
-			}
-			case 0:
-			{
-				if(list2.size() != 0){
-					posService.calcinsert(vo);
+			for(int i =0 ; i < list.size() ; i++){
+				if(vo.getItem_code().equals(list.get(i).getItem_code())&& vo.getArea().equals(list.get(i).getArea())){
+					cal = 1;
 				}
-				break;
 			}
-			default:
-			{
-				break;
+			List<ItemVO> list2 = posService.itemcodeselect(vo);
+			
+			
+			switch (cal) {
+				case 1:
+				{
+					posService.clacupdate(vo);
+					break;
+				}
+				case 0:
+				{
+					if(list2.size() != 0){
+						posService.calcinsert(vo);
+					}
+					break;
+				}
+				default:
+				{
+					break;
+				}
 			}
 		}
-		
 		list = posService.calcLists(vo);
 		if(list.size() != 0){
 			total = posService.totalcalc(vo);

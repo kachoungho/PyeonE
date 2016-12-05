@@ -428,4 +428,9 @@ public class PosServiceImpl implements PosService {
 		return posDao.selectmanpayAll1(vo);
 	}
 
+	@Override
+	public int countselect(ItemVO vo) throws Exception {
+		return posDao.countselect(vo);
+	}
+
 }

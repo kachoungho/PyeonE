@@ -431,4 +431,9 @@ public class PosDAOImpl implements PosDAO {
 
 	}
 
+	@Override
+	public int countselect(ItemVO vo) throws Exception {
+		return session.selectOne(namespace + ".countselect" , vo);
+	}
+
 }

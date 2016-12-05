@@ -256,5 +256,7 @@ public interface PosDAO {
 	
 	// 알바 일했던지금리스트
 	public List<UserVO> selectmanpayAll1(UserVO vo) throws Exception;
-
+	
+	// 카운트 가져오기
+	public int countselect(ItemVO vo) throws Exception;
 }
