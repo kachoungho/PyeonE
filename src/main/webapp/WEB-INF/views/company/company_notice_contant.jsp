@@ -58,7 +58,7 @@ input.submit:hover {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <sec:authentication property="name" var="LoingUser" />
-<title>Insert title here</title>
+<title>공지사항 상세보기</title>
 
 <script type="text/javascript">
 	function input(index) {

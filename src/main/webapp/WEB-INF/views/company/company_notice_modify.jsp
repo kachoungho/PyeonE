@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>공지사항 수정</title>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 </head>
 

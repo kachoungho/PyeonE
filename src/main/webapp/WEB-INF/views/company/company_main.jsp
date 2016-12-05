@@ -8,7 +8,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<title>본사 첫 페이지</title>
+<title>본사 메인</title>
 </head>
 <body>
 	<c:out value="${memoMap['7'] }" />
