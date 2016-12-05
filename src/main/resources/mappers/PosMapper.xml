@@ -579,11 +579,12 @@
 		insert into orderTempTemp(item_code, item_name, category, area) values(#{item_code}, #{item_name}, #{category}, #{area})
 	</insert>
 	
-	<!-- //발주 신청 ajax 리스트 -->
+	<!-- 발주 신청 ajax 리스트 -->
 	<select id="orderTempTempList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
 		select item_code, item_name, category, area from orderTempTemp
 	</select>
 	
+	<!-- 발주 신청 ajax 지우기 -->
 	<delete id="orderTempTempDelete">
 		delete from orderTempTemp
 	</delete>
@@ -601,6 +602,7 @@
 		delete from p2_usermoney where userid = #{userid}
 	</delete>
 	
+	<!-- 알바 일했던지금리스트 -->
 	<select id="selectmanpayAll1" resultType="com.pyeon2.vo.UserVO" parameterType="com.pyeon2.vo.UserVO">
 		select userid,area,sum(hour) as hour,sum(money) as money from p2_userMoney where area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{userid}) group by userid,area
 	</select>

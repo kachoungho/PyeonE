@@ -11,8 +11,6 @@ public class SectorVO {
 	public void setCode1(String code1) {
 		this.code1 = code1;
 	}
-
-
 	public int getCode2() {
 		return code2;
 	}

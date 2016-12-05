@@ -24,13 +24,6 @@ public class ItemVO {
 	private String state;
 	private int totalPrice;
 	private String name;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	private Date dayda;
 	private Date sys_time;
 	private String spend_date;
@@ -42,12 +35,17 @@ public class ItemVO {
 	private String month;
 	private String days;
 	private int num;
-	
-	//////////////////////////////////////
 	private String code1;
 	private int code2;
 	private String billnum;
 
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getYear() {
 		return year;
 	}
