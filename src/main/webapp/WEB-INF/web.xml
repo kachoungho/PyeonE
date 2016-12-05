@@ -63,5 +63,10 @@
 	<welcome-file-list>
     	<welcome-file>/WEB-INF/views/login/cus_login2.jsp</welcome-file>
     </welcome-file-list>
+    
+    <!-- 세션 유지시간 1일 -->
+    <session-config>
+ 	   <session-timeout>1440</session-timeout>
+	</session-config>
 
 </web-app>
