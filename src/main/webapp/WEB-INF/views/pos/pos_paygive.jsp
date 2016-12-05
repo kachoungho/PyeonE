@@ -1,43 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*,com.pyeon2.vo.*"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" type="text/css"
-	href="/controller/resources/css/listcss.css">
+	href="/controller/resources/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 
 </head>
 <body>
+	<div
+		style="width: 80%; display: block; margin-left: auto; margin-right: auto; margin-top: 30px;">
+		<table class="w3-table w3-hoverable w3-border">
+			<thead>
+				<tr class="w3-blue-grey">
+					<th style="width: 30%; text-align: center">ì´ë¦„</th>
+					<th style="width: 30%; text-align: center">ì—…ë¬´ ì‹œê°„</th>
+					<th style="width: 30%; text-align: center">ê¸‰ì—¬</th>
+					<th style="width: 10%; text-align: center">ì§€ê¸‰</th>
+				</tr>
+			</thead>
+			<c:forEach items="${list}" var="user">
 
-	<table class="ex1">
-		<thead>
-			<tr>
-				<th scope="col">ÀÌ¸§</th>
-				<th scope="col">¾÷¹« ½Ã°£</th>
-				<th scope="col">±Ş¿©</th>
-				<th scope="col">Áö±Ş</th>
-			</tr>
-		</thead>
-		<c:forEach items="${list}" var="user">
-			
 				<tbody>
-					<tr class="odd">
-						<td class="date5">${user.userid }</td>
-						<td class="date5">${user.hour }</td>
-						<td class="date5"><fmt:formatNumber value="${user.money }" groupingUsed="true"/>¿ø</td>
-						<td><input type="button" value="Áö±Ş" onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_paygive?userid=${user.userid }&id=${id}'"></td>
+					<tr>
+						<td style="padding-top: 20px; text-align: center">${user.userid }</td>
+						<td style="padding-top: 20px;text-align: center">${user.hour }</td>
+						<td style="padding-top: 20px;text-align: center"><fmt:formatNumber value="${user.money }"
+								groupingUsed="true" />ì›</td>
+						<td style="text-align: center"><input class="submit2" type="button" value="ì§€ê¸‰"
+							onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_paygive?userid=${user.userid }&id=${id}'"></td>
 					</tr>
 				</tbody>
-			
-		</c:forEach>
-	</table>
 
-	
-	<br><br><br>
+			</c:forEach>
+		</table>
+	</div>
+	<br>
+	<br>
+	<br>
 </body>
 </html>

@@ -1,22 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" type="text/css"
-	href="/controller/resources/css/listcss.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- <link rel="stylesheet" type="text/css"
+	href="/controller/resources/css/listcss.css"> -->
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <script type="text/javascript">
 	function button_event(btn) {
 		var name = btn;
 		var val = document.forms[name].elements['id'].value;
 
 		if (val != null) {
-			if (confirm("[" + val + "]" + "´ÔÀÇ Á¤º¸¸¦ Á¤¸»·Î »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?") == true) {
+			if (confirm("[" + val + "]" + "ë‹˜ì˜ ì •ë³´ë¥¼ ì •ë§ë¡œ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?") == true) {
 				document.forms[name].submit();
 			} else {
 				return false;
@@ -26,66 +27,68 @@
 </script>
 
 
-<title>¾Æ¸£¹ÙÀÌÆ® ¸â¹ö ÇöÈ²</title>
+<title>ì•„ë¥´ë°”ì´íŠ¸ ë©¤ë²„ í˜„í™©</title>
 </head>
 <body>
 	<br>
 	<br>
 	<br>
-	<table class="ex1">
-		<thead>
-			<tr>
-				<th colspan="11"><c:forEach items="${ area }" var="area">
+	<div
+		style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
+		<table class="w3-table w3-hoverable w3-border">
+			<thead>
+				<tr class="w3-blue-grey">
+					<th colspan="11"  style="text-align: center"><c:forEach items="${ area }" var="area">
 					${ area }
-					ÁöÁ¡ ¾Æ¸£¹ÙÀÌÆ®»ı Á¤º¸ ÇöÈ²
+					ì§€ì  ì•„ë¥´ë°”ì´íŠ¸ìƒ ì •ë³´ í˜„í™©
 				</c:forEach></th>
-			</tr>
-			<tr>
-				<th scope="col">¾ÆÀÌµğ</th>
-				<th scope="col">ÀÌ ¸§</th>
-				<th scope="col">Á÷ Ã¥</th>
-				<th scope="col">ÀüÈ­¹øÈ£</th>
-				<th scope="col">»ı³â¿ùÀÏ</th>
-				<th scope="col">ÁÖ ¼Ò</th>
-				<th scope="col">¼º º°</th>
-				<th scope="col">Áö Á¡</th>
-				<th scope="col">±Ù¹«½Ã°£</th>
-				<th scope="col">¼ö Á¤</th>
-				<th scope="col">»è Á¦</th>
-			</tr>
-		</thead>
-		<c:forEach items="${ list }" var="member">
-			<tbody>
-				<tr class="odd">
-					<td class="date5">${ member.id }</td>
-					<td class="date2">${ member.name }</td>
-					<td class="date3">${ member.position }</td>
-					<td class="date5">${ member.phone }</td>
-					<td class="date6">${ member.age }</td>
-					<td class="date7">${ member.address } ${ member.address2 }</td>
-					<td class="date8">${ member.gender }</td>
-					<td class="date5">${ member.area }</td>
-					<td class="date5">${ member.optime }</td>
-					<td class="date8"><input class="button_center" width="40"
-						type="image" src="/controller/resources/images/update.png"
-						alt="button"
-						onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_user_updateForm?id=${member.id}'">
-					</td>
-					<td class="date8">
-						<form
-							action="${pageContext.request.contextPath}/pos/ps_user_delete"
-							method="POST" name="${member.id}">
-
-							<input type="hidden" name="id" value="${member.id}"> <input
-								class="button_center" width="40" type="image"
-								src="/controller/resources/images/delete.png" alt="submit"
-								onclick="button_event('${member.id}');return false;" />
-						</form>
-					</td>
 				</tr>
-		</c:forEach>
-	</table>
+				<tr class="w3-blue-grey">
+					<th style="width: 10%; text-align: center">ì•„ì´ë””</th>
+					<th style="width: 10%; text-align: center">ì´ ë¦„</th>
+					<th style="width: 10%; text-align: center">ì§ ì±…</th>
+					<th style="width: 15%; text-align: center">ì „í™”ë²ˆí˜¸</th>
+					<th style="width: 10%; text-align: center">ìƒë…„ì›”ì¼</th>
+					<th style="width: 25%; text-align: center">ì£¼ ì†Œ</th>
+					<th style="width: 10%; text-align: center">ì„± ë³„</th>
+					<th style="width: 5%; text-align: center">ì§€ ì </th>
+					<th style="width: 5%; text-align: center">ê·¼ë¬´<br>ì‹œê°„</th>
+					<th style="width: 5%; text-align: center">ìˆ˜ì •</th>
+					<th style="width: 5%; text-align: center">ì‚­ì œ</th>
+				</tr>
+			</thead>
+			<c:forEach items="${ list }" var="member">
+				<tbody>
+					<tr class="odd">
+						<td style="text-align: center">${ member.id }</td>
+						<td style="text-align: center">${ member.name }</td>
+						<td style="text-align: center">${ member.position }</td>
+						<td style="text-align: center">${ member.phone }</td>
+						<td style="text-align: center">${ member.age }</td>
+						<td style="text-align: center">${ member.address }${ member.address2 }</td>
+						<td style="text-align: center">${ member.gender }</td>
+						<td style="text-align: center">${ member.area }</td>
+						<td style="text-align: center">${ member.optime }</td>
+						<td style="text-align: center"><input class="button_center" width="30"
+							type="image" src="/controller/resources/images/update.png"
+							alt="button"
+							onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_user_updateForm?id=${member.id}'">
+						</td>
+						<td style="text-align: center">
+							<form
+								action="${pageContext.request.contextPath}/pos/ps_user_delete"
+								method="POST" name="${member.id}">
 
+								<input type="hidden" name="id" value="${member.id}"> <input
+									class="button_center" width="30" type="image"
+									src="/controller/resources/images/delete.png" alt="submit"
+									onclick="button_event('${member.id}');return false;" />
+							</form>
+						</td>
+					</tr>
+			</c:forEach>
+		</table>
+	</div>
 	<br>
 	<br>
 	<br>

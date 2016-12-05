@@ -58,6 +58,7 @@
 			<br>
 			<br>
 			<br>
+			
 			<table class="w3-table w3-hoverable w3-border">
 				<thead>
 					<tr class="w3-blue-grey">
@@ -72,9 +73,9 @@
 				</thead>
 				<c:forEach items="${result}" var="list">
 					<tbody>
-						<tr class="odd">
+						<tr>
 							<td style="padding-bottom: 13px; text-align: center"><img width="70" height="70"
-								src="/controller/resources/item_image/${list.item_image}"></td>
+								src="${pageContext.request.contextPath}/resources/item_image/${list.item_image}"></td>
 							<td style="padding-top: 32px; text-align: center">${list.category}</td>
 							<td style="padding-top: 32px; text-align: center">${list.item_code}</td>
 							<td style="padding-top: 32px; text-align: center">${list.item_name}</td>

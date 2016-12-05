@@ -39,6 +39,7 @@
 	</definition>
 	
 	
+	
 	<!-- customer -->
 	<definition name=".customer" template="/WEB-INF/views/customer/layout/main.jsp">
 		<put-attribute name="header"

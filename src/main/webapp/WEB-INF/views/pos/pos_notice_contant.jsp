@@ -101,6 +101,8 @@ input.submit:hover {
 	<br>
 	<div style="width:100%; overflow: hidden;">
 		<div style=" float:left; width: 34%">　</div>
+		
+		<!-- 댓글 입력 부분 -->
 		<div style=" float:left;width: 32%">
 			<font class="h">댓글 입력</font>
 			<div>
@@ -111,9 +113,13 @@ input.submit:hover {
 				<input class="submit" type="button" id="replyAddBtn" value="입력"/>
 			</div>
 		</div>
+		
+		
 		<div style=" float:left; width: 34%;">　</div>
 	</div>
 	<br>
+	
+	<!-- 댓글 뿌려주는 부분 -->
 	<div style="width:100%">
 		<div align="center" >
 			<table id="replies" style="">
@@ -121,6 +127,8 @@ input.submit:hover {
 			</table>
 		</div>
 	</div>
+	
+	
 	<br>
 	
 <script>

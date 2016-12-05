@@ -5,6 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css"
+	href="/controller/resources/css/style.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <style type="text/css">
 .th {
 	border-bottom: 1px solid #000000;
@@ -16,102 +22,140 @@
 	height: 50px;
 }
 </style>
-<link rel="stylesheet" type="text/css"
-	href="/controller/resources/css/style.css">
-	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!--     <script type="text/javascript">
-		$(function() {
-			var result = new Array();
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+	function btn_event(btn) {
+		var name = btn;
+		var val = document.forms[name].elements['pay'].value;
+		alert(val);
+	}
+</script>
+
+
+<script type="text/javascript">
+	google.charts.load('current', {
+		'packages' : [ 'line' ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
+
+	function drawChart() {
+
+		var data = new google.visualization.DataTable();
+		var areaP = '판교';
+		var areaJ = '정자';
+		var areaY = '야탑';
+		var year = '2016';
+		var payP = new Array();
+		var payJ = new Array();
+		var payY = new Array();
+		var year = new Array();
+		var month = new Array();
+
+		
+		if("${area}" == areaP){
+			data.addColumn('number', '월');
+			data.addColumn('number', '판교');
 			
-			<c:forEach items="${ list }" var="list">
-				var json = new Object();
-				json.area = "${ list.area }";
-				json.pay = "${ list.pay }";
-				json.month = "${ list.month}";
-				result.push(json);
-			</c:forEach>
+			<c:forEach items="${list}" var="list">
+			if("${list.area}" == areaP){
+				payP.push("${list.pay}");
+				month.push("${list.month}");
+			}
+			</c:forEach> 
 			
-			alert("jsoninfo=" + JSON.stringify(result));
-		});
-    </script> -->
-    
-    <script type="text/javascript">
-   	function btn_event(btn) {
-	  	var name = btn;
-	  	var val = document.forms[name].elements['pay'].value;
-	    alert(val);
-   	}
-    </script>
-    
+			data.addRows([ [1,  payP[0]/10000], [2,  payP[1]/10000],
+				       	   [3,  payP[2]/10000], [4,  payP[3]/10000],
+				       	   [5,  payP[4]/10000], [6,  payP[5]/10000],
+				       	   [7,  payP[6]/10000], [8,  payP[7]/10000],
+				       	   [9,  payP[8]/10000], [10,  payP[9]/10000],
+				       	   [11,  payP[10]/10000], [12,  payP[11]/10000], ]);     
+		} else if("${area}" == areaJ){
+			data.addColumn('number', '월');
+			data.addColumn('number', '정자');
+			
+			<c:forEach items="${list}" var="list">
+			if("${list.area}" == areaJ){
+				payJ.push("${list.pay}");
+				month.push("${list.month}");
+			}
+			</c:forEach> 
+			
+			data.addRows([ [1,  payJ[0]/10000], [2,  payJ[1]/10000],
+				       	   [3,  payJ[2]/10000], [4,  payJ[3]/10000],
+				       	   [5,  payJ[4]/10000], [6,  payJ[5]/10000],
+				       	   [7,  payJ[6]/10000], [8,  payJ[7]/10000],
+				       	   [9,  payJ[8]/10000], [10,  payJ[9]/10000],
+				       	   [11,  payJ[10]/10000], [12,  payJ[11]/10000], ]);   
+		} else if("${area}" == areaY){
+			data.addColumn('number', '월');
+			data.addColumn('number', '야탑');
+			
+			<c:forEach items="${list}" var="list">
+			if("${list.area}" == areaY){
+				payY.push("${list.pay}");
+				month.push("${list.month}");
+			}
+			</c:forEach> 
+			
+			data.addRows([ [1,  payY[0]/10000], [2,  payY[1]/10000],
+				       	   [3,  payY[2]/10000], [4,  payY[3]/10000],
+				       	   [5,  payY[4]/10000], [6,  payY[5]/10000],
+				       	   [7,  payY[6]/10000], [8,  payY[7]/10000],
+				       	   [9,  payY[8]/10000], [10,  payY[9]/10000],
+				       	   [11,  payY[10]/10000], [12,  payY[11]/10000], ]);   
+		} else {
+			data.addColumn('number', '월');
+			data.addColumn('number', '판교');
+			data.addColumn('number', '정자');
+			data.addColumn('number', '야탑');
+			<c:forEach items="${list}" var="list">
+			if("${list.area}" == areaP){
+				payP.push("${list.pay}");
+				month.push("${list.month}");
+			} else if("${list.area}" == areaJ){
+				payJ.push("${list.pay}")
+			} else if("${list.area}" == areaY){
+				payY.push("${list.pay}")
+			}
+			</c:forEach> 
+			
+			data.addRows([ [1,  payP[0]/10000, payJ[0]/10000, payY[0]/10000], [2,  payP[1]/10000, payJ[1]/10000, payY[1]/10000],
+			     		 [3,  payP[2]/10000, payJ[2]/10000, payY[2]/10000], [4,  payP[3]/10000, payJ[3]/10000, payY[3]/10000],
+			     		 [5,  payP[4]/10000, payJ[4]/10000, payY[4]/10000], [6,  payP[5]/10000, payJ[5]/10000, payY[5]/10000],
+			     		 [7,  payP[6]/10000, payJ[6]/10000, payY[6]/10000], [8,  payP[7]/10000, payJ[7]/10000, payY[7]/10000],
+			     		 [9,  payP[8]/10000, payJ[8]/10000, payY[8]/10000], [10,  payP[9]/10000, payJ[9]/10000, payY[9]/10000],
+			     		 [11,  payP[10]/10000, payJ[10]/10000, payY[10]/10000], [12,  payP[11]/10000, payJ[11]/10000, payY[11]/10000] ]);  
+		}
+		var options = {
+			chart : {
+				title : '지점별 수입 현황',
+				subtitle : '(만원)'
+			},
+			width : 650,
+			height : 350
+		};
 
-    <script type="text/javascript">
-    
-    google.charts.load('current', {'packages':['line']});
-    google.charts.setOnLoadCallback(drawChart);
-	
-  function drawChart() {
-	    
-    var data = new google.visualization.DataTable();
-    
-    data.addColumn('number', 'Day');
-    data.addColumn('number', '야탑');
-    data.addColumn('number', '정자');
-    data.addColumn('number', '판교');
-    
-/*     data.addRows([
-        [1,  'obj3[0].value', 'obj3[1].value', 'obj3[2].value]',
-        [2,  'obj3[3].value', 'obj3[4].value', 'obj3[5].value'],
-        [3,  'obj3[6].value', 'obj3[7].value', 'obj3[8].value'],
-        [4,  'obj3[9].value', 'obj3[10].value', 'obj3[11].value'],
-        [5,  'obj3[12].value', 'obj3[13].value', 'obj3[14].value']
-    ]); */
-    
-      data.addRows([
-        [1,  30.9, 69.5, 32.4],
-        [2,  30.9, 69.5, 32.4],
-        [3,  25.4,   57, 25.7],
-        [4,  11.7, 18.8, 10.5],
-        [5,  11.9, 17.6, 10.4],
-        [6,   8.8, 13.6,  7.7],
-        [7,   7.6, 12.3,  9.6],
-        [8,  12.3, 29.2, 10.6],
-        [9,  16.9, 42.9, 14.8],
-        [10, 12.8, 30.9, 11.6],
-        [11,  5.3,  7.9,  4.7],
-        [12,  6.6,  8.4,  5.2],
-        [13,  4.8,  6.3,  3.6],
-        [14,  4.2,  6.2,  3.4]
-    ]);
- 
-    var options = {
-      chart: {
-        title: '지점별 수입 현황',
-        subtitle: '(WON)'
-      },
-      width: 900,
-      height: 500
-    };
+		var chart = new google.charts.Line(document
+				.getElementById('linechart_material'));
 
-    var chart = new google.charts.Line(document.getElementById('linechart_material'));
-
-    chart.draw(data, google.charts.Line.convertOptions(options));
-  }
+		chart.draw(data, google.charts.Line.convertOptions(options));
+	}
 </script>
 
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="div_container2">
-		<div class="div_row" style="margin-top: 30px;">
+	<div style="float: left; width: 50%">
+		<div class="div_row"
+			style="margin-top: 30px; margin-right: 10%; margin-left: 10%; padding-left: 15px; padding-right: 15px;">
 			<div class="div_col2">
 				<form
 					action="${pageContext.request.contextPath}/company/com_importSpendList"
 					method="post">
-					<br>
-					<br> <select class="slt_insert3" name="area">
+					<br> <br> <select class="slt_insert3" name="area">
 						<option value="">지역 선택</option>
 						<option value="판교">판교</option>
 						<option value="야탑">야탑</option>
@@ -142,8 +186,7 @@
 						<option value="1">1</option>
 					</select> <input class="submit" type="submit" value="검색">
 				</form>
-				<br>
-				<br>
+				<br> <br>
 
 				<c:if test="${year != '' && month != '' }">
 					<h4>지역 : ${area } / ${year }년 / ${month }월</h4>
@@ -166,7 +209,8 @@
 								<td class="td1">${list.area }</td>
 								<td class="td1">${list.title }</td>
 								<td class="td1">${list.content }</td>
-								<td class="td1"><fmt:formatNumber value="${list.pay }" groupingUsed="true"/>원</td>
+								<td class="td1"><fmt:formatNumber value="${list.pay }"
+										groupingUsed="true" />원</td>
 								<td class="td1"><fmt:formatDate value="${list.dayda }"
 										pattern="yyyy-MM-dd" /></td>
 							</tr>
@@ -181,16 +225,19 @@
 
 						<tr>
 							<td class="td1">수입</td>
-							<td class="td1"><fmt:formatNumber value="${pay1 }" groupingUsed="true"/>원</td>
+							<td class="td1"><fmt:formatNumber value="${pay1 }"
+									groupingUsed="true" />원</td>
 							<td class="td1">지출</td>
-							<td class="td1"><fmt:formatNumber value="${pay2 }" groupingUsed="true"/>원</td>
+							<td class="td1"><fmt:formatNumber value="${pay2 }"
+									groupingUsed="true" />원</td>
 							<td class="td1"></td>
 						</tr>
 						<tr>
 							<td class="td1">순이익</td>
 							<td class="td1"></td>
 							<td class="td1"></td>
-							<td class="td1"><fmt:formatNumber value="${total }" groupingUsed="true"/>원</td>
+							<td class="td1"><fmt:formatNumber value="${total }"
+									groupingUsed="true" />원</td>
 							<td class="td1"></td>
 						</tr>
 					</table>
@@ -221,16 +268,12 @@
 			</div>
 		</div>
 	</div>
-	
-	<form name="${ list.pay }">
-		<c:forEach items="${ list }" var="list" varStatus="idx">
-			<input type="hidden" value="${ list.pay }" name="pay">
-			<input onclick="btn_event('${ list.pay }');return false;">
-		</c:forEach>
-	</form>
-	
-	<div id="linechart_material" style="width: 900px; height: 500px;" align="center">
-
+	<div style="float: left; width: 50%">
+		<div style="margin-top: 25%">
+			<div id="linechart_material"
+				style="width: 650px; height: 350px; margin-left: auto; margin-right: auto;"
+				align="center"></div>
+		</div>
 	</div>
 </body>
 </html>

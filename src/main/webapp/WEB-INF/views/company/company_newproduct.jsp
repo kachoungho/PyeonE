@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/style.css">
 <style type="text/css">
@@ -104,31 +105,31 @@ input.submit3 {
 								style="font-size: 30px; padding-bottom: 20px;">신규 제품 추가</td>
 						</tr>
 						<tr>
-							<th class="th1" style="width: 30%">상 품 명</th>
+							<th class="w3-blue-grey" style="width: 30%">상 품 명</th>
 							<td class="td1" style="width: 70%"><input class="inpts"
 								type="text" name="item_name" /></td>
 						</tr>
 						<tr>
-							<th class="th1">상품 이미지</th>
+							<th class="w3-blue-grey">상품 이미지</th>
 							<td class="td1"><input class="submit3" type="file"
 								name="file" readonly="readonly"></td>
 						</tr>
 						<tr>
-							<th class="th1">원 가</th>
+							<th class="w3-blue-grey">원 가</th>
 							<td class="td1"><input class="inpts" type="text" name="cost" /></td>
 						</tr>
 						<tr>
-							<th class="th1">판 매 가</th>
+							<th class="w3-blue-grey">판 매 가</th>
 							<td class="td1"><input class="inpts" type="text"
 								name="price" /></td>
 						</tr>
 						<tr>
-							<th class="th1">수량</th>
+							<th class="w3-blue-grey">수량</th>
 							<td class="td1"><input class="inpts" type="text"
 								name="count" /></td>
 						</tr>
 						<tr>
-							<th class="th1">카테고리</th>
+							<th class="w3-blue-grey">카테고리</th>
 							<td class="td1"><select class="slt" name="category">
 									<option value="all">선택</option>
 									<option value="음료">음료</option>

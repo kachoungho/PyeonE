@@ -874,7 +874,6 @@ public class CompanyController {
 		vo.setArea("%"+area+"%");
 		String year = "";
 		String month = "";
-		//String days = "";
 		int pay1 = 0;
 		int pay2 = 0;
 
@@ -884,19 +883,20 @@ public class CompanyController {
 		}
 		
 		if((request.getParameter("year") == null) && (request.getParameter("month") == null)) {
-			year = "";
+			Calendar cal = Calendar.getInstance(); // Calendar객체 cal생성
+			int currentYear = cal.get(Calendar.YEAR);
+			/////////////////////////////////////////
+			year = Integer.toString(currentYear);
 			month = "";
-			//days = "";
 		}
 		else{
 			year = request.getParameter("year");
 			month = request.getParameter("month");
-			//days = request.getParameter("days");
+			
 		}
 		
 		vo.setYear("%"+year+"%");
 		vo.setMonth("%"+month+"%");
-		//vo.setDays("%"+days+"%");
 		
 		Criteria cri = new Criteria();
 		cri.setPage(pageNum);
@@ -965,6 +965,10 @@ public class CompanyController {
 		mav.addObject("list", list);
 		// 그래프 end
 		
+		
+		
+		System.out.println("area : " + area);
+		System.out.println("year : " + year);
 		mav.addObject("pay1",pay1);
 		mav.addObject("pay2",pay2);
 		mav.addObject("total",total);
@@ -1257,4 +1261,4 @@ public class CompanyController {
 		
 		return entity;
 	}
-}
+} 

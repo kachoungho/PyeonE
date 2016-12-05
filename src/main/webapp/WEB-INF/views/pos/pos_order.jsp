@@ -176,6 +176,7 @@
 	</div>
 
 	<script>
+		//최종 발주 리스트에 추가
 		getSelectedList();
 
 		function getSelectedList() {

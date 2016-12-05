@@ -1068,14 +1068,11 @@ public class PosController {
 		}
 		
 		posService.dayspenddelete(vo);
-		System.out.println("pay2 : " + pay2);
 
 		int total = pay1 - pay2;
 		
 		vo.setArea(request.getParameter("area"));
-		System.out.println("여긴 오니?!");
 		List<ItemVO> list3 = posService.daymoneylist(vo);
-		System.out.println("여기는?!?!");
 		
 		mav.addObject("pay1",pay1);
 		mav.addObject("pay2",pay2);
