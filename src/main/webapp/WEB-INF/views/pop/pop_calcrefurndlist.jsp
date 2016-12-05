@@ -52,7 +52,7 @@ input.submit:hover {
 	font-size: 15px;
 }
 </style>
-<title>Insert title here</title>
+<title>바코드 리스트</title>
 </head>
 <body>
 	<form action="pop_calcrefurnd_delete">

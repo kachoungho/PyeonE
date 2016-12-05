@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>ì˜ìˆ˜ì¦ ë°”ì½”ë“œ ì…ë ¥</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
@@ -71,12 +71,12 @@ input.submit:hover {
 	<input type="hidden" name="area" value="${area }">
 		<table class="table">
 			<tr>
-				<td class="td" colspan="2">¿µ¼öÁõÀÇ ¹ÙÄÚµå ÀÔ·Â</td>
+				<td class="td" colspan="2">ì˜ìˆ˜ì¦ì˜ ë°”ì½”ë“œ ì…ë ¥</td>
 			</tr>
 			<tr>
 				<td class="td"><input class="inpt" type="text" name="billnum" id="billnum"
 			onkeypress="if(event.keyCode==13) {input(1);}"></td>
-			<td class="td"><input class="submit" type="button" value="ÀÔ·Â" onclick='input(1)'></td>
+			<td class="td"><input class="submit" type="button" value="ì…ë ¥" onclick='input(1)'></td>
 			</tr>
 		</table>
 	</form>
