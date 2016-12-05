@@ -724,6 +724,8 @@ public class PosController {
 		ItemVO vo = new ItemVO();
 		vo.setId(request.getParameter("id"));
 		String area = posService.areaserch(vo);
+		int total = 0;
+		mav.addObject("total",total);
 		mav.addObject("area", area);
 		mav.setViewName(".pos.pos_calc");
 
@@ -772,7 +774,11 @@ public class PosController {
 		}
 		
 		list = posService.calcLists(vo);
-		total = posService.totalcalc(vo);
+		if(list.size() != 0){
+			total = posService.totalcalc(vo);
+		}else{
+			total = 0;
+		}
 		/*pay = pay - total;*/
 		
 		mav.addObject("result", list);
@@ -794,7 +800,9 @@ public class PosController {
 		int pay = vo.getPay();
 		List<ItemVO> list = posService.calcList();
 		mav.addObject("area", vo.getArea());
-		total = posService.totalcalc(vo);
+		if(list.size() != 0){
+			total = posService.totalcalc(vo);
+		}
 		pay = pay - total;
 		
 		mav.addObject("result", list);
@@ -815,42 +823,47 @@ public class PosController {
 		vo.setTotal(Integer.parseInt(request.getParameter("total")));
 		vo.setArea(request.getParameter("area"));
 		
-		///////////////////////////////////////////////////////////
-		String code1 = posService.code1();
-		int code2 = posService.code2() + 1;
-		String billnum = code1 + code2;
-		
-		vo.setCode1(code1);
-		vo.setCode2(code2);
-		vo.setBillnum(billnum);
-
-		// 바코드 생성 코드
-		Barcode barcode = BarcodeFactory.createCode128B(billnum);
-		// C:/springProject/workspace/PyeonE/src/main/webapp/resources/item_image/
-		File file = new File("C:\\springProject\\workspace\\PyeonE\\src\\main\\webapp\\resources\\Bill\\" + billnum + ".jpg");
-		BarcodeImageHandler.saveJPEG(barcode, file);
-		///////////////////////////////////////////////////////////
-		
-		
-		posService.salinsert(vo);
-		
-		List<ItemVO> list = posService.calcList();
-		
-		for(int i = 0 ; i<list.size() ; i++){
-			vo.setItem_code(list.get(i).getItem_code());
-			vo.setItem_name(list.get(i).getItem_name());
-			vo.setCount(list.get(i).getCount());
-			vo.setCategory(list.get(i).getCategory());
-			vo.setArea(list.get(i).getArea());
-			vo.setPrice(list.get(i).getPrice());
+		if(vo.getTotal() != 0){
+			///////////////////////////////////////////////////////////
+			String code1 = posService.code1();
+			int code2 = posService.code2() + 1;
+			String billnum = code1 + code2;
 			
-			posService.daycalcinser(vo);
-			posService.hitupdate(vo);
+			vo.setCode1(code1);
+			vo.setCode2(code2);
+			vo.setBillnum(billnum);
+	
+			// 바코드 생성 코드
+			Barcode barcode = BarcodeFactory.createCode128B(billnum);
+			// C:/springProject/workspace/PyeonE/src/main/webapp/resources/item_image/
+			File file = new File("C:\\springProject\\workspace\\PyeonE\\src\\main\\webapp\\resources\\Bill\\" + billnum + ".jpg");
+			BarcodeImageHandler.saveJPEG(barcode, file);
+			///////////////////////////////////////////////////////////
+			
+			
+			posService.salinsert(vo);
+			
+			List<ItemVO> list = posService.calcList();
+			
+			for(int i = 0 ; i<list.size() ; i++){
+				vo.setItem_code(list.get(i).getItem_code());
+				vo.setItem_name(list.get(i).getItem_name());
+				vo.setCount(list.get(i).getCount());
+				vo.setCategory(list.get(i).getCategory());
+				vo.setArea(list.get(i).getArea());
+				vo.setPrice(list.get(i).getPrice());
+				
+				posService.daycalcinser(vo);
+				posService.hitupdate(vo);
+			}
+			mav.addObject("area", vo.getArea());
+			posService.calcdelete(vo);
 		}
-		mav.addObject("area", vo.getArea());
-		posService.calcdelete(vo);
-		
-		
+		else{
+			mav.addObject("area", vo.getArea());
+		}
+		int total = 0;
+		mav.addObject("total",total);
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
@@ -1452,3 +1465,4 @@ public class PosController {
 	}
 	
 }
+ 
