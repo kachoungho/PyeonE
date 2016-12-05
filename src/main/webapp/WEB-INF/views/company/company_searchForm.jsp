@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/listcss.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>관리자/지점장 리스트 출력</title>
+<title>직원 검색</title>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/company/com_search" method="post">

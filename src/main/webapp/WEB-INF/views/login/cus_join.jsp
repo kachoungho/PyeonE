@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/login.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원 가입</title>
 </head>
 <body>
 	<section class="container">

@@ -9,10 +9,7 @@
 	alert("발주가 취소되었습니다.");
 	history.go(1);
 </script>
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
 </head>
 <body>
 

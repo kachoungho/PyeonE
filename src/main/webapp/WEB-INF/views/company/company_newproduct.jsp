@@ -89,7 +89,7 @@ input.submit3 {
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>신규 제품 추가</title>
 </head>
 <body>
 	<sec:authentication property="name" var="LoingUser" />

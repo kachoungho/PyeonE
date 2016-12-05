@@ -9,7 +9,6 @@
 	history.go(1);
 </script>
 
-<title>Insert title here</title>
 </head>
 <body>
 
