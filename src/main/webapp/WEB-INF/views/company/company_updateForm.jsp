@@ -58,10 +58,10 @@
 					<th id="tr2_insert"><img class="img_insert"
 						src="/controller/resources/images/address.png">주소</th>
 					<th><font face="Jeju Gothic">
-				<input class="ipt_insert2" type="text" id="postcode" placeholder="우편번호" name="postcode" value="${postcode}">
+				<input class="ipt_insert2" type="text" id="postcode" placeholder="우편번호" name="postcode" value="${list.postcode}">
 				<input class="submit" type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-				<input class="ipt_insert" type="text" id="address" placeholder="주소" name="address" value="${address}">
-				<input class="ipt_insert" type="text" id="address2" placeholder="상세주소" name="address2" value="${address2}">
+				<input class="ipt_insert" type="text" id="address" placeholder="주소" name="address" value="${list.address}">
+				<input class="ipt_insert" type="text" id="address2" placeholder="상세주소" name="address2" value="${list.address2}">
 
 					</font></th>
 				</tr>

@@ -65,7 +65,7 @@
 						<td style="text-align: center">${ member.position }</td>
 						<td style="text-align: center">${ member.phone }</td>
 						<td style="text-align: center">${ member.age }</td>
-						<td style="text-align: center">${ member.address }${ member.address2 }</td>
+						<td style="text-align: center">${ member.address } ${ member.address2 }</td>
 						<td style="text-align: center">${ member.gender }</td>
 						<td style="text-align: center">${ member.area }</td>
 						<td style="text-align: center">${ member.optime }</td>
