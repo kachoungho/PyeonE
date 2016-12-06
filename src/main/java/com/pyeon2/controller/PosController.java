@@ -47,35 +47,35 @@ public class PosController {
 
 	@RequestMapping("pos")
 	public ModelAndView getCompany(HttpServletRequest request, ItemVO Ivo, MemberVO Mvo) {
-		
+
 		ModelAndView mav = new ModelAndView();
 		Ivo.setId(request.getParameter("id"));
-		
+
 		try {
-			
+
 			String area = posService.areaserch(Ivo);
 			Mvo.setArea(area);
-			
+
 			List<NoticeVO> list = posService.getNoticeList();
 			List<ItemVO> list2 = posService.getLessItem(Mvo);
 			int count = posService.getLessItemCount(Mvo);
-			
+
 			mav.addObject("list", list);
 			mav.addObject("list2", list2);
 			mav.addObject("count", count);
-			
+
 			mav.setViewName(".pos.pos_main");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return mav;
 	}
 
-
 	@RequestMapping(value = "pos/ps_order", method = RequestMethod.GET)
-	public ModelAndView orderGET(Model model, String page, String item_code, String item_name, String category, String name) {
+	public ModelAndView orderGET(Model model, String page, String item_code, String item_name, String category,
+			String name) {
 		System.out.println("order GET 요청 성공");
 
 		ModelAndView mav = new ModelAndView();
@@ -86,32 +86,31 @@ public class PosController {
 		int count = 0;
 		int pageNum = 1;
 		String area = "";
-		
-		if(page != null && !page.equals("")){
+
+		if (page != null && !page.equals("")) {
 			pageNum = Integer.parseInt(page);
 		}
-		
+
 		try {
 			Criteria cri = new Criteria();
 			cri.setPage(pageNum);
 			cri.setPerPageNum(7);
 			count = posService.getCompanyCount();
 			list = posService.getCompanyList(cri);
-			
+
 			System.out.println("name : " + name);
-			if(name == null){
+			if (name == null) {
 				area = "";
-			}
-			else{
+			} else {
 				area = posService.getArea(name);
 			}
-			
+
 			System.out.println("List : " + list);
-			
+
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(count);
-			
+
 			mav.addObject("result", list);
 			mav.addObject("pageNum", pageNum);
 			mav.addObject("count", count);
@@ -121,17 +120,17 @@ public class PosController {
 			mav.addObject("category", category);
 			mav.addObject("area", area);
 			mav.addObject("list", list2);
-			
+
 			mav.setViewName(".pos.pos_order");
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_order", method = RequestMethod.POST)
 	public ModelAndView orderPOST(ItemVO vo, Model model, String page) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -143,151 +142,141 @@ public class PosController {
 		System.out.println("item_code : " + vo.getItem_code());
 		System.out.println("area : " + vo.getArea());
 		area = vo.getArea();
-		for(int i = 0; i < list.size(); i++){
-			if(list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())){
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())) {
 				compare = 1;
 			}
 		}
-		
-		if(compare == 1){
+
+		if (compare == 1) {
 			posService.updateOrderTemp(vo);
-		}
-		else{
+		} else {
 			posService.insertOrderTemp(vo);
 		}
-		
+
 		mav.addObject("area", area);
 		mav.addObject("list", list);
 		mav.setViewName("redirect:ps_order");
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_order_temp", method = RequestMethod.GET)
-	public ModelAndView orderTempGet(ItemVO vo, String page, String item_code, String area){
+	public ModelAndView orderTempGet(ItemVO vo, String page, String item_code, String area) {
 		ModelAndView mav = new ModelAndView();
 		List<ItemVO> list;
 		int count = 0;
 		int pageNum = 1;
-		
-		if(page != null && !page.equals("")){
+
+		if (page != null && !page.equals("")) {
 			pageNum = Integer.parseInt(page);
 		}
-		
+
 		try {
 			Criteria cri = new Criteria();
 			cri.setPage(pageNum);
 			cri.setPerPageNum(7);
 			count = posService.orderTempCount();
 			list = posService.orderTempList(cri);
-			
+
 			System.out.println("List : " + list);
 			System.out.println("count : " + count);
-			
+
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(count);
-			
+
 			mav.addObject("result", list);
 			mav.addObject("pageNum", pageNum);
 			mav.addObject("count", count);
 			mav.addObject("pageMaker", pageMaker);
 			mav.addObject("item_code", item_code);
 			mav.addObject("area", area);
-			
+
 			mav.setViewName(".pos.pos_order_temp");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_order_temp", method = RequestMethod.POST)
-	public ModelAndView orderTempPost(String page, HttpServletRequest request){
+	public ModelAndView orderTempPost(String page, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		List<ItemVO> list;
 		list = posService.selectAlreadyOrderedList();
 		ItemVO vo = new ItemVO();
 		int totalPrice = 0;
 		int temp = 0;
-		
-		try{
-			for(int i = 0; i < list.size(); i++){
+
+		try {
+			for (int i = 0; i < list.size(); i++) {
 				posService.insertOrder(list.get(i));
 				posService.orderInsert(list.get(i));
-				//totalPrice = totalPrice + posService.getPrice(list.get(i));
+				// totalPrice = totalPrice + posService.getPrice(list.get(i));
 				System.out.println(posService.getPrice(list.get(i)));
 				System.out.println(totalPrice);
 				temp = 1;
 			}
-			
-			if(temp == 1){
+
+			if (temp == 1) {
 				vo.setTotalPrice(totalPrice);
 				vo.setArea(list.get(0).getArea());
-				posService.orderSpendTemp(vo); //발주 신청시 0원으로 입력
+				posService.orderSpendTemp(vo); // 발주 신청시 0원으로 입력
 				posService.orderTempDeleteAll();
 			}
-			
+
 			mav.setViewName(".pos.pos_order_temp");
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_order_temp_delete", method = RequestMethod.GET)
-	public ModelAndView orderTempDelete(String page, String item_code, String area){
+	public ModelAndView orderTempDelete(String page, String item_code, String area) {
 		ModelAndView mav = new ModelAndView();
-		/*List<ItemVO> list;
-		int count = 0;
-		int pageNum = Integer.parseInt(page);
-		
-		try {
-			Criteria cri = new Criteria();
-			cri.setPage(pageNum);
-			cri.setPerPageNum(7);
-			
-			ItemVO vo = new ItemVO();
-			vo.setArea(area);
-			vo.setItem_code(item_code);
-			
-			posService.orderTempDelete(vo);
-			count = posService.orderTempCount();
-			list = posService.orderTempList(cri);
-			
-			System.out.println("List : " + list);
-			System.out.println("count : " + count);
-			
-			PageMaker pageMaker = new PageMaker();
-			pageMaker.setCri(cri);
-			pageMaker.setTotalCount(count);
-			
-			mav.addObject("result", list);
-			mav.addObject("pageNum", pageNum);
-			mav.addObject("count", count);
-			mav.addObject("pageMaker", pageMaker);
-			mav.addObject("item_code", item_code);
-			mav.addObject("area", area);
-			
-			mav.setViewName(".pos.pos_order_temp");
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		/*
+		 * List<ItemVO> list; int count = 0; int pageNum =
+		 * Integer.parseInt(page);
+		 * 
+		 * try { Criteria cri = new Criteria(); cri.setPage(pageNum);
+		 * cri.setPerPageNum(7);
+		 * 
+		 * ItemVO vo = new ItemVO(); vo.setArea(area);
+		 * vo.setItem_code(item_code);
+		 * 
+		 * posService.orderTempDelete(vo); count = posService.orderTempCount();
+		 * list = posService.orderTempList(cri);
+		 * 
+		 * System.out.println("List : " + list); System.out.println("count : " +
+		 * count);
+		 * 
+		 * PageMaker pageMaker = new PageMaker(); pageMaker.setCri(cri);
+		 * pageMaker.setTotalCount(count);
+		 * 
+		 * mav.addObject("result", list); mav.addObject("pageNum", pageNum);
+		 * mav.addObject("count", count); mav.addObject("pageMaker", pageMaker);
+		 * mav.addObject("item_code", item_code); mav.addObject("area", area);
+		 * 
+		 * mav.setViewName(".pos.pos_order_temp");
+		 * 
+		 * } catch (Exception e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); }
+		 */
 		String check = "1";
 		ItemVO vo = new ItemVO();
 		vo.setArea(area);
 		vo.setItem_code(item_code);
-		
+
 		posService.orderTempDelete(vo);
-		
+
 		mav.addObject("check", check);
 		mav.setViewName(".pos.pos_order_temp");
-		
+
 		return mav;
 	}
 
@@ -311,7 +300,6 @@ public class PosController {
 		return ".pos.pos_calc";
 	}
 
-
 	@RequestMapping(value = "pos/ps_item_delete", method = RequestMethod.POST)
 	public ModelAndView delete(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -324,7 +312,6 @@ public class PosController {
 		mav.setViewName(".pos.fin");
 		return mav;
 	}
-
 
 	@RequestMapping(value = "pos/ps_selectpay", method = RequestMethod.GET)
 	public ModelAndView selectalpay(HttpServletRequest request, Model model) {
@@ -431,7 +418,7 @@ public class PosController {
 			vo.setCri(cri);
 			count = posService.getCount(vo);
 			list = posService.getList(vo);
-			
+
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(count);
@@ -440,7 +427,7 @@ public class PosController {
 			mav.addObject("pageNum", pageNum);
 			mav.addObject("count", count);
 			mav.addObject("pageMaker", pageMaker);
-			//mav.addObject("area", area);
+			// mav.addObject("area", area);
 			mav.addObject("id", id);
 
 			mav.setViewName(".pos.pos_item_selectAll");
@@ -499,89 +486,84 @@ public class PosController {
 		return mav;
 	}
 
-	@RequestMapping(value="pos/ps_item_select_now")
-	   public ModelAndView selectName(HttpServletRequest request,Model model){
-	      ModelAndView mav = new ModelAndView();
-	      ItemVO vo = new ItemVO();
-	      
-	      String page = request.getParameter("page");
-	      String category = request.getParameter("category");
-	      String id = request.getParameter("id");
-	      String item_name = "";
-	      SelectSearch ss = new SelectSearch();
+	@RequestMapping(value = "pos/ps_item_select_now")
+	public ModelAndView selectName(HttpServletRequest request, Model model) {
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
 
-	      System.out.println(id);
-	      
-	      String area = posService.getArea(id);
-	      vo.setArea(area);
-	      System.out.println(area);
-	      List<ItemVO> list;
-	      int count = 0;
-	      int pageNum = 1;
-	      int perPageNum = 7;
-	      
-	      if(request.getParameter("item_name") == null){
-	         item_name = "";
-	      }
-	      else{
-	         item_name = request.getParameter("item_name");
-	      }
-	      vo.setCategory(category);
-	      
-	      
-	      if(page != null && !page.equals("")){
-	         pageNum = Integer.parseInt(page);
-	      }
-	      
-	      try {
-	         Criteria cri = new Criteria();
-	         cri.setPage(pageNum);
-	         cri.setPerPageNum(perPageNum);
-	         
-	         ss.setPage(pageNum);
-	         ss.setPerPageNum(perPageNum);
-	         ss.setItem_name("%"+item_name+"%");
-	         ss.setCategory(category);
-	         ss.setArea(area);
-	         
-	         
-	         System.out.println("상품명 :" + item_name);
-	         System.out.println("카테고리 :" + vo.getCategory());
-	         System.out.println("나와랏 :" + ss.getItem_name());
-	         
-	         if(item_name.equals("")){
-	        	 count = posService.getSelectCount2(vo);
-	         } else {
-	        	 vo.setItem_name("%"+item_name+"%");
-		         count = posService.getSelectCount(vo);
-	         }
-	         
-	         
-	         System.out.println("count : " + count);
-	         list = posService.selectName(ss);
-	         
-	         PageMaker pageMaker = new PageMaker(); //페이지 선택부분 처리
-	         pageMaker.setCri(cri);
-	         pageMaker.setTotalCount(count);
-	         
-	         mav.addObject("result", list);
-	         mav.addObject("pageNum", pageNum);
-	         mav.addObject("count", count);
-	         mav.addObject("pageMaker", pageMaker);
-	         mav.addObject("category", category);
-	         mav.addObject("item_name", item_name);
-	         mav.addObject("area", area);
-	         
-	         mav.setViewName(".pos.pos_item_select_now");
-	         
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
-	      
-	      return mav;
-	   }
-	
-	
+		String page = request.getParameter("page");
+		String category = request.getParameter("category");
+		String id = request.getParameter("id");
+		String item_name = "";
+		SelectSearch ss = new SelectSearch();
+
+		System.out.println(id);
+
+		String area = posService.getArea(id);
+		vo.setArea(area);
+		System.out.println(area);
+		List<ItemVO> list;
+		int count = 0;
+		int pageNum = 1;
+		int perPageNum = 7;
+
+		if (request.getParameter("item_name") == null) {
+			item_name = "";
+		} else {
+			item_name = request.getParameter("item_name");
+		}
+		vo.setCategory(category);
+
+		if (page != null && !page.equals("")) {
+			pageNum = Integer.parseInt(page);
+		}
+
+		try {
+			Criteria cri = new Criteria();
+			cri.setPage(pageNum);
+			cri.setPerPageNum(perPageNum);
+
+			ss.setPage(pageNum);
+			ss.setPerPageNum(perPageNum);
+			ss.setItem_name("%" + item_name + "%");
+			ss.setCategory(category);
+			ss.setArea(area);
+
+			System.out.println("상품명 :" + item_name);
+			System.out.println("카테고리 :" + vo.getCategory());
+			System.out.println("나와랏 :" + ss.getItem_name());
+
+			if (item_name.equals("")) {
+				count = posService.getSelectCount2(vo);
+			} else {
+				vo.setItem_name("%" + item_name + "%");
+				count = posService.getSelectCount(vo);
+			}
+
+			System.out.println("count : " + count);
+			list = posService.selectName(ss);
+
+			PageMaker pageMaker = new PageMaker(); // 페이지 선택부분 처리
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(count);
+
+			mav.addObject("result", list);
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("count", count);
+			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("category", category);
+			mav.addObject("item_name", item_name);
+			mav.addObject("area", area);
+
+			mav.setViewName(".pos.pos_item_select_now");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return mav;
+	}
+
 	@RequestMapping("pos/ps_user_selectForm")
 	public ModelAndView posPersonnelForm(HttpServletRequest request, MemberVO Mvo) {
 
@@ -632,10 +614,10 @@ public class PosController {
 		try {
 			if (position.equals("user")) {
 				posService.updateUser(Mvo);
-			} else if (position.equals("manager")){
+			} else if (position.equals("manager")) {
 				posService.updateManager(Mvo);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -700,7 +682,7 @@ public class PosController {
 				Mvo.setId(request.getParameter("id"));
 				Mvo.setRole_name("ROLE_USER");
 				posService.insertPosition(Mvo);
-				
+
 				// p2_user 테이블에 최초 데이터 저장 (이 후로 시간은 다른 메소드에서 업데이트)
 				vo.setUserid(request.getParameter("id"));
 				posService.insertUserTime(vo);
@@ -717,84 +699,83 @@ public class PosController {
 
 		return mav;
 	}
-	
-	@RequestMapping(value="pos/ps_calcform", method = RequestMethod.GET)
+
+	@RequestMapping(value = "pos/ps_calcform", method = RequestMethod.GET)
 	public ModelAndView calcget(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
 		vo.setId(request.getParameter("id"));
 		String area = posService.areaserch(vo);
 		int total = 0;
-		mav.addObject("total",total);
+		mav.addObject("total", total);
 		mav.addObject("area", area);
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_calc", method = RequestMethod.POST)
-	public ModelAndView calcpost(HttpServletRequest request, Model model) throws Exception{
-		
+	public ModelAndView calcpost(HttpServletRequest request, Model model) throws Exception {
+
 		ItemVO vo = new ItemVO();
 		vo.setItem_code(request.getParameter("item_code"));
 		vo.setArea(request.getParameter("area"));
-		
-		/*vo.setPay(Integer.parseInt(request.getParameter("pay")));*/
+
+		/* vo.setPay(Integer.parseInt(request.getParameter("pay"))); */
 		ModelAndView mav = new ModelAndView();
 		int cal = 0;
 		int total = 0;
-		/*int pay = vo.getPay();*/
+		/* int pay = vo.getPay(); */
+		int count = 0;
 		List<ItemVO> list = posService.calcList();
+
+		List<ItemVO> list2 = posService.itemcodeselect(vo);
 		
-		int count = posService.countselect(vo);
-		if(count != 0){
-		
-			for(int i =0 ; i < list.size() ; i++){
-				if(vo.getItem_code().equals(list.get(i).getItem_code())&& vo.getArea().equals(list.get(i).getArea())){
+		if (list2.size() != 0) {
+			count = posService.countselect(vo);
+		}
+		if (count != 0) {
+
+			for (int i = 0; i < list.size(); i++) {
+				if (vo.getItem_code().equals(list.get(i).getItem_code())
+						&& vo.getArea().equals(list.get(i).getArea())) {
 					cal = 1;
 				}
 			}
-			List<ItemVO> list2 = posService.itemcodeselect(vo);
-			
-			
+
 			switch (cal) {
-				case 1:
-				{
-					posService.clacupdate(vo);
-					break;
+			case 1: {
+				posService.clacupdate(vo);
+				break;
+			}
+			case 0: {
+				if (list2.size() != 0) {
+					posService.calcinsert(vo);
 				}
-				case 0:
-				{
-					if(list2.size() != 0){
-						posService.calcinsert(vo);
-					}
-					break;
-				}
-				default:
-				{
-					break;
-				}
+				break;
+			}
+			default: {
+				break;
+			}
 			}
 		}
 		list = posService.calcLists(vo);
-		if(list.size() != 0){
+		if (list.size() != 0) {
 			total = posService.totalcalc(vo);
-		}else{
+		} else {
 			total = 0;
 		}
-		/*pay = pay - total;*/
-		
+
 		mav.addObject("result", list);
-		mav.addObject("total",total);
+		mav.addObject("total", total);
 		mav.addObject("area", vo.getArea());
-		/*mav.addObject("pay",pay);*/
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_daycalc", method = RequestMethod.POST)
-	public ModelAndView calcpostday(HttpServletRequest request, Model model) throws Exception{
+	public ModelAndView calcpostday(HttpServletRequest request, Model model) throws Exception {
 		ItemVO vo = new ItemVO();
 		vo.setArea(request.getParameter("area"));
 		vo.setPay(Integer.parseInt(request.getParameter("pay")));
@@ -803,123 +784,122 @@ public class PosController {
 		int pay = vo.getPay();
 		List<ItemVO> list = posService.calcList();
 		mav.addObject("area", vo.getArea());
-		if(list.size() != 0){
+		if (list.size() != 0) {
 			total = posService.totalcalc(vo);
 		}
 		pay = pay - total;
-		
+
 		mav.addObject("result", list);
-		mav.addObject("total",total);
-		mav.addObject("pay",pay);
-		
+		mav.addObject("total", total);
+		mav.addObject("pay", pay);
+
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_daycalcfin", method = RequestMethod.POST)
-	public ModelAndView calcpostfinday(HttpServletRequest request, Model model) throws Exception{
+	public ModelAndView calcpostfinday(HttpServletRequest request, Model model) throws Exception {
 		ItemVO vo = new ItemVO();
-		
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		vo.setTotal(Integer.parseInt(request.getParameter("total")));
 		vo.setArea(request.getParameter("area"));
-		
-		if(vo.getTotal() != 0){
+
+		if (vo.getTotal() != 0) {
 			///////////////////////////////////////////////////////////
 			String code1 = posService.code1();
 			int code2 = posService.code2() + 1;
 			String billnum = code1 + code2;
-			
+
 			vo.setCode1(code1);
 			vo.setCode2(code2);
 			vo.setBillnum(billnum);
-	
+
 			// 바코드 생성 코드
 			Barcode barcode = BarcodeFactory.createCode128B(billnum);
 			// C:/springProject/workspace/PyeonE/src/main/webapp/resources/item_image/
-			File file = new File("C:\\springProject\\workspace\\PyeonE\\src\\main\\webapp\\resources\\Bill\\" + billnum + ".jpg");
+			File file = new File(
+					"C:\\springProject\\workspace\\PyeonE\\src\\main\\webapp\\resources\\Bill\\" + billnum + ".jpg");
 			BarcodeImageHandler.saveJPEG(barcode, file);
 			///////////////////////////////////////////////////////////
-			
-			
+
 			posService.salinsert(vo);
-			
+
 			List<ItemVO> list = posService.calcList();
-			
-			for(int i = 0 ; i<list.size() ; i++){
+
+			for (int i = 0; i < list.size(); i++) {
 				vo.setItem_code(list.get(i).getItem_code());
 				vo.setItem_name(list.get(i).getItem_name());
 				vo.setCount(list.get(i).getCount());
 				vo.setCategory(list.get(i).getCategory());
 				vo.setArea(list.get(i).getArea());
 				vo.setPrice(list.get(i).getPrice());
-				
+
 				posService.daycalcinser(vo);
 				posService.hitupdate(vo);
 			}
 			mav.addObject("area", vo.getArea());
 			posService.calcdelete(vo);
-		}
-		else{
+		} else {
 			mav.addObject("area", vo.getArea());
 		}
 		int total = 0;
-		mav.addObject("total",total);
+		mav.addObject("total", total);
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_calccancle", method = RequestMethod.POST)
-	public ModelAndView calccancle(HttpServletRequest request, Model model) throws Exception{
+	public ModelAndView calccancle(HttpServletRequest request, Model model) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
-		
+
 		vo.setArea(request.getParameter("area"));
 		posService.calcdelete(vo);
 		int total = 0;
-		mav.addObject("total",total);
+		mav.addObject("total", total);
 		mav.addObject("area", vo.getArea());
 		mav.setViewName(".pos.pos_calc");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_orderState", method = RequestMethod.GET)
-	public ModelAndView ps_orderStateGET(HttpServletRequest request) throws Exception{
+	public ModelAndView ps_orderStateGET(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
 		String name = request.getParameter("id");
 		String area = posService.getArea(name);
-		System.out.println("area : " + area );
+		System.out.println("area : " + area);
 		vo.setArea(area);
-		
+
 		List<ItemVO> list = posService.getStateList(vo);
-		
+
 		mav.addObject("list", list);
 		mav.setViewName(".pos.pos_orderState");
 		return mav;
 	}
 
 	@RequestMapping(value = "pos/ps_orderStates", method = RequestMethod.GET)
-	public ModelAndView ps_orderStatePOST(HttpServletRequest request) throws Exception{
+	public ModelAndView ps_orderStatePOST(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
-		
+
 		vo.setItem_code(request.getParameter("item_code"));
 		vo.setP2_time(request.getParameter("p2_time"));
 		vo.setArea(request.getParameter("area"));
 		posService.deleteOrder(vo);
 		companyService.odertDelete(vo);
-		
+
 		mav.setViewName(".pos.pos_StateDeleteSuc");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pos/ps_notice_list")
-	public ModelAndView comnotice(HttpServletRequest request ,Model model) throws Exception {
+	public ModelAndView comnotice(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		NoticeVO nvo = new NoticeVO();
 		Criteria cri = new Criteria();
@@ -928,19 +908,19 @@ public class PosController {
 		int count = 0;
 		String title = "";
 
-		if(request.getParameter("page") != null && !request.getParameter("page").equals("")){
+		if (request.getParameter("page") != null && !request.getParameter("page").equals("")) {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}
-		
-		if(request.getParameter("title") != null){
+
+		if (request.getParameter("title") != null) {
 			title = request.getParameter("title");
 		}
-			
-		nvo.setTitle("%"+title+"%");
-		
-		if(companyService.getNoticeCount(nvo) == null){
+
+		nvo.setTitle("%" + title + "%");
+
+		if (companyService.getNoticeCount(nvo) == null) {
 			count = 0;
-		} else{
+		} else {
 			count = Integer.parseInt(companyService.getNoticeCount(nvo));
 		}
 		cri.setPage(pageNum);
@@ -949,126 +929,123 @@ public class PosController {
 
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(count);
-		
+
 		List<NoticeVO> list = companyService.getnoticelist(nvo);
 		mav.addObject("result", list);
 		mav.addObject("pageMaker", pageMaker);
 		mav.addObject("page", pageNum);
 		mav.addObject("title", title);
 		mav.setViewName(".pos.pos_notice_list");
-		
+
 		return mav;
 	}
-	
-	@RequestMapping(value = "pos/ps_notice_contant" , method = RequestMethod.GET)
-	public ModelAndView comnoticecontant(HttpServletRequest request ,Model model)throws Exception{
+
+	@RequestMapping(value = "pos/ps_notice_contant", method = RequestMethod.GET)
+	public ModelAndView comnoticecontant(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
+
 		NoticeVO Nvo = new NoticeVO();
 		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
 		int num = 0;
 		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
 		num = list.get(0).getNoticenum();
-		
-		mav.addObject("result",list);
+
+		mav.addObject("result", list);
 		mav.addObject("num", num);
 		mav.setViewName(".pos.pos_notice_contant");
 		return mav;
 	}
-	
-	@RequestMapping(value = "pos/ps_daymoney" , method = RequestMethod.GET)
-	public ModelAndView daymoney(HttpServletRequest request,Model model) throws Exception{
+
+	@RequestMapping(value = "pos/ps_daymoney", method = RequestMethod.GET)
+	public ModelAndView daymoney(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
 		vo.setId(request.getParameter("id"));
 		String area = posService.areaserch(vo);
 		vo.setArea(area);
-		
+
 		List<ItemVO> list1 = posService.sallist(vo);
 		List<ItemVO> list2 = posService.orderSpendlist(vo);
-		
-		mav.addObject("result1",list1);
-		mav.addObject("result2",list2);
+
+		mav.addObject("result1", list1);
+		mav.addObject("result2", list2);
 		mav.addObject("area", area);
 		mav.setViewName(".pos.pos_daymoney");
 		return mav;
 	}
-	
+
 	@RequestMapping("pos/ps_daymoneyconfirm")
-	public ModelAndView daymoneyconfirm(HttpServletRequest request,Model model) throws Exception{
+	public ModelAndView daymoneyconfirm(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
 		String area = request.getParameter("area");
 		vo.setArea(area);
 		String year = "";
 		String month = "";
-		//String days = "";
+		// String days = "";
 		int pay1 = 0;
 		int pay2 = 0;
 		int pageNum = 1;
 		int count;
-		if(request.getParameter("page") != null && !request.getParameter("page").equals(null)){
+		if (request.getParameter("page") != null && !request.getParameter("page").equals(null)) {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}
-		
-		if((request.getParameter("year") == null) && (request.getParameter("month") == null)) {
+
+		if ((request.getParameter("year") == null) && (request.getParameter("month") == null)) {
 			year = "";
 			month = "";
-			//days = "";
-		}
-		else{
+			// days = "";
+		} else {
 			year = request.getParameter("year");
 			month = request.getParameter("month");
-			//days = request.getParameter("days");
+			// days = request.getParameter("days");
 		}
-		
-		vo.setYear("%"+year+"%");
-		vo.setMonth("%"+month+"%");
-		//vo.setDays("%"+days+"%");
-		
+
+		vo.setYear("%" + year + "%");
+		vo.setMonth("%" + month + "%");
+		// vo.setDays("%"+days+"%");
+
 		Criteria cri = new Criteria();
 		cri.setPage(pageNum);
 		cri.setPerPageNum(15);
-		if(posService.daymoneyCount(vo) == null){
+		if (posService.daymoneyCount(vo) == null) {
 			count = 0;
-		}
-		else {
+		} else {
 			count = Integer.parseInt(posService.daymoneyCount(vo));
 		}
-		
+
 		vo.setCri(cri);
-		
+
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(count);
-				
+
 		List<ItemVO> list1 = posService.sallist(vo);
-		for(int i = 0 ; i < list1.size() ; i++){
+		for (int i = 0; i < list1.size(); i++) {
 			vo.setPaynum(list1.get(i).getPaynum());
 			vo.setTitle(list1.get(i).getSold());
 			vo.setContent("수입");
 			vo.setPay(list1.get(i).getPay());
 			vo.setP2_time(list1.get(i).getSal_time());
-			vo.setBillnum(list1.get(i).getBillnum());              /////////////////////////
+			vo.setBillnum(list1.get(i).getBillnum()); /////////////////////////
 			System.out.println("p2_time : " + list1.get(i).getSal_time());
 			posService.daymoneyinsert(vo);
 		}
-		if(posService.daysaltotalpay(vo).get(0) == null){
+		if (posService.daysaltotalpay(vo).get(0) == null) {
 			pay1 = 0;
-		}
-		else {
+		} else {
 			pay1 = posService.daysaltotalpay(vo).get(0).getPay();
 		}
-		
+
 		posService.daysaldelete(vo);
 		System.out.println("pay1 : " + pay1);
-		
+
 		List<ItemVO> list2 = posService.orderSpendlist(vo);
-		for(int i = 0 ; i < list2.size() ; i++){
+		for (int i = 0; i < list2.size(); i++) {
 			vo.setPaynum(0);
 			vo.setTitle(list2.get(i).getSpend());
 			vo.setContent("지출");
-			if(list2.get(i).getPay() == 0){
+			if (list2.get(i).getPay() == 0) {
 				continue;
 			} else {
 				vo.setPay(list2.get(i).getPay());
@@ -1078,198 +1055,191 @@ public class PosController {
 			System.out.println("p2_time : " + list2.get(i).getSal_time());
 			posService.daymoneyinsert(vo);
 		}
-		if(posService.daysalspendpay(vo).get(0) == null){
+		if (posService.daysalspendpay(vo).get(0) == null) {
 			pay2 = 0;
-		}
-		else {
+		} else {
 			pay2 = posService.daysalspendpay(vo).get(0).getPay();
 		}
-		
+
 		posService.dayspenddelete(vo);
 
 		int total = pay1 - pay2;
-		
+
 		vo.setArea(request.getParameter("area"));
 		List<ItemVO> list3 = posService.daymoneylist(vo);
-		
-		mav.addObject("pay1",pay1);
-		mav.addObject("pay2",pay2);
-		mav.addObject("total",total);
-		mav.addObject("result",list3);
+
+		mav.addObject("pay1", pay1);
+		mav.addObject("pay2", pay2);
+		mav.addObject("total", total);
+		mav.addObject("result", list3);
 		mav.addObject("area", area);
 		mav.addObject("page", pageNum);
 		mav.addObject("pageMaker", pageMaker);
 		mav.addObject("year", year);
 		mav.addObject("month", month);
 		mav.setViewName(".pos.pos_daymoneyconfirm");
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping("pos/ps_daymoneyconfirmSelect")
-	public ModelAndView daymoneyconfirmSelect(HttpServletRequest request,Model model) throws Exception{
+	public ModelAndView daymoneyconfirmSelect(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
 		String area = request.getParameter("area");
 		vo.setArea(area);
 		String year = "";
 		String month = "";
-		//String days = "";
+		// String days = "";
 		int pay1 = 0;
 		int pay2 = 0;
-		if((request.getParameter("year") == null) && (request.getParameter("month") == null)) {
+		if ((request.getParameter("year") == null) && (request.getParameter("month") == null)) {
 			year = "";
 			month = "";
-			//days = "";
-		}
-		else{
+			// days = "";
+		} else {
 			year = request.getParameter("year");
 			month = request.getParameter("month");
-			//days = request.getParameter("days");
+			// days = request.getParameter("days");
 		}
-		
+
 		System.out.println("area : " + area);
 		System.out.println("year : " + year);
 		System.out.println("month : " + month);
-		vo.setYear("%"+year+"%");
-		vo.setMonth("%"+month+"%");
-		//vo.setDays("%"+days+"%");
-	
+		vo.setYear("%" + year + "%");
+		vo.setMonth("%" + month + "%");
+		// vo.setDays("%"+days+"%");
+
 		vo.setTitle("판매");
-		if(posService.daysaltotalpay(vo).get(0) == null){
+		if (posService.daysaltotalpay(vo).get(0) == null) {
 			pay1 = 0;
-		}
-		else {
+		} else {
 			pay1 = posService.daysaltotalpay(vo).get(0).getPay();
 		}
 
 		vo.setTitle("지출");
-		if(posService.daysaltotalpay(vo).get(0) == null){
+		if (posService.daysaltotalpay(vo).get(0) == null) {
 			pay2 = 0;
-		}
-		else {
+		} else {
 			pay2 = posService.daysalspendpay(vo).get(0).getPay();
 		}
-		
+
 		System.out.println("pay1 : " + pay1);
 		System.out.println("pay2 : " + pay2);
-		
+
 		int total = pay1 - pay2;
-		
+
 		vo.setArea(request.getParameter("area"));
 		List<ItemVO> list3 = posService.daymoneylist(vo);
-		
-		mav.addObject("pay1",pay1);
-		mav.addObject("pay2",pay2);
-		mav.addObject("total",total);
-		mav.addObject("result",list3);
+
+		mav.addObject("pay1", pay1);
+		mav.addObject("pay2", pay2);
+		mav.addObject("total", total);
+		mav.addObject("result", list3);
 		mav.addObject("area", area);
 		mav.setViewName(".pos.pos_daymoneyconfirm");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "pop_calcrefurnd")
-	public ModelAndView calcrefurnd(HttpServletRequest request,Model model) throws Exception{
+	public ModelAndView calcrefurnd(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
+
 		ItemVO vo = new ItemVO();
 		vo.setId(request.getParameter("id"));
 		String area = posService.areaserch(vo);
-		mav.addObject("area",area);
+		mav.addObject("area", area);
 		mav.setViewName("pop/pop_calcrefurnd");
 		return mav;
 	}
-	
-	@RequestMapping(value = "pop_calcrefurndlist" , method = RequestMethod.POST)
-	public ModelAndView calcrefurndlist(HttpServletRequest request,Model model) throws Exception{
+
+	@RequestMapping(value = "pop_calcrefurndlist", method = RequestMethod.POST)
+	public ModelAndView calcrefurndlist(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
+
 		ItemVO vo = new ItemVO();
 		vo.setBillnum(request.getParameter("billnum"));
-		
+
 		vo.setArea(request.getParameter("area"));
 		List<ItemVO> list = posService.daycalclist(vo);
-		
-		if(list.size() != 0){
-			int num =  posService.num(vo);
-			
-			mav.addObject("billnum",vo.getBillnum());
-			mav.addObject("num",num);
-			mav.addObject("area",request.getParameter("area"));
-			mav.addObject("result" , list);
+
+		if (list.size() != 0) {
+			int num = posService.num(vo);
+
+			mav.addObject("billnum", vo.getBillnum());
+			mav.addObject("num", num);
+			mav.addObject("area", request.getParameter("area"));
+			mav.addObject("result", list);
 			mav.setViewName("pop/pop_calcrefurndlist");
-		}
-		else{
-			mav.addObject("area",request.getParameter("area"));
+		} else {
+			mav.addObject("area", request.getParameter("area"));
 			mav.setViewName("pop/pop_calcrefurnd");
 		}
 		return mav;
 	}
-	
-	@RequestMapping(value = "pop_calcrefurnd_delete" , method = RequestMethod.GET)
-	public ModelAndView calcrefurnddelete(HttpServletRequest request,Model model) throws Exception{
+
+	@RequestMapping(value = "pop_calcrefurnd_delete", method = RequestMethod.GET)
+	public ModelAndView calcrefurnddelete(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
+
 		ItemVO vo = new ItemVO();
-		
+
 		vo.setBillnum(request.getParameter("billnum"));
 		vo.setPaynum(Integer.parseInt(request.getParameter("num")));
 		vo.setArea(request.getParameter("area"));
-		
+
 		List<ItemVO> list = posService.sallist(vo);
-		for(int i = 0 ; i < list.size() ; i++){
-			if(list.get(i).getPaynum()== vo.getPaynum()){
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getPaynum() == vo.getPaynum()) {
 				posService.saldeletenum(vo);
 			}
 		}
-		
 
 		List<ItemVO> list1 = posService.daymoneyselect();
-		for(int i = 0 ; i < list1.size() ; i++){
-			if(list1.get(i).getNum() == vo.getPaynum()){
+		for (int i = 0; i < list1.size(); i++) {
+			if (list1.get(i).getNum() == vo.getPaynum()) {
 				posService.daymoneydeletenum(vo);
 			}
 		}
-		
 
 		List<ItemVO> list2 = posService.daycalclist(vo);
-		for(int i = 0 ; i < list2.size() ; i++){
+		for (int i = 0; i < list2.size(); i++) {
 			vo.setItem_code(list2.get(i).getItem_code());
 			vo.setCount(list2.get(i).getCount());
-			
+
 			posService.itemupdate(vo);
 		}
 
 		posService.daycalclistdelete(vo);
-		
+
 		mav.setViewName("pop/pop_calcrefurnd_delete");
 		return mav;
 	}
-	
+
 	@RequestMapping("pos/ps_user_information")
 	public ModelAndView informManager(HttpServletRequest request, MemberVO Mvo) throws Exception {
-		
+
 		ModelAndView mav = new ModelAndView();
 		List<MemberVO> list;
-		
+
 		list = posService.selectUserId(Mvo);
 		System.out.println(list);
-		
+
 		mav.addObject("list", list);
 		mav.setViewName(".pos.pos_user_information");
-		
+
 		return mav;
 	}
-	
-	@RequestMapping(value = "pos/ps_notice_repl_write", method=RequestMethod.POST)
+
+	@RequestMapping(value = "pos/ps_notice_repl_write", method = RequestMethod.POST)
 	public ResponseEntity<String> noticeReplRegister(@RequestBody NoticeReplVO vo) throws Exception {
 		ResponseEntity<String> entity = null;
-		
+
 		try {
-			if(!vo.getReplyText().equals("")){
+			if (!vo.getReplyText().equals("")) {
 				posService.noticeReplWrite(vo);
 			}
-			
+
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1277,9 +1247,9 @@ public class PosController {
 		}
 		return entity;
 	}
-	
-	@RequestMapping(value = "pos/ps_notice_repl_list/{bno}", method=RequestMethod.GET)
-	public ResponseEntity<List<NoticeReplVO>> noticeReplList(@PathVariable("bno")int bno) {
+
+	@RequestMapping(value = "pos/ps_notice_repl_list/{bno}", method = RequestMethod.GET)
+	public ResponseEntity<List<NoticeReplVO>> noticeReplList(@PathVariable("bno") int bno) {
 		ResponseEntity<List<NoticeReplVO>> entity = null;
 		try {
 			entity = new ResponseEntity<>(posService.noticeReplList(bno), HttpStatus.OK);
@@ -1287,14 +1257,14 @@ public class PosController {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return entity;
 	}
-	
-	@RequestMapping(value = "pos/ps_notice_repl_delete", method=RequestMethod.POST)
-	public ResponseEntity<String> noticeReplDelete(@RequestBody NoticeReplVO vo){
+
+	@RequestMapping(value = "pos/ps_notice_repl_delete", method = RequestMethod.POST)
+	public ResponseEntity<String> noticeReplDelete(@RequestBody NoticeReplVO vo) {
 		ResponseEntity<String> entity = null;
-		
+
 		try {
 			posService.noticeReplDelete(vo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -1302,20 +1272,20 @@ public class PosController {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return entity;
 	}
-	
-	//상품 선택 ajax 
-	@RequestMapping(value = "pos/ps_order_temp_write", method=RequestMethod.POST)
+
+	// 상품 선택 ajax
+	@RequestMapping(value = "pos/ps_order_temp_write", method = RequestMethod.POST)
 	public ResponseEntity<String> orderTempWrite(@RequestBody ItemVO vo) throws Exception {
 		ResponseEntity<String> entity = null;
-		
+
 		try {
 			String area = posService.getArea(vo.getName());
 			vo.setArea(area);
 			posService.orderTempTempInsert(vo);
-			
+
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1323,9 +1293,9 @@ public class PosController {
 		}
 		return entity;
 	}
-	
-	//선택된 상품 뿌려주는 ajax
-	@RequestMapping(value = "pos/ps_order_temp_list", method=RequestMethod.GET)
+
+	// 선택된 상품 뿌려주는 ajax
+	@RequestMapping(value = "pos/ps_order_temp_list", method = RequestMethod.GET)
 	public ResponseEntity<List<ItemVO>> orderTempList(ItemVO vo) {
 		ResponseEntity<List<ItemVO>> entity = null;
 		try {
@@ -1335,15 +1305,15 @@ public class PosController {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return entity;
 	}
-	
-	//선택된 상품 발주 하는 ajax
-	@RequestMapping(value = "pos/ps_order_selected_write", method=RequestMethod.POST)
+
+	// 선택된 상품 발주 하는 ajax
+	@RequestMapping(value = "pos/ps_order_selected_write", method = RequestMethod.POST)
 	public ResponseEntity<String> orderselectedWrite(@RequestBody ItemVO vo) throws Exception {
 		ResponseEntity<String> entity = null;
-		
+
 		try {
 			List<ItemVO> list;
 			int compare = 0;
@@ -1351,36 +1321,30 @@ public class PosController {
 			list = posService.orderTempCompare();
 			System.out.println("item_code : " + vo.getItem_code());
 			System.out.println("area : " + vo.getArea());
-			/*area = vo.getArea();
-			for(int i = 0; i < list.size(); i++){
-				if(list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())){
-					compare = 1;
-				}
-			}
-			
-			if(compare == 1){
-				posService.updateOrderTemp(vo);
-			}
-			else{
-				posService.insertOrderTemp(vo);
-			}*/
-			if(vo.getCount() != 0){
+			/*
+			 * area = vo.getArea(); for(int i = 0; i < list.size(); i++){
+			 * if(list.get(i).getItem_code().equals(vo.getItem_code()) &&
+			 * list.get(i).getArea().equals(vo.getArea())){ compare = 1; } }
+			 * 
+			 * if(compare == 1){ posService.updateOrderTemp(vo); } else{
+			 * posService.insertOrderTemp(vo); }
+			 */
+			if (vo.getCount() != 0) {
 				area = vo.getArea();
-				for(int i = 0; i < list.size(); i++){
-					if(list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())){
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).getItem_code().equals(vo.getItem_code())
+							&& list.get(i).getArea().equals(vo.getArea())) {
 						compare = 1;
 					}
 				}
-				
-				if(compare == 1){
+
+				if (compare == 1) {
 					posService.updateOrderTemp(vo);
-				}
-				else{
+				} else {
 					posService.insertOrderTemp(vo);
 				}
 				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			}
-			else{
+			} else {
 				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
 			}
 		} catch (Exception e) {
@@ -1389,13 +1353,13 @@ public class PosController {
 		}
 		return entity;
 	}
-	
-	@RequestMapping(value = "pos/ps_order_selected_List", method=RequestMethod.GET)
+
+	@RequestMapping(value = "pos/ps_order_selected_List", method = RequestMethod.GET)
 	public ResponseEntity<List<ItemVO>> orderSelectedList() throws Exception {
 		ResponseEntity<List<ItemVO>> entity = null;
-		
+
 		try {
-			
+
 			entity = new ResponseEntity<>(posService.orderTempCompare(), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1403,11 +1367,11 @@ public class PosController {
 		}
 		return entity;
 	}
-	
-	@RequestMapping(value = "pos/ps_order_selected_delete", method=RequestMethod.POST)
+
+	@RequestMapping(value = "pos/ps_order_selected_delete", method = RequestMethod.POST)
 	public ResponseEntity<String> orderSelectedDelete(@RequestBody ItemVO vo) throws Exception {
 		ResponseEntity<String> entity = null;
-		
+
 		try {
 			posService.orderTempDelete(vo);
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
@@ -1424,23 +1388,22 @@ public class PosController {
 		List<UserVO> list;
 		System.out.println("userid :" + request.getParameter("userid"));
 		String userid = request.getParameter("userid");
-		
+
 		ItemVO ivo = new ItemVO();
 		UserVO vo = new UserVO();
 		vo.setUserid(request.getParameter("id"));
 		list = posService.selectmanpayAll1(vo);
-		
-		
-		if(userid != null){
+
+		if (userid != null) {
 			vo.setUserid(request.getParameter("userid"));
-			for(int i = 0 ; i <list.size() ; i++){
-				if(list.get(i).getUserid().equals(vo.getUserid())){
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getUserid().equals(vo.getUserid())) {
 					vo.setArea(list.get(i).getArea());
 					vo.setHour(list.get(i).getHour());
 					vo.setMoney(list.get(i).getMoney());
-					
+
 					posService.payinsert(vo);
-					
+
 					ivo.setPaynum(0);
 					ivo.setTitle("인건비");
 					ivo.setContent("지출");
@@ -1448,23 +1411,20 @@ public class PosController {
 					ivo.setArea(vo.getArea());
 					ivo.setBillnum("");
 					posService.daymoneyinsert(ivo);
-					
+
 					posService.paydelete(vo);
 				}
 			}
-			
+
 			vo.setUserid(request.getParameter("id"));
 			list = posService.selectmanpayAll1(vo);
 		}
-		
-		
+
 		mav.addObject("list", list);
-		mav.addObject("id",request.getParameter("id"));
+		mav.addObject("id", request.getParameter("id"));
 		mav.setViewName(".pos.pos_paygive");
-	
 
 		return mav;
 	}
-	
+
 }
- 
