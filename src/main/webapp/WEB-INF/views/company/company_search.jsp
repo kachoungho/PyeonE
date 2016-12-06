@@ -61,7 +61,7 @@
 						<td style="padding-top: 20px; text-align: center">${ member.position }</td>
 						<td style="padding-top: 20px; text-align: center">${ member.phone }</td>
 						<td style="padding-top: 20px; text-align: center">${ member.age }</td>
-						<td style="padding-top: 20px; text-align: center">${ member.address }${ member.address2 }</td>
+						<td style="padding-top: 20px; text-align: center">${ member.address } ${ member.address2 }</td>
 						<td style="padding-top: 20px; text-align: center">${ member.gender }</td>
 						<td style="padding-top: 20px; text-align: center">${ member.area }</td>
 						<td style="padding-top: 20px; text-align: center"><input class="button_center" width="40"
