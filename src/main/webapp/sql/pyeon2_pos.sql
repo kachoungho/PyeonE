@@ -111,28 +111,6 @@ create table p2_dayCalc(
    constraint dayCalc_pk  primary key(item_code, area,sys_time)
 );
 
-create table p2_weekCalc(
-   item_code varchar2(40) not null, 
-   item_name varchar2(30) not null, 
-   price number(10) not null, 
-   count number(10), 
-   category varchar2(20), 
-   area varchar2(30) not null,
-   p2_time date DEFAULT SYSDATE,
-   constraint weekCalc_pk  primary key(item_code, area)
-);
-
-create table p2_monthCalc(
-   item_code varchar2(40) not null, 
-   item_name varchar2(30) not null, 
-   price number(10) not null, 
-   count number(10), 
-   category varchar2(20), 
-   area varchar2(30) not null,
-   p2_time date DEFAULT SYSDATE,
-   constraint monthCalc_pk  primary key(item_code, area)
-);
-
 --------------- SEQUENCE --------------------
 
 create sequence p2_item_num
