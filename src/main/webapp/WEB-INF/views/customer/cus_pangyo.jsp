@@ -94,7 +94,7 @@
 		<!-- 2행 -->
 		<div class="div_alcoh">
 			<c:forEach items="${list}" var="list">
-				<c:if test="${list.code1 == 'ALCOHOL' }">
+				<c:if test="${list.code1 == 'ALCOHOLIC' }">
 					<c:if test="${(list.code2 >= 101 && list.code2 <= 104)}">
 						<c:if test="${list.item_name == name }">
 							<font color="red" size="4px"> * ${list.item_name} </font>
@@ -212,7 +212,7 @@
 		<!-- 3행 -->
 		<div class="div_alcoh">
 			<c:forEach items="${list}" var="list">
-				<c:if test="${list.code1 == 'ALCOHOL' }">
+				<c:if test="${list.code1 == 'ALCOHOLIC' }">
 					<c:if test="${(list.code2 >= 105 && list.code2 <= 108)}">
 						<c:if test="${list.item_name == name }">
 							<font color="red" size="4px"> * ${list.item_name} </font>
@@ -329,7 +329,7 @@
 		<!-- 4행 -->
 		<div class="div_alcoh">
 			<c:forEach items="${list}" var="list">
-				<c:if test="${list.code1 == 'ALCOHOL' }">
+				<c:if test="${list.code1 == 'ALCOHOLIC' }">
 					<c:if test="${(list.code2 >= 109 && list.code2 <= 112)}">
 						<c:if test="${list.item_name == name }">
 							<font color="red" size="4px"> * ${list.item_name} </font>

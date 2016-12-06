@@ -49,14 +49,14 @@ insert into p2_sector(code1,code2,item_name,area) values('INSTANT','121','농심
 insert into p2_sector(code1,code2,item_name,area) values('INSTANT','122','오뚜기진라면순한컵','판교');
 insert into p2_sector(code1,code2,item_name,area) values('INSTANT','123','오뚜기진짜짱컵','판교');
 
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','101','참이슬 fresh','판교');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','102','처음처럼','판교');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','103','참이슬 자몽에 이슬','판교');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','104','처음처럼 순하리','판교');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','105','Hite 캔 500ml','판교');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','106','Hite Dry Finish 500ml 캔','판교');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','107','OB Primium 500ml 캔','판교');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','108','CASS FRESH 500ml 캔','판교');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','101','참이슬 fresh','판교');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','102','처음처럼','판교');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','103','참이슬 자몽에 이슬','판교');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','104','처음처럼 순하리','판교');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','105','Hite 캔 500ml','판교');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','106','Hite Dry Finish 500ml 캔','판교');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','107','OB Primium 500ml 캔','판교');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','108','CASS FRESH 500ml 캔','판교');
 
 
 -- 정자점
@@ -112,14 +112,14 @@ insert into p2_sector(code1,code2,item_name,area) values('INSTANT','121','농심
 insert into p2_sector(code1,code2,item_name,area) values('INSTANT','122','오뚜기진라면순한컵','정자');
 insert into p2_sector(code1,code2,item_name,area) values('INSTANT','123','오뚜기진짜짱컵','정자');
 
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','101','참이슬 fresh','정자');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','102','처음처럼','정자');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','103','참이슬 자몽에 이슬','정자');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','104','처음처럼 순하리','정자');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','105','Hite 캔 500ml','정자');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','106','Hite Dry Finish 500ml 캔','정자');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','107','OB Primium 500ml 캔','정자');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','108','CASS FRESH 500ml 캔','정자');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','101','참이슬 fresh','정자');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','102','처음처럼','정자');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','103','참이슬 자몽에 이슬','정자');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','104','처음처럼 순하리','정자');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','105','Hite 캔 500ml','정자');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','106','Hite Dry Finish 500ml 캔','정자');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','107','OB Primium 500ml 캔','정자');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','108','CASS FRESH 500ml 캔','정자');
 
 
 -- 야탑점
@@ -175,11 +175,11 @@ insert into p2_sector(code1,code2,item_name,area) values('INSTANT','121','농심
 insert into p2_sector(code1,code2,item_name,area) values('INSTANT','122','오뚜기진라면순한컵','야탑');
 insert into p2_sector(code1,code2,item_name,area) values('INSTANT','123','오뚜기진짜짱컵','야탑');
 
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','101','참이슬 fresh','야탑');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','102','처음처럼','야탑');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','103','참이슬 자몽에 이슬','야탑');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','104','처음처럼 순하리','야탑');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','105','Hite 캔 500ml','야탑');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','106','Hite Dry Finish 500ml 캔','야탑');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','107','OB Primium 500ml 캔','야탑');
-insert into p2_sector(code1,code2,item_name,area) values('ALCOHOL','108','CASS FRESH 500ml 캔','야탑');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','101','참이슬 fresh','야탑');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','102','처음처럼','야탑');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','103','참이슬 자몽에 이슬','야탑');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','104','처음처럼 순하리','야탑');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','105','Hite 캔 500ml','야탑');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','106','Hite Dry Finish 500ml 캔','야탑');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','107','OB Primium 500ml 캔','야탑');
+insert into p2_sector(code1,code2,item_name,area) values('ALCOHOLIC','108','CASS FRESH 500ml 캔','야탑');
